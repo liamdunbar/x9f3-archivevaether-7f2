@@ -1,14 +1,12 @@
 const terminal = document.getElementById("terminalBody");
 
-/* SAFE TYPEWRITER (NO INPUT DELETION) */
+/* TYPEWRITER */
 function typeText(text, speed = 15, done) {
   terminal.textContent = "";
   let i = 0;
-
   const interval = setInterval(() => {
     terminal.textContent += text[i];
     i++;
-
     if (i >= text.length) {
       clearInterval(interval);
       if (done) done();
@@ -16,7 +14,7 @@ function typeText(text, speed = 15, done) {
   }, speed);
 }
 
-/* BOOT LOG */
+/* BOOT */
 typeText(
 `[SYS] Initializing kernel...
 [SYS] Loading terminal interface...
@@ -25,7 +23,7 @@ typeText(
 SELECT A LEVEL`
 );
 
-/* DATA */
+/* STATIC DATA */
 const DATA = {
   level1: `
 SUBJECT PROFILE — LEVEL 1
@@ -34,13 +32,6 @@ Name: Froylan Fahlan Aditya
 Alias: Liam Dunbar
 Age: 18
 Origin: Indonesia
-
-Froylan Fahlan Aditya, known online as Liam Dunbar, is an 18-year-old from Indonesia.
-He has a calm but introspective presence. He speaks Indonesian and English with a
-preference for a UK accent, and he's currently learning German.
-
-His heart is drawn to Austria and Germany — places he dreams of living in someday,
-hoping to find peace within himself and a sense of belonging he's been searching for.
 
 A quiet soul carrying many storms inside.
 Empathetic. Protective. Human.
@@ -71,84 +62,85 @@ Unwell — Matchbox Twenty
 `
 };
 
-/* LEVEL CLICK HANDLER */
+/* CLICK HANDLER */
 document.querySelectorAll(".entry").forEach(entry => {
   entry.onclick = () => {
     const view = entry.dataset.view;
 
     if (view === "level3") {
       passwordGate();
+    } else if (view === "level4") {
+      loadUpdates();
     } else {
       typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
     }
   };
 });
 
-/* PASSWORD GATE — ALWAYS DENIES */
+/* LEVEL 3 */
 function passwordGate() {
   terminal.innerHTML = `
 LEVEL 3 — RESTRICTED
 
-ENTER PASSWORD:
-
-<div class="command">
-  <span>&gt;</span>
-  <input id="pw" autofocus />
-</div>
+ACCESS DENIED.
 `;
+}
 
-  const pw = document.getElementById("pw");
+/* LEVEL 4 — UPDATES */
+async function loadUpdates() {
+  typeText("[SYS] Retrieving update records...\n", 15, async () => {
+    const res = await fetch("updates.json");
+    const data = await res.json();
 
-  pw.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      typeText(
-`[ERR] ACCESS DENIED
-[LOG] Unauthorized attempt recorded
+    terminal.innerHTML = "";
 
-Entering restricted command mode...
+    for (const update of data.updates) {
+      const block = document.createElement("div");
+      block.className = "update";
 
-Type "help"`,
-20,
-commandMode
-      );
+      block.innerHTML = `
+        <div class="update-header">
+          <img src="assets/profile.jpg" class="update-avatar">
+          <div class="update-meta">
+            <div class="name">${update.displayName}</div>
+            <div class="username">${update.username}</div>
+            <div class="date">${update.date}</div>
+          </div>
+        </div>
+        <div class="update-text"></div>
+      `;
+
+      terminal.appendChild(block);
+
+      const textEl = block.querySelector(".update-text");
+      await typeInto(textEl, update.text);
+
+      if (update.image) {
+        await delay(600);
+        const img = document.createElement("img");
+        img.src = update.image;
+        img.className = "update-image";
+        block.appendChild(img);
+      }
     }
   });
 }
 
-/* RESTRICTED COMMAND MODE */
-function commandMode() {
-  terminal.innerHTML += `
-<div class="command">
-  <span>&gt;</span>
-  <input id="cmd" autofocus />
-</div>
-`;
+/* HELPERS */
+function delay(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
 
-  const cmdInput = document.getElementById("cmd");
-
-  cmdInput.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      const cmd = e.target.value.trim().toLowerCase();
-      let out = "\nUNKNOWN COMMAND";
-
-      if (cmd === "help") {
-        out = "\nAVAILABLE COMMANDS:\nhelp\ncontact";
+function typeInto(el, text, speed = 12) {
+  return new Promise(resolve => {
+    let i = 0;
+    const interval = setInterval(() => {
+      el.textContent += text[i];
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        resolve();
       }
-
-      if (cmd === "contact") {
-        out = `
-CONTACT INFORMATION
-
-Instagram: @simplefroy
-WhatsApp: +62 851-6184-0928
-Telegram: @Wakeyliam
-Snapchat: zfroyden
-Twitter: @FahlanAditya
-`;
-      }
-
-      terminal.textContent += `\n> ${cmd}\n${out}`;
-      e.target.value = "";
-    }
+    }, speed);
   });
 }
