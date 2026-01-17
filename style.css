@@ -18,7 +18,6 @@ html, body {
   position: absolute;
   inset: 0;
   background: #050505;
-  overflow: hidden;
 }
 
 .crt::before {
@@ -28,8 +27,8 @@ html, body {
   pointer-events: none;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(255,255,255,0.05),
-    rgba(255,255,255,0.05) 1px,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.04) 1px,
     transparent 2px,
     transparent 4px
   );
@@ -41,13 +40,12 @@ html, body {
 }
 
 @keyframes flicker {
-  0%, 100% { opacity: 1; }
-  97% { opacity: 1; }
-  98% { opacity: 0.85; }
-  99% { opacity: 1; }
+  98% { opacity: 1; }
+  99% { opacity: 0.85; }
+  100% { opacity: 1; }
 }
 
-/* MAIN LAYOUT */
+/* LAYOUT */
 .terminal {
   display: grid;
   grid-template-columns: 1fr 340px;
@@ -56,14 +54,13 @@ html, body {
   height: 100%;
 }
 
-/* TERMINAL MAIN */
 .terminal-main {
   border: 1px solid #f2e86d;
   display: flex;
   flex-direction: column;
   background: rgba(0,0,0,0.9);
   height: 100%;
-  min-height: 0; /* CRITICAL: allow internal scroll */
+  min-height: 0;
 }
 
 .terminal-header {
@@ -73,15 +70,11 @@ html, body {
   flex-shrink: 0;
 }
 
-/* SCROLL CONTAINER — FIXED */
 .terminal-body {
   flex: 1;
-  min-height: 0; /* CRITICAL */
+  min-height: 0;
   padding: 12px;
   overflow-y: auto;
-  white-space: pre-wrap;
-  font-size: 14px;
-  line-height: 1.6;
 }
 
 /* RIGHT PANEL */
@@ -97,12 +90,11 @@ html, body {
   cursor: pointer;
 }
 
-.entry.denied {
-  color: #c44;
-  border-color: #c44;
+.entry:hover {
+  background: rgba(242,232,109,0.08);
 }
 
-/* FOOTER — NO OVERLAP */
+/* FOOTER */
 .footer {
   position: absolute;
   bottom: 18px;
@@ -111,8 +103,12 @@ html, body {
   pointer-events: none;
 }
 
-/* LEVEL 4 — UPDATES */
+/* VIEWS */
+.view.hidden {
+  display: none;
+}
 
+/* UPDATES */
 .update {
   border-top: 1px solid #f2e86d;
   border-bottom: 1px solid #f2e86d;
@@ -132,12 +128,9 @@ html, body {
   border-radius: 50%;
   border: 1px solid #f2e86d;
   object-fit: cover;
-  flex-shrink: 0;
 }
 
 .update-meta {
-  display: flex;
-  flex-direction: column;
   font-size: 12px;
   line-height: 1.4;
 }
@@ -155,16 +148,9 @@ html, body {
   margin-top: 10px;
 }
 
-.update-logs {
-  margin-top: 8px;
-  opacity: 0.85;
-}
-
 .update-image {
-  display: block;
   margin-top: 12px;
   max-width: 100%;
   max-height: 360px;
-  object-fit: contain;
   border: 1px solid rgba(242,232,109,0.4);
 }
