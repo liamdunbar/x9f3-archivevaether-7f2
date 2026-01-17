@@ -86,7 +86,7 @@ ACCESS DENIED.
 `;
 }
 
-/* LEVEL 4 — UPDATES */
+/* LEVEL 4 — UPDATES WITH IMAGE LOAD LOGS */
 async function loadUpdates() {
   typeText("[SYS] Retrieving update records...\n", 15, async () => {
     const res = await fetch("updates.json");
@@ -108,19 +108,33 @@ async function loadUpdates() {
           </div>
         </div>
         <div class="update-text"></div>
+        <div class="update-logs"></div>
       `;
 
       terminal.appendChild(block);
 
+      /* TYPE UPDATE TEXT */
       const textEl = block.querySelector(".update-text");
       await typeInto(textEl, update.text);
 
+      /* IMAGE LOAD LOGS */
       if (update.image) {
+        const logs = block.querySelector(".update-logs");
+
+        await delay(300);
+        logs.textContent += "\n[ATTACHMENT] Media file detected";
+
+        await delay(400);
+        logs.textContent += "\n[SYS] Loading attachment...";
+
         await delay(600);
         const img = document.createElement("img");
         img.src = update.image;
         img.className = "update-image";
         block.appendChild(img);
+
+        await delay(200);
+        logs.textContent += "\n[OK ] Attachment rendered";
       }
     }
   });
@@ -128,7 +142,7 @@ async function loadUpdates() {
 
 /* HELPERS */
 function delay(ms) {
-  return new Promise(r => setTimeout(r, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function typeInto(el, text, speed = 12) {
