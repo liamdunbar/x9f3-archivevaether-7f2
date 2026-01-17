@@ -1,51 +1,105 @@
-const views = document.querySelectorAll(".view");
-const entries = document.querySelectorAll(".entry");
-const updatesContainer = document.getElementById("updatesContainer");
+const terminal = document.getElementById("terminalBody");
 
-let updatesLoaded = false;
+/* BOOT */
+terminal.textContent =
+`[SYS] Initializing kernel...
+[SYS] Loading terminal interface...
+[OK ] Access granted
 
-/* VIEW SWITCH */
-entries.forEach(entry => {
+SELECT A LEVEL`;
+
+/* DATA */
+const DATA = {
+  level1: `
+SUBJECT PROFILE — LEVEL 1
+
+Name: Froylan Fahlan Aditya
+Alias: Liam Dunbar
+Age: 18
+Origin: Indonesia
+`,
+  level2a: `
+PSYCHOLOGICAL RECORD — LEVEL 2
+
+Social Anxiety
+Depression
+Intermittent Explosive Disorder
+Complex PTSD
+Autism Spectrum Disorder
+Borderline Personality Traits
+Executive Dysfunction
+Dissociative Symptoms
+Chronic Loneliness and Alienation
+`,
+  level2b: `
+MUSIC ARCHIVE — LEVEL 2
+
+Lost Boy — Ruth B.
+Mirror — Lil Wayne ft. Bruno Mars
+Iris — Goo Goo Dolls
+Somewhere I Belong — Linkin Park
+Unwell — Matchbox Twenty
+`
+};
+
+/* CLICK HANDLER */
+document.querySelectorAll(".entry").forEach(entry => {
   entry.onclick = () => {
-    const target = entry.dataset.view;
-    views.forEach(v => v.classList.add("hidden"));
-    document.getElementById(`view-${target}`).classList.remove("hidden");
+    const view = entry.dataset.view;
 
-    if (target === "level4" && !updatesLoaded) {
+    if (view === "level4") {
       loadUpdates();
-      updatesLoaded = true;
+    } else if (view === "level3") {
+      terminal.textContent =
+`LEVEL 3 — RESTRICTED
+
+[ERR] ACCESS DENIED
+[LOG] Unauthorized attempt recorded`;
+    } else {
+      terminal.textContent = DATA[view];
     }
   };
 });
 
-/* LOAD UPDATES ONCE */
+/* LOAD UPDATES */
 async function loadUpdates() {
-  const res = await fetch("updates.json");
+  terminal.textContent = "[SYS] Retrieving update records...\n";
+
+  const res = await fetch("updates/updates.json");
   const data = await res.json();
 
-  data.updates.forEach(update => {
-    const block = document.createElement("div");
-    block.className = "update";
+  terminal.innerHTML = "";
 
-    block.innerHTML = `
+  data.updates.forEach(update => {
+    const post = document.createElement("div");
+    post.className = "update-post";
+
+    post.innerHTML = `
       <div class="update-header">
-        <img src="assets/profile.jpg" class="update-avatar">
-        <div class="update-meta">
-          <div class="name">${update.displayName}</div>
-          <div class="username">${update.username}</div>
-          <div class="date">${update.date}</div>
+        <img class="update-avatar" src="assets/profile.jpg">
+        <div>
+          <div class="update-name">${update.displayName}</div>
+          <div class="update-meta">${update.username} · ${update.date}</div>
         </div>
       </div>
+
       <div class="update-text">${update.text}</div>
     `;
 
-    if (update.image) {
-      const img = document.createElement("img");
-      img.src = update.image;
-      img.className = "update-image";
-      block.appendChild(img);
-    }
+    terminal.appendChild(post);
 
-    updatesContainer.appendChild(block);
+    if (update.image) {
+      const log = document.createElement("div");
+      log.textContent = "[SYS] Loading attachment...";
+      post.appendChild(log);
+
+      setTimeout(() => {
+        log.remove();
+        const img = document.createElement("img");
+        img.src = update.image;
+        img.className = "update-image";
+        post.appendChild(img);
+      }, 700);
+    }
   });
 }
