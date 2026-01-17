@@ -13,12 +13,11 @@ html, body {
   color: #f2e86d;
 }
 
-/* CRT */
+/* TERMINAL LOOK */
 .crt {
   position: absolute;
   inset: 0;
   background: #050505;
-  overflow: hidden;
 }
 
 .crt::before {
@@ -35,16 +34,6 @@ html, body {
   );
 }
 
-/* FLICKER */
-.flicker {
-  animation: flicker 6s infinite;
-}
-
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  98% { opacity: 0.9; }
-}
-
 /* LAYOUT */
 .terminal {
   display: grid;
@@ -55,9 +44,9 @@ html, body {
 }
 
 .terminal-main {
-  border: 1px solid #f2e86d;
   display: flex;
   flex-direction: column;
+  border: 1px solid #f2e86d;
   background: rgba(0,0,0,0.9);
 }
 
@@ -68,15 +57,15 @@ html, body {
 }
 
 .terminal-body {
-  padding: 12px;
   flex: 1;
+  padding: 12px;
   overflow-y: auto;
   white-space: normal;
   font-size: 14px;
   line-height: 1.6;
 }
 
-/* PANEL */
+/* RIGHT PANEL */
 .right-panel {
   display: flex;
   flex-direction: column;
@@ -100,13 +89,19 @@ html, body {
   bottom: 18px;
   left: 28px;
   font-size: 13px;
+  pointer-events: none;
 }
 
-/* UPDATE POSTS */
+/* VIEWS */
+.view.hidden {
+  display: none;
+}
+
+/* UPDATES */
 .update-post {
   border-top: 1px solid #f2e86d;
   border-bottom: 1px solid #f2e86d;
-  padding: 14px 10px;
+  padding: 14px 0;
   margin-bottom: 18px;
 }
 
@@ -114,7 +109,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .update-avatar {
@@ -123,6 +118,12 @@ html, body {
   border-radius: 50%;
   border: 1px solid #f2e86d;
   object-fit: cover;
+}
+
+.update-title {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .update-name {
@@ -134,14 +135,15 @@ html, body {
 }
 
 .update-text {
-  margin-bottom: 10px;
+  margin-top: 6px;
 }
 
 .update-image {
+  margin-top: 10px;
   max-width: 100%;
   max-height: 360px;
-  display: block;
   border: 1px solid #f2e86d;
+  display: block;
 }
 
 /* SCROLLBAR */
