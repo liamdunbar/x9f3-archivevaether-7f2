@@ -120,3 +120,47 @@ html, body {
   left: 28px;
   font-size: 13px;
 }
+
+/* LEVEL 4 — UPDATES */
+.update {
+  border-top: 1px dashed rgba(242,232,109,0.4);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+
+.update-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.update-avatar {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #f2e86d;
+  object-fit: cover;
+}
+
+.update-meta {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.update-meta .name {
+  font-weight: bold;
+}
+
+.update-meta .username,
+.update-meta .date {
+  opacity: 0.75;
+}
+
+.update-text {
+  margin-top: 8px;
+}
+
+.update-image {
+  margin-top: 10px;
+  max-width: 100%;
+  border: 1px solid rgba(242,232,109,0.4);
+}
