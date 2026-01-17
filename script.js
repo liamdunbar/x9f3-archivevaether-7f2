@@ -32,9 +32,6 @@ Name: Froylan Fahlan Aditya
 Alias: Liam Dunbar
 Age: 18
 Origin: Indonesia
-
-A quiet soul carrying many storms inside.
-Empathetic. Protective. Human.
 `,
 
   level2a: `
@@ -66,27 +63,18 @@ Unwell — Matchbox Twenty
 document.querySelectorAll(".entry").forEach(entry => {
   entry.onclick = () => {
     const view = entry.dataset.view;
-
-    if (view === "level3") {
-      passwordGate();
-    } else if (view === "level4") {
-      loadUpdates();
-    } else {
-      typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
-    }
+    if (view === "level4") loadUpdates();
+    else if (view === "level3") passwordGate();
+    else typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
   };
 });
 
 /* LEVEL 3 */
 function passwordGate() {
-  terminal.innerHTML = `
-LEVEL 3 — RESTRICTED
-
-ACCESS DENIED.
-`;
+  terminal.textContent = `LEVEL 3 — RESTRICTED\n\nACCESS DENIED.`;
 }
 
-/* LEVEL 4 — UPDATES WITH IMAGE LOAD LOGS */
+/* LEVEL 4 — UPDATES */
 async function loadUpdates() {
   typeText("[SYS] Retrieving update records...\n", 15, async () => {
     const res = await fetch("updates.json");
@@ -113,28 +101,25 @@ async function loadUpdates() {
 
       terminal.appendChild(block);
 
-      /* TYPE UPDATE TEXT */
-      const textEl = block.querySelector(".update-text");
-      await typeInto(textEl, update.text);
+      /* TEXT */
+      await typeInto(block.querySelector(".update-text"), update.text);
 
-      /* IMAGE LOAD LOGS */
+      /* IMAGE WITH LOGS */
       if (update.image) {
         const logs = block.querySelector(".update-logs");
 
-        await delay(300);
-        logs.textContent += "\n[ATTACHMENT] Media file detected";
-
+        logs.textContent = "[ATTACHMENT] Media file detected";
         await delay(400);
-        logs.textContent += "\n[SYS] Loading attachment...";
 
+        logs.textContent += "\n[SYS] Loading attachment...";
         await delay(600);
+
+        logs.textContent = ""; /* clear logs before image */
+
         const img = document.createElement("img");
         img.src = update.image;
         img.className = "update-image";
         block.appendChild(img);
-
-        await delay(200);
-        logs.textContent += "\n[OK ] Attachment rendered";
       }
     }
   });
@@ -142,7 +127,7 @@ async function loadUpdates() {
 
 /* HELPERS */
 function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(r => setTimeout(r, ms));
 }
 
 function typeInto(el, text, speed = 12) {
