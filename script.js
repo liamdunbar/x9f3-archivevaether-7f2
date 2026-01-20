@@ -34,7 +34,7 @@ SUBJECT PROFILE — LEVEL 1
 
 Name: Froylan Fahlan Aditya
 Alias: Liam Dunbar
-Age: 18
+Age: 19
 Origin: Indonesia
 
 Froylan Fahlan Aditya, known online as Liam Dunbar, is an 18-year-old from Indonesia.
@@ -70,6 +70,7 @@ Mirror — Lil Wayne ft. Bruno Mars
 Iris — Goo Goo Dolls
 Somewhere I Belong — Linkin Park
 Unwell — Matchbox Twenty
+Perfect - Simple Plan
 `
 };
 
