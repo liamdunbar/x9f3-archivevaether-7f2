@@ -1,6 +1,14 @@
 {
   "updates": [
     {
+     "id": "2026-01-06-001",
+      "date": "2026-01-27",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "text": "You'll change your name or change your mind, And leave this fucked up place behind. But I'll know.",
+      "image": "updates/media/simonfroy.png"
+    },
+    {
      "id": "2026-01-05-001",
      "date": "2026-01-25",
      "displayName": "Froylan",
