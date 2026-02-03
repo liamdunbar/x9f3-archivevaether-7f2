@@ -2,6 +2,14 @@
   "revelations": [
     {
       "id": "rev-003",
+      "date": "2026-02-03",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": null
+      "video": "revelation/media/redblue.mp4"
+    },
+    {
+      "id": "rev-003",
       "date": "2026-01-27",
       "displayName": "Aditya",
       "username": "@fahlan",
