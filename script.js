@@ -38,11 +38,11 @@ Alias: Liam Dunbar
 Age: 19
 Origin: Indonesia
 
-Froylan Fahlan Aditya, known online as Liam Dunbar, is an 18-year-old from Indonesia.
+Froylan Fahlan Aditya, known online as Liam Dunbar, is an 19-year-old from Indonesia.
 He has a calm but introspective presence. He speaks Indonesian and English with a
 preference for a UK accent, and he's currently learning German.
 
-His heart is drawn to Austria and Germany — places he dreams of living in someday,
+His heart is drawn to Austria and Germany places he dreams of living in someday,
 hoping to find peace within himself and a sense of belonging he's been searching for.
 
 A quiet soul carrying many storms inside.
@@ -196,7 +196,7 @@ function renderLevel4Document() {
     });
 }
 
-/* ========= LEVEL 4 — REVELATION ========= */
+/* ========= LEVEL 4 — REVELATION (VIDEO FEED) ========= */
 
 function renderRevelation() {
   terminal.innerHTML = "";
@@ -245,6 +245,51 @@ function renderRevelation() {
     });
 }
 
+/* ========= ⭐ LEVEL 4 — CHRONICLES (NEW) ========= */
+
+function renderChronicles() {
+  terminal.innerHTML = "";
+  terminal.style.whiteSpace = "normal";
+
+  fetch("chronicles/chronicles.json")
+    .then(res => res.json())
+    .then(data => {
+      data.chronicles.forEach(post => {
+        const block = document.createElement("div");
+
+        block.style.borderTop = "1px solid #f2e86d";
+        block.style.borderBottom = "1px solid #f2e86d";
+        block.style.padding = "14px 0";
+        block.style.marginBottom = "18px";
+
+        block.innerHTML = `
+          <div style="font-size:16px; font-weight:bold; margin-bottom:6px;">
+            ${post.title}
+          </div>
+
+          <div style="opacity:.85; margin-bottom:10px;">
+            ${post.subtitle}
+          </div>
+
+          <a href="${post.link}"
+             target="_blank"
+             style="
+               color:#6aa6ff;
+               text-decoration:underline;
+               cursor:pointer;
+             ">
+             Click here to continue read
+          </a>
+        `;
+
+        terminal.appendChild(block);
+      });
+    })
+    .catch(() => {
+      terminal.textContent = "FAILED TO LOAD chronicles.json";
+    });
+}
+
 /* ========= LEVEL CLICK HANDLER ========= */
 
 document.querySelectorAll(".entry").forEach(entry => {
@@ -263,6 +308,11 @@ document.querySelectorAll(".entry").forEach(entry => {
 
     if (view === "revelation") {
       renderRevelation();
+      return;
+    }
+
+    if (view === "chronicles") {
+      renderChronicles();
       return;
     }
 
