@@ -17,7 +17,8 @@ body{
 }
 
 
-/* TOP BAR */
+/* ================= TOP BAR ================= */
+
 .topbar{
   display:flex;
   justify-content:space-between;
@@ -48,10 +49,12 @@ body{
   color:white;
   padding:10px 16px;
   border-radius:12px;
+  cursor:pointer;
 }
 
 
-/* CHAT AREA */
+/* ================= CHAT AREA ================= */
+
 .chat-area{
   flex:1;
   overflow:auto;
@@ -60,6 +63,7 @@ body{
 
 
 /* PROFILE CARD */
+
 .profile-card{
   background:#151821;
   border-radius:20px;
@@ -89,6 +93,7 @@ body{
 
 
 /* DATE + SYSTEM TEXT */
+
 .date{
   text-align:center;
   color:#9aa0a6;
@@ -103,7 +108,8 @@ body{
 }
 
 
-/* MESSAGE */
+/* ================= MESSAGE ================= */
+
 .msg-row{
   display:flex;
   margin-bottom:16px;
@@ -111,6 +117,10 @@ body{
 
 .msg-row.right{
   justify-content:flex-end;
+}
+
+.msg-row.left{
+  justify-content:flex-start;
 }
 
 .bubble{
@@ -123,8 +133,13 @@ body{
   background:linear-gradient(135deg,#4f7cff,#2a5cff);
 }
 
+.dark{
+  background:#232733;
+}
 
-/* INPUT BAR */
+
+/* ================= INPUT BAR ================= */
+
 .inputbar{
   display:flex;
   align-items:center;
@@ -137,6 +152,7 @@ body{
 .send{
   font-size:22px;
   color:#c5c7ce;
+  cursor:pointer;
 }
 
 input{
@@ -146,4 +162,111 @@ input{
   border-radius:14px;
   padding:12px;
   color:white;
+}
+
+
+/* ================= MODAL OVERLAY ================= */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(6px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+  z-index:999;
+}
+
+.modal-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+
+/* ================= MODAL BOX ================= */
+
+.modal-box{
+  width:90%;
+  max-width:360px;
+  background:#181b23;
+  border-radius:26px;
+  padding:18px;
+
+  transform:scale(.92);
+  transition:transform .25s ease;
+}
+
+.modal-overlay.active .modal-box{
+  transform:scale(1);
+}
+
+.modal-box.small{
+  max-width:300px;
+}
+
+
+/* MODAL HEADER */
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+  font-weight:600;
+}
+
+.close-btn{
+  background:none;
+  border:none;
+  color:#c5c7ce;
+  font-size:18px;
+  cursor:pointer;
+}
+
+
+/* MODAL CONTENT */
+
+.modal-content{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.modal-content.center{
+  align-items:center;
+}
+
+.modal-content input,
+.modal-content select{
+  background:#0f1117;
+  border:1px solid #2a2e39;
+  color:white;
+  padding:10px;
+  border-radius:12px;
+}
+
+.save-btn{
+  margin-top:8px;
+  background:#2a5cff;
+  border:none;
+  padding:12px;
+  border-radius:14px;
+  color:white;
+  cursor:pointer;
+}
+
+.mode-btn{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:none;
+  background:#232733;
+  color:white;
+  cursor:pointer;
 }
