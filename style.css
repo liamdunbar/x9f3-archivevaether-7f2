@@ -303,3 +303,26 @@ html, body {
   60% { transform: skewX(-0.3deg); }
   100% { transform: skewX(0deg); }
 }
+/* ===== MOBILE PORTRAIT FIX ===== */
+@media (max-width: 900px) {
+
+  .terminal {
+    grid-template-columns: 1fr;   /* remove side-by-side */
+    grid-template-rows: 1fr auto; /* terminal first, panel below */
+    height: 100vh;
+  }
+
+  .right-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-top: 1px solid #f2e86d;
+    padding-top: 10px;
+  }
+
+  .entry {
+    flex: 1 1 45%;
+    text-align: center;
+  }
+
+}
