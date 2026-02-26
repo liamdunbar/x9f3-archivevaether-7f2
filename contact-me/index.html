@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEVEL-MAX ACCESS NODE</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html,body{
+  background:#000;
+  color:#ff3b3b;
+  font-family:monospace;
+  min-height:100dvh;
+  overflow-x:hidden;
+}
+
+/* CRT */
+.crt{
+  position:fixed;
+  inset:0;
+  background:#050000;
+  animation:screenPulse 4s infinite;
+}
+
+.crt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,0,0,0.08),
+    rgba(255,0,0,0.08) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+@keyframes screenPulse{
+  0%,100%{filter:brightness(1);}
+  50%{filter:brightness(1.05);}
+}
+
+/* TERMINAL */
+.terminal{
+  position:relative;
+  max-width:950px;
+  margin:40px auto;
+  padding:30px;
+  border:1px solid #ff0000;
+  background:rgba(10,0,0,0.92);
+  box-shadow:
+    0 0 25px #ff0000,
+    inset 0 0 40px rgba(255,0,0,0.4);
+  display:none;
+}
+
+.header{
+  font-size:13px;
+  margin-bottom:20px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.badge{
+  color:#00ffcc;
+}
+
+/* PROFILE */
+.profile{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.profile img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border:2px solid #ff0000;
+  box-shadow:0 0 15px #ff0000;
+}
+
+.name{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.userid{
+  font-size:13px;
+  color:#ffae00;
+  margin-top:6px;
+}
+
+/* CONTACT */
+.contact{
+  margin-top:25px;
+  line-height:1.9;
+}
+
+.contact a{
+  color:#4da6ff;
+  text-decoration:none;
+  position:relative;
+}
+
+.contact a::after{
+  content:" [ENCRYPTED]";
+  font-size:11px;
+  color:#ffae00;
+  opacity:0;
+  transition:.3s;
+}
+
+.contact a:hover::after{
+  opacity:1;
+}
+
+/* BOOT */
+.boot{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.cursor{
+  border-right:2px solid #ff3b3b;
+  animation:blink .8s infinite;
+}
+
+@keyframes blink{
+  50%{border-color:transparent;}
+}
+
+button{
+  margin-top:10px;
+  background:none;
+  border:1px solid #ff3b3b;
+  color:#ff3b3b;
+  padding:5px 10px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#ff000022;
+}
+
+/* Mobile */
+@media(max-width:600px){
+  .terminal{
+    margin:20px;
+    padding:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="crt"></div>
+
+<div class="boot" id="boot">
+  <div id="bootText" class="cursor"></div>
+  <p>Press ENTER to Authenticate</p>
+</div>
+
+<div class="terminal" id="terminal">
+
+<div class="header">
+<span>LEVEL-MAX CONTACT NODE</span>
+<span class="badge">CLASSIFICATION: PUBLIC_SIGNAL</span>
+<span id="clock"></span>
+</div>
+
+<div class="profile">
+  <img src="profilepicture.jpg">
+  <div>
+    <div class="name">Froylán Fahlan Aditya</div>
+    <div class="userid" id="generatedID"></div>
+    <button onclick="regenID()">Regenerate ID</button>
+  </div>
+</div>
+
+<div id="typedText"></div>
+
+<div class="contact">
+<div>INSTAGRAM :
+<a href="https://www.instagram.com/simplefroy?igsh=bXFscHdieTBmZWtk" target="_blank">simplefroy</a></div>
+
+<div>DISCORD : @ilfroy</div>
+
+<div>TIKTOK :
+<a href="https://tiktok.com/@ilfroy" target="_blank">@ilfroy</a></div>
+
+<div>TELEGRAM : @Wakeyliam</div>
+
+<div>GENSHIN UID : 863415181 (Asia)</div>
+
+<div>MLBB ID : 752871039</div>
+
+<div>ROBLOX :
+<a href="https://www.roblox.com/share?code=b27e13498a4bf043b8d353dbf6ab69fe&type=Profile&source=ProfileShare&stamp=1772088267829" target="_blank">Froylán (agares_06)</a></div>
+</div>
+
+</div>
+
+<audio id="bgmusic" loop>
+  <source src="bgmusic.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="accessSound">
+  <source src="access.wav" type="audio/wav">
+</audio>
+
+<script>
+/* Boot typing */
+const bootMessage="[ SYSTEM AUTHENTICATION SEQUENCE INITIALIZED ]";
+let bi=0;
+function bootType(){
+  if(bi<bootMessage.length){
+    document.getElementById("bootText").textContent+=bootMessage.charAt(bi);
+    bi++;
+    setTimeout(bootType,20);
+  }
+}
+bootType();
+
+/* Enter unlock */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter"){
+    document.getElementById("boot").style.display="none";
+    document.getElementById("terminal").style.display="block";
+    document.getElementById("bgmusic").play();
+    document.getElementById("accessSound").play();
+    startTyping();
+  }
+});
+
+/* Clock */
+setInterval(()=>{
+  document.getElementById("clock").textContent=
+  new Date().toLocaleTimeString();
+},1000);
+
+/* ID generator */
+function generateID(){
+  const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let id="SYS-";
+  for(let i=0;i<8;i++){
+    id+=chars.charAt(Math.floor(Math.random()*chars.length));
+  }
+  return id;
+}
+function regenID(){
+  document.getElementById("generatedID").textContent=
+  "SUBJECT ID: "+generateID();
+}
+regenID();
+
+/* Terminal typing */
+const text=`
+[ NODE STATUS: MAXIMUM ACCESS GRANTED ]
+Signal encryption stable.
+Contact channels decrypted.
+Intentional communication recommended.
+`;
+let i=0;
+function startTyping(){
+  if(i<text.length){
+    document.getElementById("typedText").textContent+=text.charAt(i);
+    i++;
+    setTimeout(startTyping,20);
+  }
+}
+</script>
+
+</body>
+</html>
