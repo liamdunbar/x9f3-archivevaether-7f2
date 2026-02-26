@@ -4,27 +4,23 @@
   box-sizing:border-box;
 }
 
-/* ===== IMPORTANT MOBILE FIX ===== */
 html,body{
   width:100%;
-  min-height:100dvh;     /* dynamic viewport height */
+  min-height:100dvh;
   background:#000;
   font-family:monospace;
   color:#ff3b3b;
   overflow-x:hidden;
-  overflow-y:auto;       /* allow scrolling */
+  overflow-y:auto;
 }
 
-
-/* ===== INFECTED CRT ===== */
 .crt{
-  position:fixed;        /* <-- FIX: was absolute */
+  position:fixed;
   inset:0;
   background:#050000;
   overflow:hidden;
 }
 
-/* SCANLINES */
 .crt::before{
   content:"";
   position:absolute;
@@ -39,7 +35,6 @@ html,body{
   );
 }
 
-/* VIRUS LIGHT SWEEP */
 .crt::after{
   content:"";
   position:absolute;
@@ -59,17 +54,14 @@ html,body{
   to{ transform:translateX(30%); }
 }
 
-
-/* ===== LAYOUT ===== */
 .terminal{
   display:grid;
   grid-template-columns:1fr 340px;
   gap:20px;
   padding:28px;
-  min-height:100dvh;     /* CRITICAL FIX */
+  min-height:100dvh;
 }
 
-/* ===== TERMINAL BOX ===== */
 .terminal-main{
   border:1px solid #ff0000;
   display:flex;
@@ -107,8 +99,6 @@ html,body{
   box-shadow:0 0 10px rgba(255,0,0,0.5);
 }
 
-
-/* ===== RIGHT PANEL ===== */
 .right-panel{
   display:flex;
   flex-direction:column;
@@ -132,8 +122,6 @@ html,body{
   border-color:#ff4a4a;
 }
 
-
-/* ===== COMMAND INPUT ===== */
 .command{
   display:flex;
   margin-top:10px;
@@ -152,8 +140,6 @@ html,body{
   flex:1;
 }
 
-
-/* ===== FOOTER ===== */
 .footer{
   position:absolute;
   bottom:18px;
@@ -161,12 +147,6 @@ html,body{
   font-size:13px;
   pointer-events:none;
 }
-
-
-
-/* ===================================================== */
-/* ================= MOBILE PERFECT MODE ================= */
-/* ===================================================== */
 
 @media(max-width:900px){
 
@@ -177,7 +157,6 @@ html,body{
     min-height:100dvh;
   }
 
-  /* panel becomes bottom grid */
   .right-panel{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -191,4 +170,13 @@ html,body{
     font-size:14px;
   }
 
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(1px, -1px); }
+  60% { transform: translate(-1px, 0); }
+  80% { transform: translate(1px, 1px); }
+  100% { transform: translate(0); }
 }
