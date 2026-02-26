@@ -1,6 +1,14 @@
 {
   "revelations": [
-    {   
+    { 
+      "id": "rev-003",
+      "date": "2026-02-26",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "I told you, i was nobody.",
+      "video": "revelation/media/emmet.mp4"
+    },
+    {
       "id": "rev-003",
       "date": "2026-02-21",
       "displayName": "Froylan",
