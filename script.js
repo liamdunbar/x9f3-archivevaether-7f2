@@ -70,66 +70,92 @@ Perfect — Simple Plan
 };
 
 function passwordGate() {
-  terminal.innerHTML = `
-  <div style="
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-  ">
-    <div>
-      [ERR] ACCESS DENIED<br>
-      [LOG] Unauthorized attempt recorded<br><br>
-      Entering restricted command mode...<br><br>
-      To access request permission.<br>
-      Please type &gt; "contacts"<br><br>
-    </div>
+  terminal.innerHTML = "";
+  terminal.style.whiteSpace = "pre-wrap";
 
-    <div style="margin-top:10px;">
-      <input id="level3input"
-        style="
-          background:transparent;
-          border:1px solid #f2e86d;
-          color:#f2e86d;
-          padding:6px;
-          font-family:monospace;
-          text-align:center;
-        "
-        autofocus
-      >
-    </div>
+  const lines = [
+    "[ERR] ACCESS DENIED",
+    "[LOG] Unauthorized attempt recorded",
+    "",
+    "Entering restricted command mode...",
+    "",
+    "To access request permission.",
+    'Please type > "contacts"',
+    ""
+  ];
 
-    <button id="level3btn"
-      style="
-        margin-top:10px;
-        background:transparent;
-        border:1px solid #f2e86d;
-        color:#f2e86d;
-        padding:6px 14px;
-        font-family:monospace;
-        cursor:pointer;
-      "
-    >ENTER</button>
-  </div>
-  `;
+  let lineIndex = 0;
 
-  const input = document.getElementById("level3input");
-  const button = document.getElementById("level3btn");
-
-  function checkPassword() {
-    if (input.value.trim().toLowerCase() === "contacts") {
-      window.location.href = "https://simplefroylan.space/contact-me";
+  function typeLine() {
+    if (lineIndex >= lines.length) {
+      showInput();
+      return;
     }
+
+    let text = lines[lineIndex];
+    let charIndex = 0;
+    const lineElement = document.createElement("div");
+
+    if (text.startsWith("[ERR]")) {
+      lineElement.style.color = "#ff2a2a";
+      lineElement.style.textShadow = "0 0 8px #ff0000";
+      lineElement.style.animation = "glitch 0.15s infinite";
+    }
+
+    terminal.appendChild(lineElement);
+
+    const interval = setInterval(() => {
+      lineElement.textContent += text[charIndex] || "";
+      charIndex++;
+
+      if (charIndex > text.length) {
+        clearInterval(interval);
+        lineIndex++;
+        setTimeout(typeLine, 400);
+      }
+    }, 25);
   }
 
-  button.addEventListener("click", checkPassword);
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      checkPassword();
+  function showInput() {
+    const wrapper = document.createElement("div");
+    wrapper.style.marginTop = "10px";
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.style.background = "transparent";
+    input.style.border = "none";
+    input.style.borderBottom = "1px solid #f2e86d";
+    input.style.color = "#f2e86d";
+    input.style.fontFamily = "monospace";
+    input.style.outline = "none";
+    input.style.width = "200px";
+    input.autofocus = true;
+
+    const button = document.createElement("button");
+    button.textContent = "ENTER";
+    button.style.marginLeft = "10px";
+    button.style.background = "transparent";
+    button.style.border = "1px solid #f2e86d";
+    button.style.color = "#f2e86d";
+    button.style.cursor = "pointer";
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(button);
+    terminal.appendChild(wrapper);
+
+    function check() {
+      if (input.value.trim().toLowerCase() === "contacts") {
+        window.location.href = "https://simplefroylan.space/contact-me";
+      }
     }
-  });
+
+    button.addEventListener("click", check);
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") check();
+    });
+  }
+
+  typeLine();
 }
 
 function renderLevel4Document() {
@@ -255,11 +281,7 @@ function renderChronicles() {
 
           <a href="${post.link}"
              target="_blank"
-             style="
-               color:#6aa6ff;
-               text-decoration:underline;
-               cursor:pointer;
-             ">
+             style="color:#6aa6ff;text-decoration:underline;cursor:pointer;">
              Click here to continue read
           </a>
         `;
