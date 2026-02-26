@@ -1,8 +1,5 @@
 const terminal = document.getElementById("terminalBody");
 
-/* ========= TERMINAL MODE (Levels 1–3) ========= */
-
-/* SAFE TYPEWRITER */
 function typeText(text, speed = 15, done) {
   terminal.textContent = "";
   terminal.style.whiteSpace = "pre-wrap";
@@ -11,7 +8,6 @@ function typeText(text, speed = 15, done) {
   const interval = setInterval(() => {
     terminal.textContent += text[i];
     i++;
-
     if (i >= text.length) {
       clearInterval(interval);
       if (done) done();
@@ -19,7 +15,6 @@ function typeText(text, speed = 15, done) {
   }, speed);
 }
 
-/* BOOT */
 typeText(
 `[SYS] Initializing kernel...
 [SYS] Loading terminal interface...
@@ -28,7 +23,6 @@ typeText(
 SELECT A LEVEL`
 );
 
-/* DATA */
 const DATA = {
   level1: `
 SUBJECT PROFILE — LEVEL 1
@@ -75,76 +69,68 @@ Perfect — Simple Plan
 `
 };
 
-/* ========= LEVEL 3 ========= */
-
 function passwordGate() {
   terminal.innerHTML = `
-LEVEL 3 — RESTRICTED
+  <div style="
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+  ">
+    <div>
+      [ERR] ACCESS DENIED<br>
+      [LOG] Unauthorized attempt recorded<br><br>
+      Entering restricted command mode...<br><br>
+      To access request permission.<br>
+      Please type &gt; "contacts"<br><br>
+    </div>
 
-ENTER PASSWORD:
+    <div style="margin-top:10px;">
+      <input id="level3input"
+        style="
+          background:transparent;
+          border:1px solid #f2e86d;
+          color:#f2e86d;
+          padding:6px;
+          font-family:monospace;
+          text-align:center;
+        "
+        autofocus
+      >
+    </div>
 
-<div class="command">
-  <span>&gt;</span>
-  <input id="pw" autofocus />
-</div>
-`;
+    <button id="level3btn"
+      style="
+        margin-top:10px;
+        background:transparent;
+        border:1px solid #f2e86d;
+        color:#f2e86d;
+        padding:6px 14px;
+        font-family:monospace;
+        cursor:pointer;
+      "
+    >ENTER</button>
+  </div>
+  `;
 
-  const pw = document.getElementById("pw");
+  const input = document.getElementById("level3input");
+  const button = document.getElementById("level3btn");
 
-  pw.addEventListener("keydown", e => {
+  function checkPassword() {
+    if (input.value.trim().toLowerCase() === "contacts") {
+      window.location.href = "https://simplefroylan.space/contact-me";
+    }
+  }
+
+  button.addEventListener("click", checkPassword);
+  input.addEventListener("keydown", e => {
     if (e.key === "Enter") {
-      typeText(
-`[ERR] ACCESS DENIED
-[LOG] Unauthorized attempt recorded
-
-Entering restricted command mode...
-
-Type "help"`,
-20,
-commandMode
-      );
+      checkPassword();
     }
   });
 }
-
-function commandMode() {
-  terminal.innerHTML += `
-<div class="command">
-  <span>&gt;</span>
-  <input id="cmd" autofocus />
-</div>
-`;
-
-  const cmdInput = document.getElementById("cmd");
-
-  cmdInput.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      const cmd = e.target.value.trim().toLowerCase();
-      let out = "\nUNKNOWN COMMAND";
-
-      if (cmd === "help") {
-        out = "\nAVAILABLE COMMANDS:\nhelp\ncontact";
-      }
-
-      if (cmd === "contact") {
-        out = `
-CONTACT INFORMATION
-
-Instagram: @simplefroy
-WhatsApp: +62 851-6184-0928
-Telegram: @Wakeyliam
-Snapchat: zfroyden
-Twitter: @FahlanAditya
-`;
-      }
-
-      terminal.textContent += `\n> ${cmd}\n${out}`;
-      e.target.value = "";
-    }
-  });
-}
-
-/* ========= LEVEL 4 — UPDATES ========= */
 
 function renderLevel4Document() {
   terminal.innerHTML = "";
@@ -196,8 +182,6 @@ function renderLevel4Document() {
     });
 }
 
-/* ========= LEVEL 4 — REVELATION (VIDEO FEED) ========= */
-
 function renderRevelation() {
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
@@ -245,8 +229,6 @@ function renderRevelation() {
     });
 }
 
-/* ========= ⭐ LEVEL 4 — CHRONICLES (NEW) ========= */
-
 function renderChronicles() {
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
@@ -289,8 +271,6 @@ function renderChronicles() {
       terminal.textContent = "FAILED TO LOAD chronicles.json";
     });
 }
-
-/* ========= LEVEL CLICK HANDLER ========= */
 
 document.querySelectorAll(".entry").forEach(entry => {
   entry.onclick = () => {
