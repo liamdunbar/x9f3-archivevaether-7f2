@@ -6,7 +6,7 @@ html,body{
   background:#000;
   overflow:hidden;
   font-family:monospace;
-  color:#aaa;
+  color:#999;
 }
 
 .gate{
@@ -21,71 +21,67 @@ html,body{
 
 .gate-box{
   text-align:center;
-  max-width:500px;
-  padding:30px;
+  max-width:520px;
+  padding:40px;
   border:1px solid #ff0000;
-  box-shadow:0 0 25px #ff0000;
+  box-shadow:0 0 35px #ff0000;
 }
 
 .gate-title{
   color:#ff3b3b;
-  margin-bottom:15px;
+  margin-bottom:20px;
   font-weight:bold;
+  letter-spacing:2px;
 }
 
 .gate-text{
-  color:#888;
-  line-height:1.6;
-  margin-bottom:20px;
+  color:#777;
+  line-height:1.7;
+  margin-bottom:25px;
 }
 
 button{
   background:transparent;
   border:1px solid #ff3b3b;
   color:#ff3b3b;
-  padding:8px 18px;
+  padding:10px 22px;
   cursor:pointer;
+  letter-spacing:2px;
 }
 
 button:hover{
   background:#ff000022;
 }
 
-.phase1{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-}
-
-.phase1-text{
-  position:absolute;
-  color:#777;
-  font-size:18px;
-  opacity:0;
-  transform:scale(0.8);
-}
-
-.storm{
+.stage{
   position:fixed;
   inset:0;
   overflow:hidden;
   pointer-events:none;
 }
 
+.center-line{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(1);
+  font-size:26px;
+  color:#aaa;
+  opacity:0;
+  transition:all 4s ease;
+}
+
 .thought{
   position:absolute;
-  font-size:14px;
+  font-size:15px;
   opacity:0;
-  animation:fade 6s linear forwards;
+  animation:fade 8s linear forwards;
 }
 
 @keyframes fade{
   0%{opacity:0;}
-  10%{opacity:.8;}
-  80%{opacity:.8;}
+  10%{opacity:.85;}
+  85%{opacity:.85;}
   100%{opacity:0;}
 }
 
@@ -95,10 +91,5 @@ button:hover{
   background:#fff;
   opacity:0;
   pointer-events:none;
-}
-
-@media(max-width:700px){
-  .gate-box{
-    margin:20px;
-  }
+  transition:opacity .15s;
 }
