@@ -1,95 +1,178 @@
-*{margin:0;padding:0;box-sizing:border-box;}
+const gate=document.getElementById("gate");
+const enterBtn=document.getElementById("enterBtn");
+const stage=document.getElementById("stage");
+const flash=document.getElementById("flash");
+const music=document.getElementById("bgmusic");
 
-html,body{
-  width:100%;
-  height:100%;
-  background:#000;
-  overflow:hidden;
-  font-family:monospace;
-  color:#999;
+const duration=109000;
+
+const thoughts=[
+"I am being left.",
+"I am being replaced.",
+"I am too much.",
+"I am not enough.",
+"I ruined it.",
+"I suffocated him.",
+"I scared him away.",
+"I made him tired.",
+"I always lose people.",
+"I am temporary.",
+"I am disposable.",
+"I am forgettable.",
+"I am not special.",
+"Someone else will be calmer.",
+"Someone else will be easier.",
+"I am embarrassing.",
+"I should’ve been quieter.",
+"I should’ve texted less.",
+"I am needy.",
+"I am pathetic.",
+"I’m exhausting.",
+"I drain people.",
+"I push people away.",
+"I don’t deserve love.",
+"I don’t deserve stability.",
+"I am not worth fighting for.",
+"I imagined everything.",
+"I misread everything.",
+"I’m dramatic.",
+"I’m weak.",
+"I’m childish.",
+"I’m still that unwanted kid.",
+"No one stays.",
+"No one chooses me first.",
+"I am always second.",
+"I am too intense to be loved.",
+"I am a burden.",
+"I should disappear.",
+"I should stop caring.",
+"If I was better, he’d stay.",
+"If I was better, they’d choose me.",
+"I am too broken to be anyone’s home.",
+"I am unfixable.",
+"I ruin everything.",
+"I am destined to be alone.",
+"I am hard to love.",
+"I am not enough."
+];
+
+let started=false;
+
+enterBtn.onclick=()=>{
+  gate.style.display="none";
+  music.currentTime=0;
+  music.volume=0.7;
+  music.play();
+  startCycle();
+  started=true;
+};
+
+music.addEventListener("ended",()=>{
+  music.currentTime=0;
+  music.play();
+  startCycle();
+});
+
+function startCycle(){
+  stage.innerHTML="";
+  phase1();
 }
 
-.gate{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#000;
-  z-index:10;
+function phase1(){
+  const lines=[
+    "I am not enough.",
+    "I ruin everything.",
+    "I am being left."
+  ];
+
+  lines.forEach((text,i)=>{
+    const el=document.createElement("div");
+    el.className="center-line";
+    el.textContent=text;
+    stage.appendChild(el);
+
+    setTimeout(()=>{
+      el.style.opacity=1;
+      el.style.transform="translate(-50%,-50%) scale(1.8)";
+    },200);
+
+    setTimeout(()=>{
+      el.style.transform="translate(-50%,-50%) scale(0.05)";
+      el.style.opacity=0;
+    },5000+(i*500));
+  });
+
+  setTimeout(()=>{
+    stage.innerHTML="";
+    escalate();
+  },9000);
 }
 
-.gate-box{
-  text-align:center;
-  max-width:520px;
-  padding:40px;
-  border:1px solid #ff0000;
-  box-shadow:0 0 35px #ff0000;
+function escalate(){
+  const start=Date.now();
+
+  const interval=setInterval(()=>{
+    const elapsed=Date.now()-start;
+    const progress=elapsed/duration;
+
+    spawnThought(progress);
+
+    if(progress>0.5){
+      flashPulse();
+    }
+
+    if(progress>=1){
+      clearInterval(interval);
+      collapse();
+    }
+
+  },120);
 }
 
-.gate-title{
-  color:#ff3b3b;
-  margin-bottom:20px;
-  font-weight:bold;
-  letter-spacing:2px;
+function spawnThought(progress){
+  const t=document.createElement("div");
+  t.className="thought";
+  t.textContent=thoughts[Math.floor(Math.random()*thoughts.length)];
+
+  const x=Math.random()*100;
+  const y=Math.random()*100;
+  const scale=0.8+(progress*2*Math.random());
+  const rot=(Math.random()*20-10)*(progress*2);
+
+  t.style.left=x+"%";
+  t.style.top=y+"%";
+  t.style.transform=`rotate(${rot}deg) scale(${scale})`;
+
+  if(progress>0.6){
+    t.style.color="#ff0000";
+  }else{
+    t.style.color="#777";
+  }
+
+  stage.appendChild(t);
+
+  setTimeout(()=>{t.remove();},8000);
 }
 
-.gate-text{
-  color:#777;
-  line-height:1.7;
-  margin-bottom:25px;
+function flashPulse(){
+  flash.style.opacity=1;
+  setTimeout(()=>{
+    flash.style.opacity=0;
+  },120);
 }
 
-button{
-  background:transparent;
-  border:1px solid #ff3b3b;
-  color:#ff3b3b;
-  padding:10px 22px;
-  cursor:pointer;
-  letter-spacing:2px;
-}
+function collapse(){
+  stage.innerHTML="";
+  const last=document.createElement("div");
+  last.className="center-line";
+  last.textContent="I am not enough.";
+  stage.appendChild(last);
 
-button:hover{
-  background:#ff000022;
-}
+  setTimeout(()=>{
+    last.style.opacity=.7;
+  },200);
 
-.stage{
-  position:fixed;
-  inset:0;
-  overflow:hidden;
-  pointer-events:none;
-}
-
-.center-line{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(1);
-  font-size:26px;
-  color:#aaa;
-  opacity:0;
-  transition:all 4s ease;
-}
-
-.thought{
-  position:absolute;
-  font-size:15px;
-  opacity:0;
-  animation:fade 8s linear forwards;
-}
-
-@keyframes fade{
-  0%{opacity:0;}
-  10%{opacity:.85;}
-  85%{opacity:.85;}
-  100%{opacity:0;}
-}
-
-.flash{
-  position:fixed;
-  inset:0;
-  background:#fff;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .15s;
+  setTimeout(()=>{
+    last.style.opacity=0;
+  },5000);
 }
