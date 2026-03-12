@@ -66,6 +66,7 @@ Iris — Goo Goo Dolls
 Somewhere I Belong — Linkin Park
 Unwell — Matchbox Twenty
 Perfect — Simple Plan
+Bye — Midnight Til Morning
 `
 };
 
