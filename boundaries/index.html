@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SYSTEM TERMINAL — BOUNDARY LOG</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html,body{
+  width:100%;
+  min-height:100dvh;
+  background:#000;
+  font-family:monospace;
+  color:#f2e86d;
+}
+
+/* CRT */
+.crt{
+  position:fixed;
+  inset:0;
+  background:#050505;
+}
+
+.crt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.05),
+    rgba(255,255,255,0.05) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* TERMINAL */
+.terminal{
+  position:relative;
+  max-width:900px;
+  margin:40px auto;
+  padding:28px;
+  border:1px solid #f2e86d;
+  background:rgba(0,0,0,0.92);
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #f2e86d;
+  padding-bottom:8px;
+  margin-bottom:16px;
+  font-weight:bold;
+}
+
+/* BACK BUTTON */
+.back{
+  font-size:12px;
+  color:#6aa6ff;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+/* TITLE */
+.title{
+  font-weight:bold;
+  font-size:18px;
+  margin-bottom:16px;
+}
+
+/* TEXT */
+.body{
+  line-height:1.8;
+  font-size:14px;
+}
+
+.body br{line-height:2;}
+
+/* EMPHASIS */
+.warn{ color:#ff4a4a; }
+.soft{ color:#aaa; }
+
+/* FINAL */
+.final{
+  margin-top:18px;
+  color:#ffffff;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .terminal{
+    margin:20px;
+    padding:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="crt"></div>
+
+<div class="terminal">
+
+<div class="header">
+  <span>SYSTEM TERMINAL — BOUNDARY LOG</span>
+  <a class="back" href="https://simplefroylan.space">← back</a>
+</div>
+
+<div class="title">
+ENTRY — I ASKED THE WRONG PEOPLE
+</div>
+
+<div class="body">
+
+I don’t think I ask for too much.<br>
+I just ask the wrong people.<br><br>
+
+<span class="warn">• Don’t tell me I deserve love if you can’t show it consistently.</span><br>
+<span class="warn">• Don’t give me attention just to disappear when it gets real.</span><br>
+<span class="warn">• Don’t say things you don’t mean just to fill silence.</span><br>
+<span class="warn">• Don’t act interested if you’re only bored.</span><br>
+<span class="warn">• Don’t make me feel special today and optional tomorrow.</span><br><br>
+
+• If you’re confused about your feelings, figure it out before involving me.<br>
+• If you’re “not ready,” then don’t start something you can’t maintain.<br>
+• If you only want something casual, say it clearly — don’t disguise it as connection.<br><br>
+
+• I won’t chase people who are unsure about me.<br>
+• I won’t beg for consistency, respect, or clarity.<br>
+• I won’t keep explaining myself to people who don’t try to understand.<br><br>
+
+<span class="soft">• I can be patient, but I won’t wait forever for someone to decide my worth.</span><br>
+<span class="soft">• I can care deeply, but I won’t pour into someone who gives nothing back.</span><br><br>
+
+<div class="final">
+I’m not afraid of love.<br>
+I’m just done with half-effort, mixed signals, and empty words.<br><br>
+
+If you come into my life, come honestly.<br>
+If not, don’t come close at all.
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
