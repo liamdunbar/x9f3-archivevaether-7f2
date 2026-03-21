@@ -1,6 +1,14 @@
 const terminal = document.getElementById("terminalBody");
 const clickSound = document.getElementById("clickSound");
 
+function playClick(){
+  if(clickSound){
+    clickSound.currentTime = 0;
+    clickSound.volume = 0.2;
+    clickSound.play();
+  }
+}
+
 function typeText(text, speed = 15, done) {
   terminal.textContent = "";
   terminal.style.whiteSpace = "pre-wrap";
@@ -55,6 +63,8 @@ Autism Spectrum Disorder
 Borderline Personality Traits
 Executive Dysfunction
 Dissociative Symptoms
+Anxious Attachment
+Limerence
 Chronic Loneliness and Alienation
 `,
 
@@ -299,11 +309,7 @@ function renderChronicles() {
 document.querySelectorAll(".entry").forEach(entry => {
   entry.onclick = () => {
 
-    if(clickSound){
-      clickSound.currentTime = 0;
-      clickSound.volume = 0.2;
-      clickSound.play();
-    }
+    playClick();
 
     const view = entry.dataset.view;
 
