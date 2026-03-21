@@ -2,6 +2,30 @@
   "revelations": [
     { 
       "id": "rev-003",
+      "date": "2026-March-22",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "beautiful BOY.",
+      "video": "revelation/media/beautifulboy.mp4"
+    },
+    {
+      "id": "rev-003",
+      "date": "2026-March-22",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "I'll carry that sin with you\nWe don't have to be normal.",
+      "video": "revelation/media/sins.mp4"
+    },
+    {
+      "id": "rev-003",
+      "date": "2026-March-22",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "Maybe we get married one day, but who knows?\nThink I'll take that thought to the grave, but who knows?\nI know that I'll love you always\nYeah, bro, you, and I'd like that",
+      "video": "revelation/media/butwhoknows.mp4"
+    },
+    {
+      "id": "rev-003",
       "date": "2026-March-21",
       "displayName": "Froylan",
       "username": "@froy",
