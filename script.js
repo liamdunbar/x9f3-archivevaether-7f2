@@ -1,4 +1,5 @@
 const terminal = document.getElementById("terminalBody");
+const clickSound = document.getElementById("clickSound");
 
 function typeText(text, speed = 15, done) {
   terminal.textContent = "";
@@ -297,6 +298,13 @@ function renderChronicles() {
 
 document.querySelectorAll(".entry").forEach(entry => {
   entry.onclick = () => {
+
+    if(clickSound){
+      clickSound.currentTime = 0;
+      clickSound.volume = 0.2;
+      clickSound.play();
+    }
+
     const view = entry.dataset.view;
 
     if (view === "level3") {
