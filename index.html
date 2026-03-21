@@ -25,12 +25,30 @@
       -webkit-touch-callout:none;
       pointer-events:none;
     }
+
+    #warnBox{
+      position:fixed;
+      bottom:40px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#000;
+      color:#ff3b3b;
+      border:1px solid #ff3b3b;
+      padding:10px 18px;
+      font-size:13px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .3s ease;
+      z-index:9999;
+    }
   </style>
 </head>
+
 <body>
-  <h1 style="display:none;">
+
+<h1 style="display:none;">
 System Terminal Internal Log Interactive Experience
-  </h1>
+</h1>
 
 <section class="state">
   <div class="crt terminal flicker">
@@ -52,19 +70,42 @@ System Terminal Internal Log Interactive Experience
 
     <div class="footer">AREA AUTHORIZED</div>
 
+    <div id="warnBox">ACCESS DENIED — UNAUTHORIZED ACTION</div>
+
   </div>
 </section>
 
 <script>
-document.addEventListener("contextmenu", e => e.preventDefault());
+window.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener("dragstart", e => {
-  if(e.target.tagName === "IMG"){
-    e.preventDefault();
+  const warn = document.getElementById("warnBox");
+  let timeout;
+
+  function showWarning(){
+    warn.style.opacity = 1;
+
+    clearTimeout(timeout);
+    timeout = setTimeout(()=>{
+      warn.style.opacity = 0;
+    },2000);
   }
+
+  document.addEventListener("contextmenu", e => {
+    e.preventDefault();
+    showWarning();
+  });
+
+  document.addEventListener("dragstart", e => {
+    if(e.target.tagName === "IMG"){
+      e.preventDefault();
+      showWarning();
+    }
+  });
+
 });
 </script>
 
 <script src="script.js"></script>
+
 </body>
 </html>
