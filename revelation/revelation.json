@@ -2,7 +2,23 @@
   "revelations": [
     { 
       "id": "rev-003",
-      "date": "2026-03-11",
+      "date": "2026-March-21",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "Selamat tidur kekasih gelapku. (Oh Hikaru)\nSemoga cepat kau lupakan Aku. (Oh Hikaru)\nKekasih sejati mu tak kan pernah sanggup untuk melupakanmu.",
+      "video": "revelation/media/kekasihgelapku.mp4"
+    },
+    {
+      "id": "rev-003",
+      "date": "2026-March-21",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "Oh Hikaru? He makes me feel like I'm someone worth something. He cares about me, and I care about him. Every time I see him smile I just get this warm and fuzzy feeling in my chest and I don't want to leave his side..",
+      "video": "revelation/media/yoshiki.mp4"
+    },
+    {
+      "id": "rev-003",
+      "date": "2026-March-11",
       "displayName": "Froylan",
       "username": "@froy",
       "caption": "Oh, what am I supposed to do without you?.",
@@ -10,7 +26,7 @@
     },
     {
       "id": "rev-003",
-      "date": "2026-02-26",
+      "date": "2026-February-26",
       "displayName": "Froylan",
       "username": "@froy",
       "caption": "I told you, i was nobody.",
@@ -18,7 +34,7 @@
     },
     {
       "id": "rev-003",
-      "date": "2026-02-21",
+      "date": "2026-February-21",
       "displayName": "Froylan",
       "username": "@froy",
       "caption": "say it out loud",
@@ -26,7 +42,7 @@
     },
     {
       "id": "rev-003",
-      "date": "2026-02-18",
+      "date": "2026-February-18",
       "displayName": "Froylan",
       "username": "@froy",
       "caption": "I showed up for you in every way I knew how, and somehow I'm the one left questioning my worth, replaying every moment trying to figure out how loving you turned into something I had to apologize for",
@@ -34,7 +50,7 @@
     },
     {
       "id": "rev-003",
-      "date": "2026-02-18",
+      "date": "2026-February-18",
       "displayName": "Froylan",
       "username": "@froy",
       "caption": "real",
@@ -42,7 +58,7 @@
     },
     {
       "id": "rev-003",
-      "date": "2026-02-18",
+      "date": "2026-February-18",
       "displayName": "Froylan",
       "username": "@froy",
       "caption": "i wonder why i cry sometimes",
@@ -50,7 +66,7 @@
     },
     {
       "id": "rev-003",
-      "date": "2026-02-03",
+      "date": "2026-January-03",
       "displayName": "Froylan",
       "username": "@froy",
       "caption": "🥹",
