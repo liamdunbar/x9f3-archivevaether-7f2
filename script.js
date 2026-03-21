@@ -1,6 +1,16 @@
 const terminal = document.getElementById("terminalBody");
 const clickSound = document.getElementById("clickSound");
 
+// 🔑 control typing globally
+let typingInterval = null;
+
+function stopTyping(){
+  if(typingInterval){
+    clearInterval(typingInterval);
+    typingInterval = null;
+  }
+}
+
 function playClick(){
   if(clickSound){
     clickSound.currentTime = 0;
@@ -10,20 +20,27 @@ function playClick(){
 }
 
 function typeText(text, speed = 15, done) {
+
+  stopTyping();
+
   terminal.textContent = "";
   terminal.style.whiteSpace = "pre-wrap";
+
   let i = 0;
 
-  const interval = setInterval(() => {
-    terminal.textContent += text[i];
+  typingInterval = setInterval(() => {
+    terminal.textContent += text[i] || "";
     i++;
+
     if (i >= text.length) {
-      clearInterval(interval);
+      clearInterval(typingInterval);
+      typingInterval = null;
       if (done) done();
     }
   }, speed);
 }
 
+// ===== INIT =====
 typeText(
 `[SYS] Initializing kernel...
 [SYS] Loading terminal interface...
@@ -32,6 +49,7 @@ typeText(
 SELECT A LEVEL`
 );
 
+// ===== DATA =====
 const DATA = {
   level1: `
 SUBJECT PROFILE — LEVEL 1
@@ -81,7 +99,11 @@ Bye — Midnight Til Morning
 `
 };
 
+// ===== PASSWORD GATE =====
 function passwordGate() {
+
+  stopTyping();
+
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "pre-wrap";
 
@@ -170,7 +192,11 @@ function passwordGate() {
   typeLine();
 }
 
+// ===== LEVEL 4 =====
 function renderLevel4Document() {
+
+  stopTyping();
+
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
 
@@ -178,6 +204,7 @@ function renderLevel4Document() {
     .then(res => res.json())
     .then(data => {
       data.updates.forEach(update => {
+
         const block = document.createElement("div");
 
         block.style.borderTop = "1px solid #f2e86d";
@@ -220,7 +247,11 @@ function renderLevel4Document() {
     });
 }
 
+// ===== REVELATION =====
 function renderRevelation() {
+
+  stopTyping();
+
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
 
@@ -228,6 +259,7 @@ function renderRevelation() {
     .then(res => res.json())
     .then(data => {
       data.revelations.forEach(post => {
+
         const block = document.createElement("div");
 
         block.style.borderTop = "1px solid #f2e86d";
@@ -267,7 +299,11 @@ function renderRevelation() {
     });
 }
 
+// ===== CHRONICLES =====
 function renderChronicles() {
+
+  stopTyping();
+
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
 
@@ -275,6 +311,7 @@ function renderChronicles() {
     .then(res => res.json())
     .then(data => {
       data.chronicles.forEach(post => {
+
         const block = document.createElement("div");
 
         block.style.borderTop = "1px solid #f2e86d";
@@ -293,7 +330,7 @@ function renderChronicles() {
 
           <a href="${post.link}"
              target="_blank"
-             style="color:#6aa6ff;text-decoration:underline;cursor:pointer;">
+             style="color:#6aa6ff;text-decoration:underline;">
              Click here to continue read
           </a>
         `;
@@ -306,6 +343,7 @@ function renderChronicles() {
     });
 }
 
+// ===== CLICK HANDLER =====
 document.querySelectorAll(".entry").forEach(entry => {
   entry.onclick = () => {
 
@@ -313,25 +351,10 @@ document.querySelectorAll(".entry").forEach(entry => {
 
     const view = entry.dataset.view;
 
-    if (view === "level3") {
-      passwordGate();
-      return;
-    }
-
-    if (view === "level4") {
-      renderLevel4Document();
-      return;
-    }
-
-    if (view === "revelation") {
-      renderRevelation();
-      return;
-    }
-
-    if (view === "chronicles") {
-      renderChronicles();
-      return;
-    }
+    if (view === "level3") return passwordGate();
+    if (view === "level4") return renderLevel4Document();
+    if (view === "revelation") return renderRevelation();
+    if (view === "chronicles") return renderChronicles();
 
     typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
   };
