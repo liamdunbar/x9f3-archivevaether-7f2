@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SYSTEM TERMINAL</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    img{
+      -webkit-user-select:none;
+      user-select:none;
+      -webkit-touch-callout:none;
+      pointer-events:none;
+    }
+  </style>
 </head>
 <body>
 
@@ -30,6 +39,16 @@
 
   </div>
 </section>
+
+<script>
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+document.addEventListener("dragstart", e => {
+  if(e.target.tagName === "IMG"){
+    e.preventDefault();
+  }
+});
+</script>
 
 <script src="script.js"></script>
 </body>
