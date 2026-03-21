@@ -147,12 +147,13 @@ If not, don’t come close at all.
 `;
 
 const target = document.getElementById("typed");
+
 let i = 0;
-const speed = 12;
+const speed = 18;
 
 function type(){
   if(i < content.length){
-    target.innerHTML += content.charAt(i);
+    target.innerHTML = content.slice(0, i);
     i++;
     setTimeout(type, speed);
   }
@@ -160,6 +161,6 @@ function type(){
 
 type();
 </script>
-
+  
 </body>
 </html>
