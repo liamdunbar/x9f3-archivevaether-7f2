@@ -74,19 +74,30 @@ System Terminal Internal Log Interactive Experience
 
   </div>
 </section>
-  
- <audio id="clickSound">
- <source src="click.wav" type="audio/wav"> 
- </audio>
-  
+
+<audio id="clickSound">
+  <source src="click.wav" type="audio/wav">
+</audio>
+
+<audio id="errorSound">
+  <source src="error.wav" type="audio/wav">
+</audio>
+
 <script>
 window.addEventListener("DOMContentLoaded", () => {
 
   const warn = document.getElementById("warnBox");
+  const errorSound = document.getElementById("errorSound");
   let timeout;
 
   function showWarning(){
     warn.style.opacity = 1;
+
+    if(errorSound){
+      errorSound.currentTime = 0;
+      errorSound.volume = 0.25;
+      errorSound.play();
+    }
 
     clearTimeout(timeout);
     timeout = setTimeout(()=>{
