@@ -78,13 +78,9 @@ html,body{
   font-size:14px;
 }
 
-.body br{line-height:2;}
-
-/* EMPHASIS */
 .warn{ color:#ff4a4a; }
 .soft{ color:#aaa; }
 
-/* FINAL */
 .final{
   margin-top:18px;
   color:#ffffff;
@@ -115,8 +111,12 @@ html,body{
 ENTRY — I ASKED THE WRONG PEOPLE
 </div>
 
-<div class="body">
+<div class="body" id="typed"></div>
 
+</div>
+
+<script>
+const content = `
 I don’t think I ask for too much.<br>
 I just ask the wrong people.<br><br>
 
@@ -144,10 +144,22 @@ I’m just done with half-effort, mixed signals, and empty words.<br><br>
 If you come into my life, come honestly.<br>
 If not, don’t come close at all.
 </div>
+`;
 
-</div>
+const target = document.getElementById("typed");
+let i = 0;
+const speed = 12;
 
-</div>
+function type(){
+  if(i < content.length){
+    target.innerHTML += content.charAt(i);
+    i++;
+    setTimeout(type, speed);
+  }
+}
+
+type();
+</script>
 
 </body>
 </html>
