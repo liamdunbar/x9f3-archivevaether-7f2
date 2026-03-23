@@ -42,42 +42,49 @@
       z-index:9999;
     }
 
-    /* ✅ POPUP STYLE */
+    /* ===== CENTER POPUP (NO BACKGROUND BLOCK) ===== */
     #entryWarning{
       position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.85);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index:10000;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      z-index:9999;
+
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+    }
+
+    #entryWarning.show{
+      opacity:1;
+      pointer-events:auto;
     }
 
     .warning-box{
       border:1px solid #ff0000;
       background:#000;
-      padding:20px;
-      width:90%;
-      max-width:380px;
+      padding:18px;
+      width:320px;
       text-align:center;
+      box-shadow:0 0 12px #ff0000;
     }
 
     .warning-title{
       font-weight:bold;
-      margin-bottom:12px;
+      margin-bottom:10px;
     }
 
     .warning-text{
       font-size:13px;
       line-height:1.6;
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
 
     #enterSite{
       background:transparent;
       border:1px solid #ff0000;
       color:#ff3b3b;
-      padding:6px 16px;
+      padding:6px 14px;
       cursor:pointer;
       font-family:monospace;
     }
@@ -86,7 +93,7 @@
 
 <body>
 
-<!-- ✅ POPUP (FIXED POSITION) -->
+<!-- ✅ POPUP -->
 <div id="entryWarning">
   <div class="warning-box">
 
@@ -96,12 +103,9 @@
 
     <div class="warning-text">
       This project has been abandoned.<br><br>
-
       The creator stopped maintaining it<br>
       after giving up on someone he loved.<br><br>
-
-      Do you want to continue accessing<br>
-      this abandoned subject?
+      Do you want to continue?
     </div>
 
     <button id="enterSite">CONTINUE</button>
@@ -183,10 +187,17 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ✅ POPUP CLOSE
-  if (popup && btn) {
+  // ✅ SHOW POPUP AFTER 1 SECOND
+  setTimeout(()=>{
+    if(popup){
+      popup.classList.add("show");
+    }
+  },1000);
+
+  // ✅ CLOSE POPUP
+  if(btn){
     btn.onclick = () => {
-      popup.style.display = "none";
+      popup.classList.remove("show");
     };
   }
 
