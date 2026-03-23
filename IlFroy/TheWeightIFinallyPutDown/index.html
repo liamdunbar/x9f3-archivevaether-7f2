@@ -13,16 +13,14 @@ html,body{
   min-height:100dvh;
   background:#000;
   font-family:monospace;
-  color:#f2e86d;
-  overflow:hidden;
+  color:#ff3b3b;
 }
 
-/* CRT */
+/* CRT SAME AS MAIN */
 .crt{
   position:fixed;
   inset:0;
-  background:#050505;
-  animation:flicker 0.15s infinite;
+  background:#050000;
 }
 
 .crt::before{
@@ -32,66 +30,71 @@ html,body{
   pointer-events:none;
   background:repeating-linear-gradient(
     to bottom,
-    rgba(255,255,255,0.05),
-    rgba(255,255,255,0.05) 1px,
+    rgba(255,0,0,0.08),
+    rgba(255,0,0,0.08) 1px,
     transparent 2px,
     transparent 4px
   );
 }
 
-/* GLITCH */
-.glitch{
-  position:relative;
-  animation:glitch 2s infinite;
-}
-
-.glitch::before,
-.glitch::after{
-  content:attr(data-text);
+.crt::after{
+  content:"";
   position:absolute;
-  left:0;
-  width:100%;
-  overflow:hidden;
+  inset:-20%;
+  pointer-events:none;
+  background:linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,0,0,0.15) 50%,
+    transparent 60%
+  );
+  animation:virusScan 3s linear infinite;
 }
 
-.glitch::before{
-  color:#ff0000;
-  z-index:-1;
-  animation:glitchTop 2s infinite;
-}
-
-.glitch::after{
-  color:#00ffff;
-  z-index:-2;
-  animation:glitchBottom 2s infinite;
+@keyframes virusScan{
+  from{ transform:translateX(-30%); }
+  to{ transform:translateX(30%); }
 }
 
 /* TERMINAL */
 .terminal{
   position:absolute;
   inset:28px;
-  border:1px solid #f2e86d;
+  border:1px solid #ff0000;
   display:flex;
   flex-direction:column;
-  background:rgba(0,0,0,0.92);
+  background:rgba(10,0,0,0.92);
+  box-shadow:
+    0 0 12px #ff0000,
+    inset 0 0 30px rgba(255,0,0,0.35);
 }
 
 .header{
   padding:8px 12px;
-  border-bottom:1px solid #f2e86d;
+  border-bottom:1px solid #ff0000;
   font-weight:bold;
+  text-shadow:0 0 6px #ff0000;
 }
 
 .body{
   padding:18px;
   overflow-y:auto;
   line-height:1.8;
+  font-size:14px;
 }
 
+/* TITLE */
 .title{
   font-weight:bold;
   font-size:20px;
   margin-bottom:16px;
+  text-shadow:0 0 10px #ff0000;
+  animation:glitch 1.5s infinite;
+}
+
+/* TEXT slight flicker */
+.text{
+  animation:flicker 2s infinite;
 }
 
 /* VIDEO */
@@ -99,35 +102,24 @@ video{
   width:100%;
   max-height:460px;
   margin-top:22px;
-  border:1px solid #f2e86d;
+  border:1px solid #ff0000;
+  box-shadow:0 0 10px rgba(255,0,0,0.5);
 }
 
 /* ANIMATIONS */
-@keyframes flicker{
-  0%{opacity:1;}
-  50%{opacity:0.98;}
-  100%{opacity:1;}
-}
-
 @keyframes glitch{
   0%{transform:translate(0);}
   20%{transform:translate(-1px,1px);}
-  40%{transform:translate(-1px,-1px);}
-  60%{transform:translate(1px,1px);}
-  80%{transform:translate(1px,-1px);}
+  40%{transform:translate(1px,-1px);}
+  60%{transform:translate(-1px,0);}
+  80%{transform:translate(1px,1px);}
   100%{transform:translate(0);}
 }
 
-@keyframes glitchTop{
-  0%{clip-path:inset(0 0 80% 0);}
-  50%{clip-path:inset(0 0 50% 0);}
-  100%{clip-path:inset(0 0 80% 0);}
-}
-
-@keyframes glitchBottom{
-  0%{clip-path:inset(80% 0 0 0);}
-  50%{clip-path:inset(50% 0 0 0);}
-  100%{clip-path:inset(80% 0 0 0);}
+@keyframes flicker{
+  0%{opacity:1;}
+  50%{opacity:0.95;}
+  100%{opacity:1;}
 }
 </style>
 </head>
@@ -137,17 +129,17 @@ video{
 <div class="crt">
 <div class="terminal">
 
-<div class="header glitch" data-text="SYSTEM TERMINAL — LOG ENTRY">
+<div class="header">
 SYSTEM TERMINAL — LOG ENTRY
 </div>
 
 <div class="body">
 
-<div class="title glitch" data-text="CHRONICLE ENTRY — The Weight I Finally Put Down">
+<div class="title">
 CHRONICLE ENTRY — The Weight I Finally Put Down
 </div>
 
-<div>
+<div class="text">
 
 I'm finally letting you go not because I wanted to not because I stopped loving you but because I got tired of loving someone who made me feel so alone.<br><br>
 
