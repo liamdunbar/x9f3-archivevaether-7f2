@@ -2,6 +2,14 @@
   "revelations": [
     { 
       "id": "rev-003",
+      "date": "2026-March-23",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "?.",
+      "video": "revelation/media/alongwithme.mp4"
+    },
+    {
+      "id": "rev-003",
       "date": "2026-March-22",
       "displayName": "Froylan",
       "username": "@froy",
