@@ -363,13 +363,8 @@ document.querySelectorAll(".entry").forEach(entry => {
 const popup = document.getElementById("entryWarning");
 const btn = document.getElementById("enterSite");
 
-if(btn){
+if (popup && btn) {
   btn.onclick = () => {
-    popup.style.opacity = 0;
-    popup.style.transition = "opacity .4s ease";
-
-    setTimeout(()=>{
-      popup.style.display = "none";
-    },400);
+    popup.style.display = "none";
   };
 }
