@@ -197,14 +197,19 @@ html,body{
   z-index:9999;
 }
 
+/* ===== FIXED POPUP (NO BACKGROUND LAYER) ===== */
 #entryWarning{
   position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.85);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
   z-index:9999;
+
+  display:none;
+}
+
+#entryWarning.show{
+  display:block;
 }
 
 .warning-box{
@@ -214,6 +219,7 @@ html,body{
   width:90%;
   max-width:380px;
   text-align:center;
+  box-shadow:0 0 12px #ff0000;
 }
 
 .warning-title{
