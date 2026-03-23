@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARCHIVE TERMINAL</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html,body{
+  width:100%;
+  min-height:100dvh;
+  background:#000;
+  font-family:monospace;
+  color:#f2e86d;
+  overflow:hidden;
+}
+
+/* CRT */
+.crt{
+  position:fixed;
+  inset:0;
+  background:#050505;
+  animation:flicker 0.15s infinite;
+}
+
+.crt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.05),
+    rgba(255,255,255,0.05) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* GLITCH */
+.glitch{
+  position:relative;
+  animation:glitch 2s infinite;
+}
+
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  left:0;
+  width:100%;
+  overflow:hidden;
+}
+
+.glitch::before{
+  color:#ff0000;
+  z-index:-1;
+  animation:glitchTop 2s infinite;
+}
+
+.glitch::after{
+  color:#00ffff;
+  z-index:-2;
+  animation:glitchBottom 2s infinite;
+}
+
+/* TERMINAL */
+.terminal{
+  position:absolute;
+  inset:28px;
+  border:1px solid #f2e86d;
+  display:flex;
+  flex-direction:column;
+  background:rgba(0,0,0,0.92);
+}
+
+.header{
+  padding:8px 12px;
+  border-bottom:1px solid #f2e86d;
+  font-weight:bold;
+}
+
+.body{
+  padding:18px;
+  overflow-y:auto;
+  line-height:1.8;
+}
+
+.title{
+  font-weight:bold;
+  font-size:20px;
+  margin-bottom:16px;
+}
+
+/* VIDEO */
+video{
+  width:100%;
+  max-height:460px;
+  margin-top:22px;
+  border:1px solid #f2e86d;
+}
+
+/* ANIMATIONS */
+@keyframes flicker{
+  0%{opacity:1;}
+  50%{opacity:0.98;}
+  100%{opacity:1;}
+}
+
+@keyframes glitch{
+  0%{transform:translate(0);}
+  20%{transform:translate(-1px,1px);}
+  40%{transform:translate(-1px,-1px);}
+  60%{transform:translate(1px,1px);}
+  80%{transform:translate(1px,-1px);}
+  100%{transform:translate(0);}
+}
+
+@keyframes glitchTop{
+  0%{clip-path:inset(0 0 80% 0);}
+  50%{clip-path:inset(0 0 50% 0);}
+  100%{clip-path:inset(0 0 80% 0);}
+}
+
+@keyframes glitchBottom{
+  0%{clip-path:inset(80% 0 0 0);}
+  50%{clip-path:inset(50% 0 0 0);}
+  100%{clip-path:inset(80% 0 0 0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="crt">
+<div class="terminal">
+
+<div class="header glitch" data-text="SYSTEM TERMINAL — LOG ENTRY">
+SYSTEM TERMINAL — LOG ENTRY
+</div>
+
+<div class="body">
+
+<div class="title glitch" data-text="CHRONICLE ENTRY — The Weight I Finally Put Down">
+CHRONICLE ENTRY — The Weight I Finally Put Down
+</div>
+
+<div>
+
+I'm finally letting you go not because I wanted to not because I stopped loving you but because I got tired of loving someone who made me feel so alone.<br><br>
+
+I looked at you and I didn't feel angry. I just felt heavy like carrying a backpack full of rocks for too long. You don't even notice the weight anymore until you finally decide to put it down.<br><br>
+
+It's not that I stopped loving you. I just stopped hoping, you know, that feeling when you're screaming underwater, that was me trying to explain trying to change trying to make you see.<br><br>
+
+But you just couldn't or wouldn't. And I realized my voice doesn't work down here. So I stopped trying to save something that was already gone.<br><br>
+
+People think giving up is weak, but sometimes, giving up is just accepting the truth that's been staring at you for months.<br><br>
+
+You can love somebody and still know they're not good for you. You can miss them and still not pick up the phone.<br><br>
+
+I gave up on us because I finally gave up on the version of you I made up in my head. The real you was standing right there watching me drown handing me a towel.<br><br>
+
+So I just walked away. My soul got tired of begging for the bare minimum.<br><br>
+
+And the saddest part. You probably didn't even notice I left or maybe you did. And you just finally got the peace and quiet you always wanted.<br><br>
+
+Yeah, I guess that's the thing. I finally stopped asking for love and it's quiet now, too quiet, but at least I'm not begging anymore.
+
+</div>
+
+<video controls>
+  <source src="come.mp4" type="video/mp4">
+</video>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
