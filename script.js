@@ -1,7 +1,7 @@
 const terminal = document.getElementById("terminalBody");
 const clickSound = document.getElementById("clickSound");
 
-// 🔑 control typing globally
+// 🔑 typing control
 let typingInterval = null;
 
 function stopTyping(){
@@ -20,7 +20,6 @@ function playClick(){
 }
 
 function typeText(text, speed = 15, done) {
-
   stopTyping();
 
   terminal.textContent = "";
@@ -101,7 +100,6 @@ Bye — Midnight Til Morning
 
 // ===== PASSWORD GATE =====
 function passwordGate() {
-
   stopTyping();
 
   terminal.innerHTML = "";
@@ -128,6 +126,7 @@ function passwordGate() {
 
     let text = lines[lineIndex];
     let charIndex = 0;
+
     const lineElement = document.createElement("div");
 
     if (text.startsWith("[ERR]")) {
@@ -195,6 +194,7 @@ function passwordGate() {
 // ===== LEVEL 4 =====
 function renderLevel4Document() {
   stopTyping();
+
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
 
@@ -202,6 +202,7 @@ function renderLevel4Document() {
     .then(res => res.json())
     .then(data => {
       data.updates.forEach(update => {
+
         const block = document.createElement("div");
 
         block.style.borderTop = "1px solid #f2e86d";
@@ -213,7 +214,7 @@ function renderLevel4Document() {
           <div style="display:flex; align-items:center; gap:10px;">
             <img src="assets/profile.jpg"
                  style="width:40px;height:40px;border-radius:50%;
-                        border:1px solid #f2e86d;object-fit:cover;">
+                        border:1px solid #f2e86d;">
             <div>
               <strong>${update.displayName}</strong>
               <span style="opacity:.75;">
@@ -229,16 +230,24 @@ function renderLevel4Document() {
 
         terminal.appendChild(block);
       });
+    })
+    .catch(() => {
+      terminal.textContent = "FAILED TO LOAD updates.json";
     });
 }
 
 // ===== LEVEL 5 =====
 function renderLevel5Fragments(){
-
   stopTyping();
 
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
+
+  // safety check
+  if (typeof FRAGMENTS === "undefined") {
+    terminal.textContent = "ERROR: fragments.js not loaded";
+    return;
+  }
 
   const grid = document.createElement("div");
   grid.style.display = "grid";
@@ -287,6 +296,10 @@ document.querySelectorAll(".entry").forEach(entry => {
     if (view === "level4") return renderLevel4Document();
     if (view === "level5") return renderLevel5Fragments();
 
-    typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
+    if (DATA[view]) {
+      typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
+    } else {
+      typeText("[ERR] DATA NOT FOUND");
+    }
   };
 });
