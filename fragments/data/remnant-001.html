@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>REMNANT — 003</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html,body{
+  width:100%;
+  min-height:100dvh;
+  background:#000;
+  font-family:monospace;
+  color:#ff3b3b;
+}
+
+/* CRT EFFECT */
+.crt{
+  position:fixed;
+  inset:0;
+  background:#050000;
+}
+
+.crt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,0,0,0.08),
+    rgba(255,0,0,0.08) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* TERMINAL */
+.terminal{
+  position:absolute;
+  inset:30px;
+  border:1px solid #ff0000;
+  background:rgba(10,0,0,0.95);
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 0 12px #ff0000;
+}
+
+.header{
+  padding:10px;
+  border-bottom:1px solid #ff0000;
+  font-weight:bold;
+}
+
+.body{
+  padding:18px;
+  line-height:1.6;
+  position:relative;
+}
+
+/* IMAGE */
+img{
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+  border:1px solid #ff0000;
+  margin:15px 0;
+}
+
+/* BLUR LOCK */
+.locked{
+  filter:blur(4px);
+  pointer-events:none;
+  user-select:none;
+}
+
+/* POPUP */
+#authBox{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.auth-inner{
+  border:1px solid #ff0000;
+  background:#000;
+  padding:20px;
+  width:280px;
+  text-align:center;
+  box-shadow:0 0 10px #ff0000;
+}
+
+.auth-text{
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+.auth-input{
+  width:100%;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid #ff0000;
+  color:#ff3b3b;
+  outline:none;
+  margin-bottom:12px;
+  font-family:monospace;
+}
+
+.auth-btn{
+  background:transparent;
+  border:1px solid #ff0000;
+  color:#ff3b3b;
+  padding:5px 12px;
+  cursor:pointer;
+}
+
+/* BACK BUTTON */
+.back{
+  position:absolute;
+  bottom:15px;
+  left:15px;
+  font-size:12px;
+  cursor:pointer;
+  opacity:.7;
+}
+.back:hover{
+  opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="crt">
+<div class="terminal">
+
+<div class="header">REMNANT ENTRY — 003</div>
+
+<div class="body">
+
+<!-- CONTENT -->
+<div id="content" class="locked">
+
+  <img src="satrya.webp">
+
+  <div>Name: S■■■■</div>
+  <div>Username: s◇◇◇◇</div>
+
+  <br>
+
+  <div>
+    Partial record detected.<br>
+    Emotional trace remains but full data is restricted.<br>
+    Access requires authorization.
+  </div>
+
+</div>
+
+<!-- AUTH POPUP -->
+<div id="authBox">
+  <div class="auth-inner">
+
+    <div class="auth-text">
+      ACCESS RESTRICTED<br><br>
+      You need authorization to view full data.<br>
+      Please input password.
+    </div>
+
+    <input type="password" id="password" class="auth-input">
+    <button class="auth-btn" id="enter">ENTER</button>
+
+  </div>
+</div>
+
+<!-- BACK -->
+<div class="back" onclick="window.location.href='../../index.html'">
+← BACK
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+const btn = document.getElementById("enter");
+const input = document.getElementById("password");
+const content = document.getElementById("content");
+const auth = document.getElementById("authBox");
+
+function unlock(){
+  if(input.value === "test123"){
+
+    // remove blur
+    content.classList.remove("locked");
+
+    // replace content with full data
+    content.innerHTML = `
+      <img src="satrya.webp">
+
+      <div>Name: Satrya</div>
+      <div>Username: sqryaaa</div>
+
+      <br>
+
+      <div>
+        Full record restored.<br><br>
+
+        He is someone who left a quiet mark.<br>
+        Not loud, not obvious — but present in ways that linger.<br><br>
+
+        There are things that were never said.<br>
+        And maybe that’s why they stayed.
+      </div>
+    `;
+
+    // remove popup
+    auth.style.display = "none";
+
+  }
+}
+
+btn.onclick = unlock;
+
+input.addEventListener("keydown", e=>{
+  if(e.key === "Enter") unlock();
+});
+</script>
+
+</body>
+</html>
