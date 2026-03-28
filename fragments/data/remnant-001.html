@@ -1,235 +1,168 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>REMNANT — 003</title>
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
-html,body{
-  width:100%;
-  min-height:100dvh;
-  background:#000;
-  font-family:monospace;
-  color:#ff3b3b;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remnant Profile</title><style>
+body {
+  margin: 0;
+  background: #050505;
+  color: #ff3b3b;
+  font-family: "Courier New", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-/* CRT EFFECT */
-.crt{
-  position:fixed;
-  inset:0;
-  background:#050000;
+.container {
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid rgba(255,0,0,0.3);
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(255,0,0,0.2);
+  background: rgba(0,0,0,0.85);
 }
 
-.crt::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:repeating-linear-gradient(
-    to bottom,
-    rgba(255,0,0,0.08),
-    rgba(255,0,0,0.08) 1px,
-    transparent 2px,
-    transparent 4px
-  );
+.profile-img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 15px;
+  border: 2px solid #ff3b3b;
+  filter: blur(10px) brightness(0.6);
+  transition: 0.5s;
 }
 
-/* TERMINAL */
-.terminal{
-  position:absolute;
-  inset:30px;
-  border:1px solid #ff0000;
-  background:rgba(10,0,0,0.95);
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 0 12px #ff0000;
+h2, p {
+  text-align: center;
+  margin: 5px 0;
 }
 
-.header{
-  padding:10px;
-  border-bottom:1px solid #ff0000;
-  font-weight:bold;
+.desc {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 10px;
 }
 
-.body{
-  padding:18px;
-  line-height:1.6;
-  position:relative;
+.lock-box {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255,0,0,0.3);
+  padding-top: 15px;
+  text-align: center;
 }
 
-/* IMAGE */
-img{
-  width:100%;
-  max-height:300px;
-  object-fit:cover;
-  border:1px solid #ff0000;
-  margin:15px 0;
+input {
+  width: 80%;
+  padding: 8px;
+  background: black;
+  border: 1px solid #ff3b3b;
+  color: #ff3b3b;
+  outline: none;
 }
 
-/* BLUR LOCK */
-.locked{
-  filter:blur(4px);
-  pointer-events:none;
-  user-select:none;
+button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid #ff3b3b;
+  color: #ff3b3b;
+  cursor: pointer;
 }
 
-/* POPUP */
-#authBox{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 8px;
 }
 
-.auth-inner{
-  border:1px solid #ff0000;
-  background:#000;
-  padding:20px;
-  width:280px;
-  text-align:center;
-  box-shadow:0 0 10px #ff0000;
+/* Glitch Effect */
+.glitch {
+  position: relative;
 }
 
-.auth-text{
-  font-size:13px;
-  margin-bottom:12px;
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
 }
 
-.auth-input{
-  width:100%;
-  background:transparent;
-  border:none;
-  border-bottom:1px solid #ff0000;
-  color:#ff3b3b;
-  outline:none;
-  margin-bottom:12px;
-  font-family:monospace;
+.glitch::before {
+  color: red;
+  animation: glitch 0.5s infinite;
 }
 
-.auth-btn{
-  background:transparent;
-  border:1px solid #ff0000;
-  color:#ff3b3b;
-  padding:5px 12px;
-  cursor:pointer;
+.glitch::after {
+  color: white;
+  animation: glitch 0.5s infinite reverse;
 }
 
-/* BACK BUTTON */
-.back{
-  position:absolute;
-  bottom:15px;
-  left:15px;
-  font-size:12px;
-  cursor:pointer;
-  opacity:.7;
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px,2px); }
+  40% { transform: translate(-2px,-2px); }
+  60% { transform: translate(2px,2px); }
+  80% { transform: translate(2px,-2px); }
+  100% { transform: translate(0); }
 }
-.back:hover{
-  opacity:1;
+
+/* Typing effect */
+.typing {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid red;
+  width: 0;
+  animation: typing 3s steps(40, end) forwards;
 }
-</style>
-</head>
 
-<body>
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
 
-<div class="crt">
-<div class="terminal">
+/* Access granted */
+.access {
+  color: #00ff9c;
+  margin-top: 10px;
+}
 
-<div class="header">REMNANT ENTRY — 003</div>
+</style></head><body><div class="container">  <img src="satrya.webp" class="profile-img" id="profileImg">  <h2 class="glitch" data-text="S■■■■">S■■■■</h2>
+  <p>@s◇◇◇◇</p>  <p class="desc typing" id="descText">
+    He is someone who left a quiet mark... not loud, but lingering.
+  </p>  <div class="lock-box">
+    <p>🔒 Authorization Required</p>
+    <input type="password" id="password" placeholder="Enter password">
+    <br>
+    <button onclick="checkPass()">ENTER</button>
+    <p id="error" class="error"></p>
+    <p id="access" class="access"></p>
+  </div></div><script>
+function checkPass() {
+  const input = document.getElementById("password").value;
+  const error = document.getElementById("error");
+  const access = document.getElementById("access");
+  const img = document.getElementById("profileImg");
 
-<div class="body">
+  const correct = "remnant003";
 
-<!-- CONTENT -->
-<div id="content" class="locked">
+  if (input === correct) {
+    error.textContent = "";
+    access.textContent = "ACCESS GRANTED";
+    img.style.filter = "none";
 
-  <img src="satrya.webp">
+    // subtle glitch flash
+    document.body.style.background = "#001a12";
+    setTimeout(() => {
+      document.body.style.background = "#050505";
+    }, 200);
 
-  <div>Name: S■■■■</div>
-  <div>Username: s◇◇◇◇</div>
-
-  <br>
-
-  <div>
-    Partial record detected.<br>
-    Emotional trace remains but full data is restricted.<br>
-    Access requires authorization.
-  </div>
-
-</div>
-
-<!-- AUTH POPUP -->
-<div id="authBox">
-  <div class="auth-inner">
-
-    <div class="auth-text">
-      ACCESS RESTRICTED<br><br>
-      You need authorization to view full data.<br>
-      Please input password.
-    </div>
-
-    <input type="password" id="password" class="auth-input">
-    <button class="auth-btn" id="enter">ENTER</button>
-
-  </div>
-</div>
-
-<!-- BACK -->
-<div class="back" onclick="window.location.href='../../index.html'">
-← BACK
-</div>
-
-</div>
-</div>
-</div>
-
-<script>
-const btn = document.getElementById("enter");
-const input = document.getElementById("password");
-const content = document.getElementById("content");
-const auth = document.getElementById("authBox");
-
-function unlock(){
-  if(input.value === "test123"){
-
-    // remove blur
-    content.classList.remove("locked");
-
-    // replace content with full data
-    content.innerHTML = `
-      <img src="satrya.webp">
-
-      <div>Name: Satrya</div>
-      <div>Username: sqryaaa</div>
-
-      <br>
-
-      <div>
-        Full record restored.<br><br>
-
-        He is someone who left a quiet mark.<br>
-        Not loud, not obvious — but present in ways that linger.<br><br>
-
-        There are things that were never said.<br>
-        And maybe that’s why they stayed.
-      </div>
-    `;
-
-    // remove popup
-    auth.style.display = "none";
-
+  } else {
+    error.textContent = "ACCESS DENIED";
+    access.textContent = "";
   }
 }
-
-btn.onclick = unlock;
-
-input.addEventListener("keydown", e=>{
-  if(e.key === "Enter") unlock();
-});
-</script>
-
-</body>
+</script></body>
 </html>
