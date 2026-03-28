@@ -99,16 +99,6 @@ Bye — Midnight Til Morning
 `
 };
 
-// ===== LEVEL 5 DATA =====
-const FRAGMENTS = [
-  {
-    name: "Satrya",
-    username: "@sqryaaa",
-    image: "fragments/satrya.webp",
-    link: "fragments/satrya.html"
-  }
-];
-
 // ===== PASSWORD GATE =====
 function passwordGate() {
 
@@ -204,9 +194,7 @@ function passwordGate() {
 
 // ===== LEVEL 4 =====
 function renderLevel4Document() {
-
   stopTyping();
-
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
 
@@ -214,7 +202,6 @@ function renderLevel4Document() {
     .then(res => res.json())
     .then(data => {
       data.updates.forEach(update => {
-
         const block = document.createElement("div");
 
         block.style.borderTop = "1px solid #f2e86d";
@@ -240,116 +227,8 @@ function renderLevel4Document() {
           </div>
         `;
 
-        if (update.image) {
-          const img = document.createElement("img");
-          img.src = update.image;
-          img.style.maxWidth = "100%";
-          img.style.border = "1px solid #f2e86d";
-          img.style.marginTop = "10px";
-          block.appendChild(img);
-        }
-
         terminal.appendChild(block);
       });
-    })
-    .catch(() => {
-      terminal.textContent = "FAILED TO LOAD updates.json";
-    });
-}
-
-// ===== REVELATION =====
-function renderRevelation() {
-
-  stopTyping();
-
-  terminal.innerHTML = "";
-  terminal.style.whiteSpace = "normal";
-
-  fetch("revelation/revelation.json")
-    .then(res => res.json())
-    .then(data => {
-      data.revelations.forEach(post => {
-
-        const block = document.createElement("div");
-
-        block.style.borderTop = "1px solid #f2e86d";
-        block.style.borderBottom = "1px solid #f2e86d";
-        block.style.padding = "12px 0";
-        block.style.marginBottom = "20px";
-
-        block.innerHTML = `
-          <div style="display:flex; align-items:center; gap:10px;">
-            <img src="assets/profile.jpg"
-                 style="width:40px;height:40px;border-radius:50%;
-                        border:1px solid #f2e86d;">
-            <div>
-              <strong>${post.displayName}</strong>
-              <span style="opacity:.75;">
-                ${post.username} · ${post.date}
-              </span>
-            </div>
-          </div>
-
-          <div style="margin:10px 0;">
-            ${post.caption.replace(/\n/g, "<br>")}
-          </div>
-
-          <video controls
-                 style="width:100%; max-height:420px;
-                        border:1px solid #f2e86d;">
-            <source src="${post.video}" type="video/mp4">
-          </video>
-        `;
-
-        terminal.appendChild(block);
-      });
-    })
-    .catch(() => {
-      terminal.textContent = "FAILED TO LOAD revelation.json";
-    });
-}
-
-// ===== CHRONICLES =====
-function renderChronicles() {
-
-  stopTyping();
-
-  terminal.innerHTML = "";
-  terminal.style.whiteSpace = "normal";
-
-  fetch("chronicles/chronicles.json")
-    .then(res => res.json())
-    .then(data => {
-      data.chronicles.forEach(post => {
-
-        const block = document.createElement("div");
-
-        block.style.borderTop = "1px solid #f2e86d";
-        block.style.borderBottom = "1px solid #f2e86d";
-        block.style.padding = "14px 0";
-        block.style.marginBottom = "18px";
-
-        block.innerHTML = `
-          <div style="font-size:16px; font-weight:bold; margin-bottom:6px;">
-            ${post.title}
-          </div>
-
-          <div style="opacity:.85; margin-bottom:10px;">
-            ${post.subtitle}
-          </div>
-
-          <a href="${post.link}"
-             target="_blank"
-             style="color:#6aa6ff;text-decoration:underline;">
-             Click here to continue read
-          </a>
-        `;
-
-        terminal.appendChild(block);
-      });
-    })
-    .catch(() => {
-      terminal.textContent = "FAILED TO LOAD chronicles.json";
     });
 }
 
@@ -386,14 +265,8 @@ function renderLevel5Fragments(){
         border:1px solid #ff0000;
         margin-bottom:6px;
       ">
-
-      <div style="font-size:13px; font-weight:bold;">
-        ${f.name}
-      </div>
-
-      <div style="font-size:11px; opacity:.7;">
-        ${f.username}
-      </div>
+      <div style="font-size:13px; font-weight:bold;">${f.name}</div>
+      <div style="font-size:11px; opacity:.7;">${f.username}</div>
     `;
 
     grid.appendChild(card);
@@ -412,20 +285,8 @@ document.querySelectorAll(".entry").forEach(entry => {
 
     if (view === "level3") return passwordGate();
     if (view === "level4") return renderLevel4Document();
-    if (view === "revelation") return renderRevelation();
-    if (view === "chronicles") return renderChronicles();
     if (view === "level5") return renderLevel5Fragments();
 
     typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
   };
 });
-
-// ===== POPUP =====
-const popup = document.getElementById("entryWarning");
-const btn = document.getElementById("enterSite");
-
-if (popup && btn) {
-  btn.onclick = () => {
-    popup.style.display = "none";
-  };
-}
