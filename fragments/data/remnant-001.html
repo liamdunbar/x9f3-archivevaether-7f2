@@ -1,168 +1,159 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Remnant Profile</title><style>
+<title>remnant-003</title>
+
+<style>
 body {
   margin: 0;
-  background: #050505;
-  color: #ff3b3b;
-  font-family: "Courier New", monospace;
+  background: black;
+  color: #8a0000;
+  font-family: monospace;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
-.container {
-  width: 100%;
-  max-width: 420px;
-  border: 1px solid rgba(255,0,0,0.3);
+.panel {
+  width: 90%;
+  max-width: 500px;
+  border: 1px solid rgba(255,0,0,0.2);
   padding: 20px;
-  box-shadow: 0 0 20px rgba(255,0,0,0.2);
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.95);
 }
 
-.profile-img {
-  width: 110px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto 15px;
-  border: 2px solid #ff3b3b;
-  filter: blur(10px) brightness(0.6);
+.header {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 15px;
+}
+
+.content {
+  opacity: 0.5;
   transition: 0.5s;
 }
 
-h2, p {
-  text-align: center;
-  margin: 5px 0;
+img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 10px;
+  filter: blur(10px);
+  transition: 0.6s;
 }
 
-.desc {
-  font-size: 12px;
+.lock {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255,0,0,0.2);
+  padding-top: 10px;
+}
+
+input {
+  width: 100%;
+  background: black;
+  border: none;
+  border-bottom: 1px solid #8a0000;
+  color: #8a0000;
+  outline: none;
+  padding: 6px;
+}
+
+.system {
+  font-size: 11px;
   opacity: 0.7;
   margin-top: 10px;
 }
 
-.lock-box {
-  margin-top: 20px;
-  border-top: 1px solid rgba(255,0,0,0.3);
-  padding-top: 15px;
-  text-align: center;
-}
+.denied { color: red; }
+.granted { color: #00ff9c; }
+</style>
+</head>
 
-input {
-  width: 80%;
-  padding: 8px;
-  background: black;
-  border: 1px solid #ff3b3b;
-  color: #ff3b3b;
-  outline: none;
-}
+<body>
 
-button {
-  margin-top: 10px;
-  padding: 6px 12px;
-  background: transparent;
-  border: 1px solid #ff3b3b;
-  color: #ff3b3b;
-  cursor: pointer;
-}
+<div class="panel">
 
-.error {
-  color: red;
-  font-size: 12px;
-  margin-top: 8px;
-}
+  <div class="header">
+    FILE: remnant-003<br>
+    STATUS: RESTRICTED
+  </div>
 
-/* Glitch Effect */
-.glitch {
-  position: relative;
-}
+  <!-- DATA AREA -->
+  <div class="content" id="content">
+    <img src="satrya.webp" id="img">
 
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  width: 100%;
-}
+    <div id="name">Name: S■■■■</div>
+    <div id="user">Username: s◇◇◇◇</div>
 
-.glitch::before {
-  color: red;
-  animation: glitch 0.5s infinite;
-}
+    <div id="desc" style="margin-top:10px; font-size:12px;">
+      Partial data recovered...
+    </div>
+  </div>
 
-.glitch::after {
-  color: white;
-  animation: glitch 0.5s infinite reverse;
-}
+  <!-- LOCK -->
+  <div class="lock">
+    <input type="password" id="pass" placeholder="authorization key required">
+    <div id="msg" class="system"></div>
+  </div>
 
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px,2px); }
-  40% { transform: translate(-2px,-2px); }
-  60% { transform: translate(2px,2px); }
-  80% { transform: translate(2px,-2px); }
-  100% { transform: translate(0); }
-}
+</div>
 
-/* Typing effect */
-.typing {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid red;
-  width: 0;
-  animation: typing 3s steps(40, end) forwards;
-}
+<script>
+const correct = "leftunsaid";
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
+const input = document.getElementById("pass");
+const msg = document.getElementById("msg");
 
-/* Access granted */
-.access {
-  color: #00ff9c;
-  margin-top: 10px;
-}
+input.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
 
-</style></head><body><div class="container">  <img src="satrya.webp" class="profile-img" id="profileImg">  <h2 class="glitch" data-text="S■■■■">S■■■■</h2>
-  <p>@s◇◇◇◇</p>  <p class="desc typing" id="descText">
-    He is someone who left a quiet mark... not loud, but lingering.
-  </p>  <div class="lock-box">
-    <p>🔒 Authorization Required</p>
-    <input type="password" id="password" placeholder="Enter password">
-    <br>
-    <button onclick="checkPass()">ENTER</button>
-    <p id="error" class="error"></p>
-    <p id="access" class="access"></p>
-  </div></div><script>
-function checkPass() {
-  const input = document.getElementById("password").value;
-  const error = document.getElementById("error");
-  const access = document.getElementById("access");
-  const img = document.getElementById("profileImg");
+    if (input.value === correct) {
 
-  const correct = "remnant003";
+      input.disabled = true;
 
-  if (input === correct) {
-    error.textContent = "";
-    access.textContent = "ACCESS GRANTED";
-    img.style.filter = "none";
+      msg.textContent = "AUTHORIZING...";
 
-    // subtle glitch flash
-    document.body.style.background = "#001a12";
-    setTimeout(() => {
-      document.body.style.background = "#050505";
-    }, 200);
+      setTimeout(() => {
+        msg.textContent = "DECRYPTING DATA...";
+      }, 700);
 
-  } else {
-    error.textContent = "ACCESS DENIED";
-    access.textContent = "";
+      setTimeout(() => {
+        msg.textContent = "LOADING RECORD...";
+      }, 1400);
+
+      setTimeout(() => {
+
+        msg.textContent = "ACCESS GRANTED";
+        msg.className = "system granted";
+
+        // 🔥 REAL CHANGE HAPPENS HERE
+        document.getElementById("img").style.filter = "none";
+
+        document.getElementById("name").textContent = "Name: Satrya";
+        document.getElementById("user").textContent = "Username: satrya_03";
+
+        document.getElementById("desc").innerHTML = `
+          Full record loaded.<br><br>
+          Subject shows signs of emotional suppression.<br>
+          Avoids external interaction.<br>
+          Presence: low, but persistent.<br><br>
+          Notes: Not gone. Just hidden.
+        `;
+
+      }, 2100);
+
+    } else {
+      msg.textContent = "ACCESS DENIED";
+      msg.className = "system denied";
+    }
+
   }
-}
-</script></body>
+});
+</script>
+
+</body>
 </html>
