@@ -263,8 +263,17 @@ function renderLevel5Fragments(){
     card.style.textAlign = "center";
 
     card.onclick = () => {
-      window.location.href = f.link;
-    };
+
+  // external link → new tab
+  if (f.link.startsWith("http")) {
+    window.open(f.link, "_blank");
+  } 
+  // internal link → same tab
+  else {
+    window.location.href = f.link;
+  }
+
+};
 
     card.innerHTML = `
       <img src="${f.image}" style="
