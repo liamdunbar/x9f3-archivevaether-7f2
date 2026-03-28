@@ -14,12 +14,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .panel {
   width: 90%;
-  max-width: 500px;
+  max-width: 420px;
   border: 1px solid rgba(255,0,0,0.2);
   padding: 20px;
   background: rgba(0,0,0,0.95);
@@ -62,6 +62,16 @@ input {
   padding: 6px;
 }
 
+button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  border: 1px solid #8a0000;
+  color: #8a0000;
+  font-family: monospace;
+}
+
 .system {
   font-size: 11px;
   opacity: 0.7;
@@ -70,6 +80,16 @@ input {
 
 .denied { color: red; }
 .granted { color: #00ff9c; }
+
+/* Back button smaller + subtle */
+.back {
+  margin-top: 15px;
+  font-size: 11px;
+  opacity: 0.6;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -82,7 +102,6 @@ input {
     STATUS: RESTRICTED
   </div>
 
-  <!-- DATA AREA -->
   <div class="content" id="content">
     <img src="satrya.webp" id="img">
 
@@ -94,11 +113,14 @@ input {
     </div>
   </div>
 
-  <!-- LOCK -->
   <div class="lock">
     <input type="password" id="pass" placeholder="authorization key required">
+    <button onclick="checkPass()">EXECUTE</button>
     <div id="msg" class="system"></div>
   </div>
+
+  <!-- BACK BUTTON (always available) -->
+  <button class="back" onclick="goBack()">← return</button>
 
 </div>
 
@@ -108,51 +130,60 @@ const correct = "leftunsaid";
 const input = document.getElementById("pass");
 const msg = document.getElementById("msg");
 
+function checkPass() {
+
+  if (input.value === correct) {
+
+    input.disabled = true;
+
+    msg.textContent = "AUTHORIZING...";
+    msg.className = "system";
+
+    setTimeout(() => {
+      msg.textContent = "DECRYPTING DATA...";
+    }, 700);
+
+    setTimeout(() => {
+      msg.textContent = "LOADING RECORD...";
+    }, 1400);
+
+    setTimeout(() => {
+
+      msg.textContent = "ACCESS GRANTED";
+      msg.className = "system granted";
+
+      document.getElementById("img").style.filter = "none";
+
+      document.getElementById("name").textContent = "Name: Satrya";
+      document.getElementById("user").textContent = "Username: satrya_03";
+
+      document.getElementById("desc").innerHTML = `
+        Full record loaded.<br><br>
+        Subject shows signs of emotional suppression.<br>
+        Avoids external interaction.<br>
+        Presence: low, but persistent.<br><br>
+        Notes: Not gone. Just hidden.
+      `;
+
+    }, 2100);
+
+  } else {
+    msg.textContent = "ACCESS DENIED";
+    msg.className = "system denied";
+  }
+}
+
+// keyboard support
 input.addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
-
-    if (input.value === correct) {
-
-      input.disabled = true;
-
-      msg.textContent = "AUTHORIZING...";
-
-      setTimeout(() => {
-        msg.textContent = "DECRYPTING DATA...";
-      }, 700);
-
-      setTimeout(() => {
-        msg.textContent = "LOADING RECORD...";
-      }, 1400);
-
-      setTimeout(() => {
-
-        msg.textContent = "ACCESS GRANTED";
-        msg.className = "system granted";
-
-        // 🔥 REAL CHANGE HAPPENS HERE
-        document.getElementById("img").style.filter = "none";
-
-        document.getElementById("name").textContent = "Name: Satrya";
-        document.getElementById("user").textContent = "Username: satrya_03";
-
-        document.getElementById("desc").innerHTML = `
-          Full record loaded.<br><br>
-          Subject shows signs of emotional suppression.<br>
-          Avoids external interaction.<br>
-          Presence: low, but persistent.<br><br>
-          Notes: Not gone. Just hidden.
-        `;
-
-      }, 2100);
-
-    } else {
-      msg.textContent = "ACCESS DENIED";
-      msg.className = "system denied";
-    }
-
+    checkPass();
   }
 });
+
+// BACK FUNCTION
+function goBack() {
+  window.history.back();
+}
 </script>
 
 </body>
