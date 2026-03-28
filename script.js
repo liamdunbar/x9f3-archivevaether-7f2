@@ -99,6 +99,16 @@ Bye — Midnight Til Morning
 `
 };
 
+// ===== LEVEL 5 DATA =====
+const FRAGMENTS = [
+  {
+    name: "Satrya",
+    username: "@sqryaaa",
+    image: "fragments/satrya.webp",
+    link: "fragments/satrya.html"
+  }
+];
+
 // ===== PASSWORD GATE =====
 function passwordGate() {
 
@@ -343,6 +353,55 @@ function renderChronicles() {
     });
 }
 
+// ===== LEVEL 5 =====
+function renderLevel5Fragments(){
+
+  stopTyping();
+
+  terminal.innerHTML = "";
+  terminal.style.whiteSpace = "normal";
+
+  const grid = document.createElement("div");
+  grid.style.display = "grid";
+  grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(90px, 1fr))";
+  grid.style.gap = "14px";
+
+  FRAGMENTS.forEach(f => {
+
+    const card = document.createElement("div");
+    card.style.border = "1px solid #ff0000";
+    card.style.padding = "6px";
+    card.style.cursor = "pointer";
+    card.style.textAlign = "center";
+
+    card.onclick = () => {
+      window.location.href = f.link;
+    };
+
+    card.innerHTML = `
+      <img src="${f.image}" style="
+        width:100%;
+        height:80px;
+        object-fit:cover;
+        border:1px solid #ff0000;
+        margin-bottom:6px;
+      ">
+
+      <div style="font-size:13px; font-weight:bold;">
+        ${f.name}
+      </div>
+
+      <div style="font-size:11px; opacity:.7;">
+        ${f.username}
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  terminal.appendChild(grid);
+}
+
 // ===== CLICK HANDLER =====
 document.querySelectorAll(".entry").forEach(entry => {
   entry.onclick = () => {
@@ -355,11 +414,13 @@ document.querySelectorAll(".entry").forEach(entry => {
     if (view === "level4") return renderLevel4Document();
     if (view === "revelation") return renderRevelation();
     if (view === "chronicles") return renderChronicles();
+    if (view === "level5") return renderLevel5Fragments();
 
     typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
   };
 });
 
+// ===== POPUP =====
 const popup = document.getElementById("entryWarning");
 const btn = document.getElementById("enterSite");
 
