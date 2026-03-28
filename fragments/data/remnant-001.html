@@ -8,8 +8,8 @@
 <style>
 body {
   margin: 0;
-  background: black;
-  color: #8a0000;
+  background: radial-gradient(circle at center, #0a0000 0%, #000000 80%);
+  color: #ff4d4d;
   font-family: monospace;
   display: flex;
   justify-content: center;
@@ -17,22 +17,29 @@ body {
   min-height: 100vh;
 }
 
+/* PANEL */
 .panel {
   width: 90%;
   max-width: 420px;
-  border: 1px solid rgba(255,0,0,0.2);
+  border: 1px solid rgba(255,0,0,0.4);
   padding: 20px;
-  background: rgba(0,0,0,0.95);
+  background: rgba(10,0,0,0.9);
+  box-shadow:
+    0 0 10px rgba(255,0,0,0.3),
+    0 0 25px rgba(255,0,0,0.2);
 }
 
+/* HEADER */
 .header {
   font-size: 12px;
-  opacity: 0.6;
+  opacity: 0.8;
   margin-bottom: 15px;
+  text-shadow: 0 0 6px rgba(255,0,0,0.6);
 }
 
+/* CONTENT */
 .content {
-  opacity: 0.5;
+  opacity: 0.6;
   transition: 0.5s;
 }
 
@@ -44,22 +51,25 @@ img {
   margin-bottom: 10px;
   filter: blur(10px);
   transition: 0.6s;
+  box-shadow: 0 0 10px rgba(255,0,0,0.4);
 }
 
+/* LOCK */
 .lock {
   margin-top: 20px;
-  border-top: 1px solid rgba(255,0,0,0.2);
+  border-top: 1px solid rgba(255,0,0,0.3);
   padding-top: 10px;
 }
 
 input {
   width: 100%;
-  background: black;
+  background: transparent;
   border: none;
-  border-bottom: 1px solid #8a0000;
-  color: #8a0000;
+  border-bottom: 1px solid #ff4d4d;
+  color: #ff4d4d;
   outline: none;
   padding: 6px;
+  text-shadow: 0 0 5px rgba(255,0,0,0.6);
 }
 
 button {
@@ -67,28 +77,38 @@ button {
   width: 100%;
   padding: 8px;
   background: transparent;
-  border: 1px solid #8a0000;
-  color: #8a0000;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
   font-family: monospace;
+  cursor: pointer;
+  text-shadow: 0 0 5px rgba(255,0,0,0.6);
+  box-shadow: 0 0 8px rgba(255,0,0,0.3);
 }
 
+button:hover {
+  background: rgba(255,0,0,0.1);
+}
+
+/* SYSTEM TEXT */
 .system {
   font-size: 11px;
-  opacity: 0.7;
+  opacity: 0.8;
   margin-top: 10px;
+  text-shadow: 0 0 5px rgba(255,0,0,0.6);
 }
 
-.denied { color: red; }
+.denied { color: #ff2a2a; }
 .granted { color: #00ff9c; }
 
-/* Back button smaller + subtle */
+/* BACK BUTTON */
 .back {
   margin-top: 15px;
   font-size: 11px;
-  opacity: 0.6;
+  opacity: 0.7;
   border: none;
   text-align: left;
   cursor: pointer;
+  text-shadow: 0 0 5px rgba(255,0,0,0.6);
 }
 </style>
 </head>
@@ -119,7 +139,7 @@ button {
     <div id="msg" class="system"></div>
   </div>
 
-  <!-- BACK BUTTON (always available) -->
+  <!-- BACK BUTTON -->
   <button class="back" onclick="goBack()">← return</button>
 
 </div>
@@ -173,16 +193,14 @@ function checkPass() {
   }
 }
 
-// keyboard support
 input.addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
     checkPass();
   }
 });
 
-// BACK FUNCTION
 function goBack() {
-  window.history.back();
+  window.location.href = "https://simplefroylan.space";
 }
 </script>
 
