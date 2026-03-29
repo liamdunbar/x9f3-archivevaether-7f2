@@ -243,7 +243,6 @@ function renderLevel5Fragments(){
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
 
-  // safety check
   if (typeof FRAGMENTS === "undefined") {
     terminal.textContent = "ERROR: fragments.js not loaded";
     return;
@@ -262,18 +261,10 @@ function renderLevel5Fragments(){
     card.style.cursor = "pointer";
     card.style.textAlign = "center";
 
+    // ✅ FIXED: always open in new tab
     card.onclick = () => {
-
-  // external link → new tab
-  if (f.link.startsWith("http")) {
-    window.open(f.link, "_blank");
-  } 
-  // internal link → same tab
-  else {
-    window.location.href = f.link;
-  }
-
-};
+      window.open(f.link, "_blank", "noopener,noreferrer");
+    };
 
     card.innerHTML = `
       <img src="${f.image}" style="
