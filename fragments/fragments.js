@@ -10,6 +10,6 @@ const FRAGMENTS = [
     name: "1◇◇◇◇",
     username: "@p■■■■■■■",
     image: "/fragments/assets/1only.webp",
-    link: "https://simplefroylan.space/fragments/assets/1only.html"
+    link: "https://simplefroylan.space/fragments/data/remnant-002"
   }
 ];
