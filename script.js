@@ -236,6 +236,96 @@ function renderLevel4Document() {
     });
 }
 
+// ===== REVELATION =====
+function renderRevelation() {
+  stopTyping();
+
+  terminal.innerHTML = "";
+  terminal.style.whiteSpace = "normal";
+
+  fetch("revelation/revelation.json")
+    .then(res => res.json())
+    .then(data => {
+      data.revelations.forEach(post => {
+
+        const block = document.createElement("div");
+
+        block.style.borderTop = "1px solid #f2e86d";
+        block.style.borderBottom = "1px solid #f2e86d";
+        block.style.padding = "12px 0";
+        block.style.marginBottom = "20px";
+
+        block.innerHTML = `
+          <div style="display:flex; gap:10px;">
+            <img src="assets/profile.jpg"
+                 style="width:40px;height:40px;border-radius:50%;
+                        border:1px solid #f2e86d;">
+            <div>
+              <strong>${post.displayName}</strong>
+              <span style="opacity:.75;">
+                ${post.username} · ${post.date}
+              </span>
+            </div>
+          </div>
+
+          <div style="margin:10px 0;">
+            ${post.caption.replace(/\n/g, "<br>")}
+          </div>
+
+          <video controls style="width:100%;border:1px solid #f2e86d;">
+            <source src="${post.video}" type="video/mp4">
+          </video>
+        `;
+
+        terminal.appendChild(block);
+      });
+    })
+    .catch(() => {
+      terminal.textContent = "FAILED TO LOAD revelation.json";
+    });
+}
+
+// ===== CHRONICLES =====
+function renderChronicles() {
+  stopTyping();
+
+  terminal.innerHTML = "";
+  terminal.style.whiteSpace = "normal";
+
+  fetch("chronicles/chronicles.json")
+    .then(res => res.json())
+    .then(data => {
+      data.chronicles.forEach(post => {
+
+        const block = document.createElement("div");
+
+        block.style.borderTop = "1px solid #f2e86d";
+        block.style.borderBottom = "1px solid #f2e86d";
+        block.style.padding = "14px 0";
+        block.style.marginBottom = "18px";
+
+        block.innerHTML = `
+          <div style="font-size:16px; font-weight:bold;">
+            ${post.title}
+          </div>
+
+          <div style="opacity:.85;">
+            ${post.subtitle}
+          </div>
+
+          <a href="${post.link}" target="_blank">
+            Click here to continue read
+          </a>
+        `;
+
+        terminal.appendChild(block);
+      });
+    })
+    .catch(() => {
+      terminal.textContent = "FAILED TO LOAD chronicles.json";
+    });
+}
+
 // ===== LEVEL 5 =====
 function renderLevel5Fragments(){
   stopTyping();
@@ -261,7 +351,6 @@ function renderLevel5Fragments(){
     card.style.cursor = "pointer";
     card.style.textAlign = "center";
 
-    // ✅ FIXED: always open in new tab
     card.onclick = () => {
       window.open(f.link, "_blank", "noopener,noreferrer");
     };
@@ -294,6 +383,8 @@ document.querySelectorAll(".entry").forEach(entry => {
 
     if (view === "level3") return passwordGate();
     if (view === "level4") return renderLevel4Document();
+    if (view === "revelation") return renderRevelation();
+    if (view === "chronicles") return renderChronicles();
     if (view === "level5") return renderLevel5Fragments();
 
     if (DATA[view]) {
