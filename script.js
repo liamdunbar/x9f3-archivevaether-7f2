@@ -1,7 +1,7 @@
 const terminal = document.getElementById("terminalBody");
 const clickSound = document.getElementById("clickSound");
 
-// 🔑 typing control
+// 🔑 control typing globally
 let typingInterval = null;
 
 function stopTyping(){
@@ -20,10 +20,12 @@ function playClick(){
 }
 
 function typeText(text, speed = 15, done) {
+
   stopTyping();
 
   terminal.textContent = "";
   terminal.style.whiteSpace = "pre-wrap";
+  terminal.style.display = "block";
 
   let i = 0;
 
@@ -100,10 +102,12 @@ Bye — Midnight Til Morning
 
 // ===== PASSWORD GATE =====
 function passwordGate() {
+
   stopTyping();
 
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "pre-wrap";
+  terminal.style.display = "block";
 
   const lines = [
     "[ERR] ACCESS DENIED",
@@ -126,7 +130,6 @@ function passwordGate() {
 
     let text = lines[lineIndex];
     let charIndex = 0;
-
     const lineElement = document.createElement("div");
 
     if (text.startsWith("[ERR]")) {
@@ -193,10 +196,12 @@ function passwordGate() {
 
 // ===== LEVEL 4 =====
 function renderLevel4Document() {
+
   stopTyping();
 
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
+  terminal.style.display = "block";
 
   fetch("updates/updates.json")
     .then(res => res.json())
@@ -214,7 +219,7 @@ function renderLevel4Document() {
           <div style="display:flex; align-items:center; gap:10px;">
             <img src="assets/profile.jpg"
                  style="width:40px;height:40px;border-radius:50%;
-                        border:1px solid #f2e86d;">
+                        border:1px solid #f2e86d;object-fit:cover;">
             <div>
               <strong>${update.displayName}</strong>
               <span style="opacity:.75;">
@@ -228,6 +233,15 @@ function renderLevel4Document() {
           </div>
         `;
 
+        if (update.image) {
+          const img = document.createElement("img");
+          img.src = update.image;
+          img.style.maxWidth = "100%";
+          img.style.border = "1px solid #f2e86d";
+          img.style.marginTop = "10px";
+          block.appendChild(img);
+        }
+
         terminal.appendChild(block);
       });
     })
@@ -238,10 +252,12 @@ function renderLevel4Document() {
 
 // ===== REVELATION =====
 function renderRevelation() {
+
   stopTyping();
 
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
+  terminal.style.display = "block";
 
   fetch("revelation/revelation.json")
     .then(res => res.json())
@@ -256,7 +272,7 @@ function renderRevelation() {
         block.style.marginBottom = "20px";
 
         block.innerHTML = `
-          <div style="display:flex; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px;">
             <img src="assets/profile.jpg"
                  style="width:40px;height:40px;border-radius:50%;
                         border:1px solid #f2e86d;">
@@ -272,7 +288,9 @@ function renderRevelation() {
             ${post.caption.replace(/\n/g, "<br>")}
           </div>
 
-          <video controls style="width:100%;border:1px solid #f2e86d;">
+          <video controls
+                 style="width:100%; max-height:420px;
+                        border:1px solid #f2e86d;">
             <source src="${post.video}" type="video/mp4">
           </video>
         `;
@@ -287,10 +305,12 @@ function renderRevelation() {
 
 // ===== CHRONICLES =====
 function renderChronicles() {
+
   stopTyping();
 
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
+  terminal.style.display = "block";
 
   fetch("chronicles/chronicles.json")
     .then(res => res.json())
@@ -305,16 +325,18 @@ function renderChronicles() {
         block.style.marginBottom = "18px";
 
         block.innerHTML = `
-          <div style="font-size:16px; font-weight:bold;">
+          <div style="font-size:16px; font-weight:bold; margin-bottom:6px;">
             ${post.title}
           </div>
 
-          <div style="opacity:.85;">
+          <div style="opacity:.85; margin-bottom:10px;">
             ${post.subtitle}
           </div>
 
-          <a href="${post.link}" target="_blank">
-            Click here to continue read
+          <a href="${post.link}"
+             target="_blank"
+             style="color:#6aa6ff;text-decoration:underline;">
+             Click here to continue read
           </a>
         `;
 
@@ -328,10 +350,12 @@ function renderChronicles() {
 
 // ===== LEVEL 5 =====
 function renderLevel5Fragments(){
+
   stopTyping();
 
   terminal.innerHTML = "";
   terminal.style.whiteSpace = "normal";
+  terminal.style.display = "block";
 
   if (typeof FRAGMENTS === "undefined") {
     terminal.textContent = "ERROR: fragments.js not loaded";
@@ -340,8 +364,8 @@ function renderLevel5Fragments(){
 
   const grid = document.createElement("div");
   grid.style.display = "grid";
-  grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(90px, 1fr))";
-  grid.style.gap = "14px";
+  grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(100px, 1fr))";
+  grid.style.gap = "12px";
 
   FRAGMENTS.forEach(f => {
 
@@ -352,7 +376,7 @@ function renderLevel5Fragments(){
     card.style.textAlign = "center";
 
     card.onclick = () => {
-      window.open(f.link, "_blank", "noopener,noreferrer");
+      window.open(f.link, "_blank");
     };
 
     card.innerHTML = `
@@ -387,10 +411,6 @@ document.querySelectorAll(".entry").forEach(entry => {
     if (view === "chronicles") return renderChronicles();
     if (view === "level5") return renderLevel5Fragments();
 
-    if (DATA[view]) {
-      typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
-    } else {
-      typeText("[ERR] DATA NOT FOUND");
-    }
+    typeText(`[SYS] Loading data...\n\n${DATA[view]}`);
   };
 });
