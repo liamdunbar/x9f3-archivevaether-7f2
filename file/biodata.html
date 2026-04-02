@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>FROYLAN — BIODATA</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#000;
+  font-family:monospace;
+  color:#ff3b3b;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* ===== MAIN CARD ===== */
+.card{
+  width:90%;
+  max-width:520px;
+  background:#050000;
+  border:1px solid #ff0000;
+  box-shadow:0 0 20px #ff0000;
+
+  padding:30px;
+  position:relative;
+}
+
+/* ===== TITLE ===== */
+.title{
+  text-align:center;
+  font-size:28px;
+  margin-bottom:20px;
+  letter-spacing:2px;
+}
+
+/* ===== IMAGE ===== */
+.profile{
+  width:100%;
+  max-width:220px;
+  display:block;
+  margin:0 auto 20px;
+  border:1px solid #ff0000;
+}
+
+/* ===== STICKER ===== */
+.sticker{
+  position:absolute;
+  right:10px;
+  top:120px;
+  width:100px;
+  pointer-events:none;
+}
+
+/* ===== TEXT ===== */
+.data{
+  font-size:14px;
+  line-height:1.8;
+}
+
+.data span{
+  display:block;
+}
+
+/* ===== BACK BUTTON ===== */
+.back{
+  margin-top:20px;
+  text-align:center;
+}
+
+.back button{
+  background:transparent;
+  border:1px solid #ff0000;
+  color:#ff3b3b;
+  padding:8px 18px;
+  cursor:pointer;
+  font-family:monospace;
+}
+
+/* ===== CRT EFFECT ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,0,0,0.06),
+    rgba(255,0,0,0.06) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* ===== BLOCK COPY / HOLD ===== */
+img{
+  user-select:none;
+  pointer-events:none;
+  -webkit-user-drag:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div class="title">BIODATA</div>
+
+  <img src="profile.jpg" class="profile">
+  <img src="stickers.jpg" class="sticker">
+
+  <div class="data">
+    <span>Nama            : Froylán bukan mpruy</span>
+    <span>Zodiak          : Libra</span>
+    <br>
+    <span>Makanan Fav     : Whatever tastes good</span>
+    <span>Minuman Fav     : Americano</span>
+    <span>Kesibukan       : tidur and goonung</span>
+    <br>
+    <span>Tanggal Lahir   : gatau lupa</span>
+    <br>
+    <span>Hobi            : Masak, nyanyi, ngehalu, denger lagu, ribut sama A.I.</span>
+    <br>
+    <span>Domisili        : Heisenberg</span>
+    <span>Nomor Rumah     : 67 Six Seven</span>
+    <span>Boneka Favorit  : Teddy</span>
+    <br>
+    <span>Nama Ortu       : g kenal</span>
+    <span>No. Rek         : 69 666 67</span>
+    <br>
+    <span>Pw Email        : 123456789</span>
+    <span>Pin             : ilfroy</span>
+    <br>
+    <span>Mie             : ga suka mie</span>
+  </div>
+
+  <div class="back">
+    <button onclick="goBack()">← BACK</button>
+  </div>
+
+</div>
+
+<script>
+// BACK BUTTON
+function goBack(){
+  window.location.href = "index.html";
+}
+
+// BLOCK RIGHT CLICK
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// BLOCK IMAGE DRAG
+document.addEventListener("dragstart", e => {
+  if(e.target.tagName === "IMG"){
+    e.preventDefault();
+  }
+});
+</script>
+
+</body>
+</html>
