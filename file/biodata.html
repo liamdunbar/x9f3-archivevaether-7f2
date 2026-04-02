@@ -14,7 +14,7 @@
 }
 
 body{
-  background:#050000;
+  background:#030000;
   font-family:monospace;
   color:#ff4d4d;
 
@@ -24,97 +24,97 @@ body{
   height:100vh;
 }
 
-/* ===== CARD ===== */
+/* ===== MAIN CARD ===== */
 .card{
   width:min(92vw, 380px);
   aspect-ratio:9 / 16;
 
-  background:#080000;
+  background:#050000;
   border:1px solid #ff2a2a;
 
   box-shadow:
-    0 0 12px #ff0000,
-    inset 0 0 30px rgba(255,0,0,0.08);
+    0 0 10px #ff0000,
+    inset 0 0 30px rgba(255,0,0,0.06);
 
-  padding:18px;
+  padding:16px;
 
   display:flex;
   flex-direction:column;
-  position:relative;
-  overflow:hidden;
-}
+  justify-content:space-between;
 
-/* subtle glow edges */
-.card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(
-    to bottom,
-    rgba(255,0,0,0.05),
-    transparent,
-    rgba(255,0,0,0.05)
-  );
+  position:relative;
 }
 
 /* ===== TITLE ===== */
 .title{
   text-align:center;
-  font-size:22px;
-  letter-spacing:3px;
-  margin-bottom:14px;
+  font-size:20px;
+  letter-spacing:4px;
+  opacity:0.8;
 }
 
-/* ===== IMAGE WRAPPER ===== */
-.img-wrap{
+/* ===== IMAGE SECTION ===== */
+.img-section{
   position:relative;
-  margin-bottom:14px;
+  display:flex;
+  justify-content:center;
 }
 
 .profile{
-  width:100%;
-  height:200px;
+  width:85%;
+  height:180px;
   object-fit:cover;
-
   border:1px solid #ff2a2a;
 }
 
-/* ===== STICKER (attached, not floating) ===== */
+/* sticker attached */
 .sticker{
   position:absolute;
-  right:-10px;
+  right:10%;
   bottom:-10px;
-  width:80px;
-  pointer-events:none;
-  filter:drop-shadow(0 0 6px rgba(255,0,0,0.5));
+  width:70px;
+  transform:rotate(-8deg);
+  filter:drop-shadow(0 0 6px rgba(255,0,0,0.6));
 }
 
-/* ===== CONTENT ===== */
-.content{
-  font-size:13px;
-  line-height:1.7;
-  overflow:auto;
-  padding-right:4px;
+/* ===== INFO GRID ===== */
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 12px;
+
+  font-size:11px;
+  line-height:1.5;
 }
 
-/* spacing between groups */
-.content br{
-  line-height:2;
+/* labels */
+.label{
+  opacity:0.6;
+}
+
+/* value */
+.value{
+  text-align:right;
+}
+
+/* divider line */
+.line{
+  grid-column:span 2;
+  height:1px;
+  background:rgba(255,0,0,0.2);
+  margin:4px 0;
 }
 
 /* ===== BACK BUTTON ===== */
 .back{
-  margin-top:auto;
   text-align:center;
-  padding-top:10px;
 }
 
 .back button{
   background:transparent;
   border:1px solid #ff2a2a;
   color:#ff4d4d;
-  padding:6px 18px;
+  padding:5px 14px;
   cursor:pointer;
   font-family:monospace;
 
@@ -135,8 +135,8 @@ body::before{
 
   background:repeating-linear-gradient(
     to bottom,
-    rgba(255,0,0,0.04),
-    rgba(255,0,0,0.04) 1px,
+    rgba(255,0,0,0.03),
+    rgba(255,0,0,0.03) 1px,
     transparent 2px,
     transparent 4px
   );
@@ -157,34 +157,63 @@ img{
 
   <div class="title">BIODATA</div>
 
-  <div class="img-wrap">
+  <div class="img-section">
     <img src="profile.jpg" class="profile">
     <img src="stickers.png" class="sticker">
   </div>
 
-  <div class="content">
-    Nama            : Froylán bukan mpruy<br>
-    Zodiak          : Libra<br><br>
+  <div class="info">
 
-    Makanan Fav     : Somebody Son's ass<br>
-    Minuman Fav     : Americano<br>
-    Kesibukan       : tidur and goonung<br><br>
+    <div class="label">Nama</div>
+    <div class="value">Froylán bukan mpruy</div>
 
-    Tanggal Lahir   : gatau lupa<br><br>
+    <div class="label">Zodiak</div>
+    <div class="value">Libra</div>
 
-    Hobi            : Masak, nyanyi, ngehalu, denger lagu, ribut sama A.I.<br><br>
+    <div class="line"></div>
 
-    Domisili        : Heisenberg<br>
-    Nomor Rumah     : 67 Six Seven<br>
-    Boneka Favorit  : Teddy<br><br>
+    <div class="label">Makanan</div>
+    <div class="value">Somebody Son's ass</div>
 
-    Nama Ortu       : g kenal<br>
-    No. Rek         : 69 666 67<br><br>
+    <div class="label">Minuman</div>
+    <div class="value">Americano</div>
 
-    Pw Email        : 123456789<br>
-    Pin             : ilfroy<br><br>
+    <div class="label">Kesibukan</div>
+    <div class="value">tidur & gooning</div>
 
-    Mie             : ga suka mie
+    <div class="line"></div>
+
+    <div class="label">Tanggal</div>
+    <div class="value">gatau lupa</div>
+
+    <div class="label">Hobi</div>
+    <div class="value">ngehalu nyanyi ribut AI</div>
+
+    <div class="line"></div>
+
+    <div class="label">Domisili</div>
+    <div class="value">Heisenberg</div>
+
+    <div class="label">Rumah</div>
+    <div class="value">67 Six Seven</div>
+
+    <div class="label">Boneka</div>
+    <div class="value">Teddy</div>
+
+    <div class="line"></div>
+
+    <div class="label">Ortu</div>
+    <div class="value">g kenal</div>
+
+    <div class="label">Rekening</div>
+    <div class="value">69 666 67</div>
+
+    <div class="label">Pw Email</div>
+    <div class="value">123456789</div>
+
+    <div class="label">Pin</div>
+    <div class="value">ilfroy</div>
+
   </div>
 
   <div class="back">
