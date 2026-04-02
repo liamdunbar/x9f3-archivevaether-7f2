@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>FROYLAN — BIODATA</title>
+<title>BIODATA</title>
 
 <style>
 *{
@@ -21,60 +21,64 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  min-height:100vh;
+  height:100vh;
 }
 
-/* ===== MAIN CARD ===== */
+/* ===== SQUARE CARD ===== */
 .card{
-  width:90%;
-  max-width:520px;
+  width:min(90vw, 520px);
+  aspect-ratio:1 / 1;
+
   background:#050000;
   border:1px solid #ff0000;
-  box-shadow:0 0 20px #ff0000;
+  box-shadow:0 0 25px #ff0000;
 
-  padding:30px;
+  padding:24px;
+
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
   position:relative;
 }
 
 /* ===== TITLE ===== */
 .title{
   text-align:center;
-  font-size:28px;
-  margin-bottom:20px;
+  font-size:26px;
+  margin-bottom:14px;
   letter-spacing:2px;
 }
 
 /* ===== IMAGE ===== */
 .profile{
-  width:100%;
-  max-width:220px;
-  display:block;
-  margin:0 auto 20px;
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  margin:0 auto;
   border:1px solid #ff0000;
 }
 
 /* ===== STICKER ===== */
 .sticker{
   position:absolute;
-  right:10px;
-  top:120px;
-  width:100px;
+  right:20px;
+  top:140px;
+  width:90px;
   pointer-events:none;
 }
 
-/* ===== TEXT ===== */
-.data{
-  font-size:14px;
-  line-height:1.8;
-}
-
-.data span{
-  display:block;
+/* ===== CONTENT SCROLL INSIDE CARD ===== */
+.content{
+  margin-top:14px;
+  overflow:auto;
+  font-size:13px;
+  line-height:1.7;
+  padding-right:6px;
 }
 
 /* ===== BACK BUTTON ===== */
 .back{
-  margin-top:20px;
+  margin-top:auto;
   text-align:center;
 }
 
@@ -82,7 +86,7 @@ body{
   background:transparent;
   border:1px solid #ff0000;
   color:#ff3b3b;
-  padding:8px 18px;
+  padding:6px 16px;
   cursor:pointer;
   font-family:monospace;
 }
@@ -95,14 +99,14 @@ body::before{
   pointer-events:none;
   background:repeating-linear-gradient(
     to bottom,
-    rgba(255,0,0,0.06),
-    rgba(255,0,0,0.06) 1px,
+    rgba(255,0,0,0.05),
+    rgba(255,0,0,0.05) 1px,
     transparent 2px,
     transparent 4px
   );
 }
 
-/* ===== BLOCK COPY / HOLD ===== */
+/* ===== BLOCK COPY ===== */
 img{
   user-select:none;
   pointer-events:none;
@@ -118,31 +122,31 @@ img{
   <div class="title">BIODATA</div>
 
   <img src="profile.jpg" class="profile">
-  <img src="stickers.png" class="sticker">
+  <img src="stickers.jpg" class="sticker">
 
-  <div class="data">
-    <span>Nama            : Froylán bukan mpruy</span>
-    <span>Zodiak          : Libra</span>
-    <br>
-    <span>Makanan Fav     : Whatever tastes good</span>
-    <span>Minuman Fav     : Americano</span>
-    <span>Kesibukan       : tidur and goonung</span>
-    <br>
-    <span>Tanggal Lahir   : gatau lupa</span>
-    <br>
-    <span>Hobi            : Masak, nyanyi, ngehalu, denger lagu, ribut sama A.I.</span>
-    <br>
-    <span>Domisili        : Heisenberg</span>
-    <span>Nomor Rumah     : 67 Six Seven</span>
-    <span>Boneka Favorit  : Teddy</span>
-    <br>
-    <span>Nama Ortu       : g kenal</span>
-    <span>No. Rek         : 69 666 67</span>
-    <br>
-    <span>Pw Email        : 123456789</span>
-    <span>Pin             : ilfroy</span>
-    <br>
-    <span>Mie             : ga suka mie</span>
+  <div class="content">
+    Nama            : Froylán bukan mpruy<br>
+    Zodiak          : Libra<br><br>
+
+    Makanan Fav     : Whatever tastes good<br>
+    Minuman Fav     : Americano<br>
+    Kesibukan       : tidur and goonung<br><br>
+
+    Tanggal Lahir   : gatau lupa<br><br>
+
+    Hobi            : Masak, nyanyi, ngehalu, denger lagu, ribut sama A.I.<br><br>
+
+    Domisili        : Heisenberg<br>
+    Nomor Rumah     : 67 Six Seven<br>
+    Boneka Favorit  : Teddy<br><br>
+
+    Nama Ortu       : g kenal<br>
+    No. Rek         : 69 666 67<br><br>
+
+    Pw Email        : 123456789<br>
+    Pin             : ilfroy<br><br>
+
+    Mie             : ga suka mie
   </div>
 
   <div class="back">
@@ -152,15 +156,15 @@ img{
 </div>
 
 <script>
-// BACK BUTTON
+// back
 function goBack(){
   window.location.href = "index.html";
 }
 
-// BLOCK RIGHT CLICK
+// block right click
 document.addEventListener("contextmenu", e => e.preventDefault());
 
-// BLOCK IMAGE DRAG
+// block drag
 document.addEventListener("dragstart", e => {
   if(e.target.tagName === "IMG"){
     e.preventDefault();
