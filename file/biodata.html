@@ -24,7 +24,7 @@ body{
   height:100vh;
 }
 
-/* ===== MAIN CONTAINER ===== */
+/* ===== CARD ===== */
 .card{
   width:min(92vw, 380px);
   aspect-ratio:9 / 16;
@@ -42,7 +42,7 @@ body{
   overflow:hidden;
 }
 
-/* ===== SCAN LINE ===== */
+/* scan line */
 .scan{
   position:absolute;
   width:100%;
@@ -57,7 +57,7 @@ body{
   100%{top:100%}
 }
 
-/* ===== HEADER ===== */
+/* header */
 .header{
   font-size:12px;
   opacity:0.6;
@@ -71,7 +71,7 @@ body{
   margin-bottom:10px;
 }
 
-/* ===== IMAGE ===== */
+/* image */
 .img-wrap{
   position:relative;
 }
@@ -81,30 +81,28 @@ body{
   height:190px;
   object-fit:cover;
   border:1px solid #ff0000;
-  filter:contrast(1.1) brightness(0.9);
 }
 
-/* sticker like intrusion */
+/* clickable sticker */
 .sticker{
   position:absolute;
   right:-8px;
   bottom:-8px;
   width:85px;
   transform:rotate(-10deg);
+  cursor:pointer;
 
-  filter:
-    drop-shadow(0 0 10px red)
-    saturate(1.2);
+  filter:drop-shadow(0 0 10px red);
 }
 
-/* ===== CONTENT ===== */
+/* content */
 .content{
   margin-top:12px;
   font-size:12px;
   line-height:1.6;
+  white-space:pre-wrap;
 }
 
-/* lines */
 .row{
   display:flex;
   justify-content:space-between;
@@ -112,50 +110,16 @@ body{
   border-bottom:1px solid rgba(255,0,0,0.2);
 }
 
-/* labels */
 .label{
   opacity:0.5;
 }
 
-/* values */
 .value{
   text-align:right;
   max-width:55%;
 }
 
-/* ===== GLITCH TEXT ===== */
-.glitch{
-  position:relative;
-}
-
-.glitch::before,
-.glitch::after{
-  content:attr(data-text);
-  position:absolute;
-  left:0;
-  width:100%;
-  overflow:hidden;
-}
-
-.glitch::before{
-  color:#ff0000;
-  top:-1px;
-  animation:glitch 1s infinite;
-}
-
-.glitch::after{
-  color:#ff9999;
-  top:1px;
-  animation:glitch 1s infinite reverse;
-}
-
-@keyframes glitch{
-  0%{clip-path:inset(0 0 80% 0)}
-  50%{clip-path:inset(40% 0 20% 0)}
-  100%{clip-path:inset(0 0 60% 0)}
-}
-
-/* ===== BACK BUTTON ===== */
+/* back button */
 .back{
   position:absolute;
   bottom:14px;
@@ -177,7 +141,7 @@ body{
   text-decoration:underline;
 }
 
-/* ===== CRT ===== */
+/* CRT */
 body::before{
   content:"";
   position:fixed;
@@ -193,10 +157,10 @@ body::before{
   );
 }
 
-/* ===== BLOCK ===== */
+/* block */
 img{
   user-select:none;
-  pointer-events:none;
+  pointer-events:auto;
 }
 </style>
 </head>
@@ -209,14 +173,15 @@ img{
 
   <div class="header">[ CLASSIFIED FILE — UNAUTHORIZED VIEW ]</div>
 
-  <div class="title glitch" data-text="BIODATA">BIODATA</div>
+  <div class="title">BIODATA</div>
 
   <div class="img-wrap">
     <img src="profile.jpg" class="profile">
-    <img src="stickers.png" class="sticker">
+    <img src="stickers.png" class="sticker" onclick="toggleSecret()">
   </div>
 
-  <div class="content">
+  <!-- NORMAL DATA -->
+  <div class="content" id="biodata">
 
     <div class="row"><div class="label">Nama</div><div class="value">Froylán bukan mpruy</div></div>
     <div class="row"><div class="label">Zodiak</div><div class="value">Libra</div></div>
@@ -226,7 +191,7 @@ img{
     <div class="row"><div class="label">Kesibukan</div><div class="value">tidur & gooning</div></div>
 
     <div class="row"><div class="label">Tanggal</div><div class="value">gatau lupa</div></div>
-    <div class="row"><div class="label">Hobi</div><div class="value">ngehalu, nyanyi, ribut sama AI</div></div>
+    <div class="row"><div class="label">Hobi</div><div class="value">ngehalu nyanyi ribut AI</div></div>
 
     <div class="row"><div class="label">Domisili</div><div class="value">Heisenberg</div></div>
     <div class="row"><div class="label">Rumah</div><div class="value">67 Six Seven</div></div>
@@ -235,6 +200,9 @@ img{
     <div class="row"><div class="label">Pin</div><div class="value">ilfroy</div></div>
 
   </div>
+
+  <!-- SECRET TEXT -->
+  <div class="content" id="secretText" style="display:none;"></div>
 
   <div class="back">
     <button onclick="goBack()">← return</button>
@@ -247,9 +215,77 @@ function goBack(){
   window.location.href = "https://simplefroylan.space";
 }
 
+const message = `I Just realized I'm not, I'm not even everyone's favorite friend.
+People may tell me, I mean, a lot to them that I'm special.
+
+But deep down I know there's always someone they'll choose over me.
+Someone they talk to more someone, they run to first.
+Someone they think of before.
+
+And that's okay, even if it hurts sometimes.
+
+I used to wonder what's wrong with me.
+Why I'm never the first option, but now I understand that not being chosen
+doesn't mean I'm not enough.
+
+It just means people have their own people.
+
+And that's something I can't control.
+
+I still have a good heart.
+I still care deeply.
+
+And even if I'm not their favorite,
+I'll still be kind.
+
+I don't need to be everyone's first choice
+to know that I'm worth choosing.`;
+
+let showingSecret = false;
+let typingInterval = null;
+
+function toggleSecret(){
+  const bio = document.getElementById("biodata");
+  const secret = document.getElementById("secretText");
+
+  if(typingInterval){
+    clearInterval(typingInterval);
+    typingInterval = null;
+  }
+
+  if(!showingSecret){
+    bio.style.display = "none";
+    secret.style.display = "block";
+    secret.textContent = "";
+
+    let i = 0;
+
+    typingInterval = setInterval(()=>{
+      secret.textContent += message[i];
+      i++;
+
+      if(i >= message.length){
+        clearInterval(typingInterval);
+      }
+    }, 18);
+
+    showingSecret = true;
+
+  } else {
+    secret.style.display = "none";
+    bio.style.display = "block";
+    showingSecret = false;
+  }
+}
+
+// block right click
 document.addEventListener("contextmenu", e => e.preventDefault());
+
+// block drag
 document.addEventListener("dragstart", e => {
-  if(e.target.tagName === "IMG") e.preventDefault();
+  if(e.target.tagName === "IMG"){
+    e.preventDefault();
+  }
 });
 </script>
 
