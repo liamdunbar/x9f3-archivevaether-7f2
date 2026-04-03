@@ -19,7 +19,7 @@ body{
   height:100vh;
 }
 
-/* ===== TERMINAL STYLE CARD ===== */
+/* ===== CARD ===== */
 .card{
   width:min(92vw, 380px);
   height:min(92vh, 680px);
@@ -35,7 +35,6 @@ body{
   display:flex;
   flex-direction:column;
 
-  position:relative;
   overflow:hidden;
 }
 
@@ -55,7 +54,7 @@ body{
   margin-top:6px;
 }
 
-/* ===== PROFILE ===== */
+/* ===== IMAGE ===== */
 .profile-wrap{
   position:relative;
   margin-top:10px;
@@ -63,12 +62,12 @@ body{
 
 .profile{
   width:100%;
-  height:160px;
+  height:150px;
   object-fit:cover;
   border:1px solid #ff0000;
 }
 
-/* ===== STICKER BUTTON ===== */
+/* ===== STICKER ===== */
 .sticker{
   position:absolute;
   right:8px;
@@ -76,24 +75,36 @@ body{
   width:60px;
   cursor:pointer;
   z-index:5;
-
-  /* IMPORTANT FIX */
   pointer-events:auto;
 }
 
-.sticker:hover{
-  transform:scale(1.1);
-}
-
-/* ===== CONTENT ===== */
+/* ===== BIODATA GRID ===== */
 .content{
   margin-top:12px;
   font-size:12px;
-  line-height:1.5;
-  white-space:pre-wrap;
-
   flex:1;
-  overflow:hidden;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:4px 0;
+  border-bottom:1px solid rgba(255,0,0,0.15);
+}
+
+.label{
+  opacity:.6;
+}
+
+.value{
+  text-align:right;
+  max-width:60%;
+}
+
+/* ===== MESSAGE MODE ===== */
+.message{
+  white-space:pre-wrap;
+  line-height:1.5;
 }
 
 /* ===== BACK ===== */
@@ -116,12 +127,9 @@ body{
 }
 
 img{
-  -webkit-user-drag:none;
-  user-drag:none;
   pointer-events:none;
 }
 
-/* EXCEPTION FOR BUTTON */
 .sticker{
   pointer-events:auto !important;
 }
@@ -142,7 +150,29 @@ img{
     <img src="stickers.png" class="sticker" id="toggleBtn">
   </div>
 
-  <div class="content" id="content"></div>
+  <!-- ===== BIODATA VIEW ===== -->
+  <div class="content" id="biodata">
+
+    <div class="row"><div class="label">Nama</div><div class="value">Froylán bukan mpruy</div></div>
+    <div class="row"><div class="label">Zodiak</div><div class="value">Libra</div></div>
+
+    <div class="row"><div class="label">Makanan</div><div class="value">Somebody Son's ass</div></div>
+    <div class="row"><div class="label">Minuman</div><div class="value">Americano</div></div>
+    <div class="row"><div class="label">Kesibukan</div><div class="value">tidur & gooning</div></div>
+
+    <div class="row"><div class="label">Tanggal</div><div class="value">gatau lupa</div></div>
+    <div class="row"><div class="label">Hobi</div><div class="value">ngehalu nyanyi ribut AI</div></div>
+
+    <div class="row"><div class="label">Domisili</div><div class="value">Heisenberg</div></div>
+    <div class="row"><div class="label">Rumah</div><div class="value">67 Six Seven</div></div>
+
+    <div class="row"><div class="label">Rekening</div><div class="value">69 666 67</div></div>
+    <div class="row"><div class="label">Pin</div><div class="value">ilfroy</div></div>
+
+  </div>
+
+  <!-- ===== MESSAGE VIEW ===== -->
+  <div class="content message" id="message" style="display:none;"></div>
 
   <div class="back" onclick="window.location.href='https://simplefroylan.space'">
     ← BACK
@@ -152,36 +182,11 @@ img{
 
 <script>
 
-// ===== BLOCK RIGHT CLICK =====
+// ===== BLOCK =====
 document.addEventListener("contextmenu", e => e.preventDefault());
 document.addEventListener("dragstart", e => e.preventDefault());
 
-// ===== TEXT =====
-const biodataText = `Nama            : Froylán bukan mpruy
-Zodiak          : Libra
-
-Makanan Fav     : Somebody Son's ass
-Minuman Fav     : Americano
-Kesibukan       : tidur and goonung
-
-Tanggal Lahir   : gatau lupa
-
-Hobi            : Masak, nyanyi, ngehalu, denger lagu, ribut sama A.I.
-
-Domisili        : Heisenberg
-Nomor Rumah     : 67 Six Seven
-Boneka Favorit  : Teddy
-
-Nama Ortu       : g kenal
-
-No. Rek         : 69 666 67
-
-Pw Email        : 123456789
-
-Pin             : ilfroy
-
-Mie             : ga suka mie`;
-
+// ===== MESSAGE TEXT =====
 const messageText = `I Just realized I'm not, I'm not even everyone's favorite friend.
 People may tell me, I mean, a lot to them that I'm special.
 
@@ -210,43 +215,46 @@ I don't need to be everyone's first choice
 to know that I'm worth choosing.`;
 
 // ===== TYPE EFFECT =====
-let typingInterval;
+let typing;
 
 function typeText(text){
-  clearInterval(typingInterval);
+  clearInterval(typing);
 
-  const el = document.getElementById("content");
+  const el = document.getElementById("message");
   el.textContent = "";
 
   let i = 0;
 
-  typingInterval = setInterval(()=>{
+  typing = setInterval(()=>{
     el.textContent += text[i] || "";
     i++;
 
     if(i >= text.length){
-      clearInterval(typingInterval);
+      clearInterval(typing);
     }
   }, 15);
 }
 
 // ===== TOGGLE =====
-let isBio = true;
+let showingBio = true;
 
-document.getElementById("toggleBtn").addEventListener("click", () => {
+document.getElementById("toggleBtn").onclick = () => {
 
-  isBio = !isBio;
+  const bio = document.getElementById("biodata");
+  const msg = document.getElementById("message");
 
-  if(isBio){
-    typeText(biodataText);
+  showingBio = !showingBio;
+
+  if(showingBio){
+    bio.style.display = "block";
+    msg.style.display = "none";
   } else {
+    bio.style.display = "none";
+    msg.style.display = "block";
     typeText(messageText);
   }
 
-});
-
-// ===== INIT =====
-typeText(biodataText);
+};
 
 </script>
 
