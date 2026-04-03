@@ -19,6 +19,21 @@ body{
   height:100vh;
 }
 
+/* ===== CRT EFFECT ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,0,0,0.05) 0px,
+    rgba(255,0,0,0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events:none;
+}
+
 /* ===== CARD ===== */
 .card{
   width:min(92vw, 380px);
@@ -28,20 +43,22 @@ body{
   background:#050000;
 
   box-shadow:
-    0 0 20px #ff0000,
-    inset 0 0 40px rgba(255,0,0,0.15);
+    0 0 10px #ff0000,
+    0 0 40px rgba(255,0,0,0.4),
+    inset 0 0 60px rgba(255,0,0,0.15);
 
   padding:16px;
+
   display:flex;
   flex-direction:column;
-
   overflow:hidden;
 }
 
 /* ===== HEADER ===== */
 .header{
   text-align:center;
-  letter-spacing:3px;
+  letter-spacing:4px;
+  margin-bottom:8px;
 }
 
 .small{
@@ -50,14 +67,13 @@ body{
 }
 
 .title{
-  font-size:20px;
-  margin-top:6px;
+  font-size:22px;
+  text-shadow:0 0 8px #ff0000;
 }
 
 /* ===== IMAGE ===== */
 .profile-wrap{
   position:relative;
-  margin-top:10px;
 }
 
 .profile{
@@ -70,26 +86,43 @@ body{
 /* ===== STICKER ===== */
 .sticker{
   position:absolute;
-  right:8px;
-  bottom:-10px;
-  width:60px;
+  right:6px;
+  bottom:-12px;
+  width:65px;
   cursor:pointer;
-  z-index:5;
+  z-index:10;
   pointer-events:auto;
+  transition:.2s;
 }
 
-/* ===== BIODATA GRID ===== */
+.sticker:hover{
+  transform:scale(1.1);
+}
+
+/* ===== CONTENT (SCROLL FIX) ===== */
 .content{
-  margin-top:12px;
+  margin-top:10px;
   font-size:12px;
+
   flex:1;
+  overflow-y:auto;   /* 🔑 SCROLL FIX */
+  padding-right:4px;
 }
 
+/* ===== SCROLLBAR STYLE ===== */
+.content::-webkit-scrollbar{
+  width:4px;
+}
+.content::-webkit-scrollbar-thumb{
+  background:#ff0000;
+}
+
+/* ===== ROW ===== */
 .row{
   display:flex;
   justify-content:space-between;
-  padding:4px 0;
-  border-bottom:1px solid rgba(255,0,0,0.15);
+  padding:6px 0;
+  border-bottom:1px solid rgba(255,0,0,0.2);
 }
 
 .label{
@@ -101,10 +134,10 @@ body{
   max-width:60%;
 }
 
-/* ===== MESSAGE MODE ===== */
+/* ===== MESSAGE ===== */
 .message{
   white-space:pre-wrap;
-  line-height:1.5;
+  line-height:1.6;
 }
 
 /* ===== BACK ===== */
@@ -150,9 +183,8 @@ img{
     <img src="stickers.png" class="sticker" id="toggleBtn">
   </div>
 
-  <!-- ===== BIODATA VIEW ===== -->
+  <!-- BIODATA -->
   <div class="content" id="biodata">
-
     <div class="row"><div class="label">Nama</div><div class="value">Froylán bukan mpruy</div></div>
     <div class="row"><div class="label">Zodiak</div><div class="value">Libra</div></div>
 
@@ -168,25 +200,23 @@ img{
 
     <div class="row"><div class="label">Rekening</div><div class="value">69 666 67</div></div>
     <div class="row"><div class="label">Pin</div><div class="value">ilfroy</div></div>
-
   </div>
 
-  <!-- ===== MESSAGE VIEW ===== -->
+  <!-- MESSAGE -->
   <div class="content message" id="message" style="display:none;"></div>
 
   <div class="back" onclick="window.location.href='https://simplefroylan.space'">
-    ← BACK
+    ← return
   </div>
 
 </div>
 
 <script>
 
-// ===== BLOCK =====
+// block
 document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("dragstart", e => e.preventDefault());
 
-// ===== MESSAGE TEXT =====
+// message
 const messageText = `I Just realized I'm not, I'm not even everyone's favorite friend.
 People may tell me, I mean, a lot to them that I'm special.
 
@@ -214,38 +244,32 @@ I'll still be kind.
 I don't need to be everyone's first choice
 to know that I'm worth choosing.`;
 
-// ===== TYPE EFFECT =====
-let typing;
-
+// typing
+let t;
 function typeText(text){
-  clearInterval(typing);
-
+  clearInterval(t);
   const el = document.getElementById("message");
   el.textContent = "";
 
   let i = 0;
-
-  typing = setInterval(()=>{
+  t = setInterval(()=>{
     el.textContent += text[i] || "";
     i++;
-
-    if(i >= text.length){
-      clearInterval(typing);
-    }
-  }, 15);
+    if(i >= text.length) clearInterval(t);
+  },15);
 }
 
-// ===== TOGGLE =====
-let showingBio = true;
+// toggle
+let state = true;
 
 document.getElementById("toggleBtn").onclick = () => {
 
   const bio = document.getElementById("biodata");
   const msg = document.getElementById("message");
 
-  showingBio = !showingBio;
+  state = !state;
 
-  if(showingBio){
+  if(state){
     bio.style.display = "block";
     msg.style.display = "none";
   } else {
