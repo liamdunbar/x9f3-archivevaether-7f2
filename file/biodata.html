@@ -10,8 +10,8 @@
 body{
   margin:0;
   background:#000;
-  color:#ff4d4d;
   font-family:monospace;
+  color:#ff4d4d;
 
   display:flex;
   justify-content:center;
@@ -19,20 +19,19 @@ body{
   height:100vh;
 }
 
-/* ===== CARD ===== */
+/* ===== TERMINAL STYLE CARD ===== */
 .card{
   width:min(92vw, 380px);
   height:min(92vh, 680px);
 
-  background:#040000;
   border:1px solid #ff0000;
+  background:#050000;
 
   box-shadow:
-    0 0 25px rgba(255,0,0,0.4),
-    inset 0 0 60px rgba(255,0,0,0.08);
+    0 0 20px #ff0000,
+    inset 0 0 40px rgba(255,0,0,0.15);
 
   padding:16px;
-
   display:flex;
   flex-direction:column;
 
@@ -44,7 +43,6 @@ body{
 .header{
   text-align:center;
   letter-spacing:3px;
-  margin-bottom:8px;
 }
 
 .small{
@@ -58,8 +56,9 @@ body{
 }
 
 /* ===== PROFILE ===== */
-.profile-wrapper{
+.profile-wrap{
   position:relative;
+  margin-top:10px;
 }
 
 .profile{
@@ -72,11 +71,14 @@ body{
 /* ===== STICKER BUTTON ===== */
 .sticker{
   position:absolute;
-  right:6px;
+  right:8px;
   bottom:-10px;
-  width:65px;
+  width:60px;
   cursor:pointer;
-  transition:.2s;
+  z-index:5;
+
+  /* IMPORTANT FIX */
+  pointer-events:auto;
 }
 
 .sticker:hover{
@@ -98,7 +100,7 @@ body{
 .back{
   text-align:center;
   font-size:12px;
-  margin-top:8px;
+  margin-top:6px;
   cursor:pointer;
   opacity:.6;
 }
@@ -114,7 +116,14 @@ body{
 }
 
 img{
+  -webkit-user-drag:none;
+  user-drag:none;
   pointer-events:none;
+}
+
+/* EXCEPTION FOR BUTTON */
+.sticker{
+  pointer-events:auto !important;
 }
 </style>
 </head>
@@ -128,7 +137,7 @@ img{
     <div class="title">BIODATA</div>
   </div>
 
-  <div class="profile-wrapper">
+  <div class="profile-wrap">
     <img src="profile.jpg" class="profile">
     <img src="stickers.png" class="sticker" id="toggleBtn">
   </div>
@@ -142,7 +151,8 @@ img{
 </div>
 
 <script>
-// ===== PROTECTION =====
+
+// ===== BLOCK RIGHT CLICK =====
 document.addEventListener("contextmenu", e => e.preventDefault());
 document.addEventListener("dragstart", e => e.preventDefault());
 
@@ -200,7 +210,7 @@ I don't need to be everyone's first choice
 to know that I'm worth choosing.`;
 
 // ===== TYPE EFFECT =====
-let typingInterval = null;
+let typingInterval;
 
 function typeText(text){
   clearInterval(typingInterval);
@@ -221,17 +231,19 @@ function typeText(text){
 }
 
 // ===== TOGGLE =====
-let showingBio = true;
+let isBio = true;
 
-document.getElementById("toggleBtn").onclick = () => {
-  showingBio = !showingBio;
+document.getElementById("toggleBtn").addEventListener("click", () => {
 
-  if(showingBio){
+  isBio = !isBio;
+
+  if(isBio){
     typeText(biodataText);
-  }else{
+  } else {
     typeText(messageText);
   }
-};
+
+});
 
 // ===== INIT =====
 typeText(biodataText);
