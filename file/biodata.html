@@ -4,19 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>BIODATA — FILE</title>
+<title>BIODATA</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 body{
-  background:#020000;
-  font-family:monospace;
+  margin:0;
+  background:#000;
   color:#ff4d4d;
+  font-family:monospace;
 
   display:flex;
   justify-content:center;
@@ -27,7 +22,7 @@ body{
 /* ===== CARD ===== */
 .card{
   width:min(92vw, 380px);
-  aspect-ratio:9 / 16;
+  height:min(92vh, 680px);
 
   background:#040000;
   border:1px solid #ff0000;
@@ -38,129 +33,88 @@ body{
 
   padding:16px;
 
+  display:flex;
+  flex-direction:column;
+
   position:relative;
   overflow:hidden;
 }
 
-/* scan line */
-.scan{
-  position:absolute;
-  width:100%;
-  height:2px;
-  background:rgba(255,0,0,0.3);
-  top:0;
-  animation:scanMove 4s linear infinite;
-}
-
-@keyframes scanMove{
-  0%{top:0}
-  100%{top:100%}
-}
-
-/* header */
+/* ===== HEADER ===== */
 .header{
-  font-size:12px;
-  opacity:0.6;
-  margin-bottom:6px;
+  text-align:center;
+  letter-spacing:3px;
+  margin-bottom:8px;
+}
+
+.small{
+  font-size:10px;
+  opacity:.6;
 }
 
 .title{
-  text-align:center;
-  font-size:22px;
-  letter-spacing:6px;
-  margin-bottom:10px;
+  font-size:20px;
+  margin-top:6px;
 }
 
-/* image */
-.img-wrap{
+/* ===== PROFILE ===== */
+.profile-wrapper{
   position:relative;
 }
 
 .profile{
   width:100%;
-  height:190px;
+  height:160px;
   object-fit:cover;
   border:1px solid #ff0000;
 }
 
-/* clickable sticker */
+/* ===== STICKER BUTTON ===== */
 .sticker{
   position:absolute;
-  right:-8px;
-  bottom:-8px;
-  width:85px;
-  transform:rotate(-10deg);
+  right:6px;
+  bottom:-10px;
+  width:65px;
   cursor:pointer;
-
-  filter:drop-shadow(0 0 10px red);
+  transition:.2s;
 }
 
-/* content */
+.sticker:hover{
+  transform:scale(1.1);
+}
+
+/* ===== CONTENT ===== */
 .content{
   margin-top:12px;
   font-size:12px;
-  line-height:1.6;
+  line-height:1.5;
   white-space:pre-wrap;
+
+  flex:1;
+  overflow:hidden;
 }
 
-.row{
-  display:flex;
-  justify-content:space-between;
-  padding:6px 0;
-  border-bottom:1px solid rgba(255,0,0,0.2);
-}
-
-.label{
-  opacity:0.5;
-}
-
-.value{
-  text-align:right;
-  max-width:55%;
-}
-
-/* back button */
+/* ===== BACK ===== */
 .back{
-  position:absolute;
-  bottom:14px;
-  left:50%;
-  transform:translateX(-50%);
-}
-
-.back button{
-  background:transparent;
-  border:none;
-  color:#ff4d4d;
+  text-align:center;
   font-size:12px;
+  margin-top:8px;
   cursor:pointer;
-  opacity:0.7;
+  opacity:.6;
 }
 
-.back button:hover{
+.back:hover{
   opacity:1;
-  text-decoration:underline;
 }
 
-/* CRT */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-
-  background:repeating-linear-gradient(
-    to bottom,
-    rgba(255,0,0,0.04),
-    rgba(255,0,0,0.04) 1px,
-    transparent 2px,
-    transparent 4px
-  );
-}
-
-/* block */
-img{
+/* ===== PROTECTION ===== */
+*{
+  -webkit-user-select:none;
   user-select:none;
-  pointer-events:auto;
+}
+
+img{
+  pointer-events:none;
 }
 </style>
 </head>
@@ -169,53 +123,56 @@ img{
 
 <div class="card">
 
-  <div class="scan"></div>
+  <div class="header">
+    <div class="small">[ CLASSIFIED FILE — UNAUTHORIZED VIEW ]</div>
+    <div class="title">BIODATA</div>
+  </div>
 
-  <div class="header">[ CLASSIFIED FILE — UNAUTHORIZED VIEW ]</div>
-
-  <div class="title">BIODATA</div>
-
-  <div class="img-wrap">
+  <div class="profile-wrapper">
     <img src="profile.jpg" class="profile">
-    <img src="stickers.png" class="sticker" onclick="toggleSecret()">
+    <img src="stickers.png" class="sticker" id="toggleBtn">
   </div>
 
-  <!-- NORMAL DATA -->
-  <div class="content" id="biodata">
+  <div class="content" id="content"></div>
 
-    <div class="row"><div class="label">Nama</div><div class="value">Froylán bukan mpruy</div></div>
-    <div class="row"><div class="label">Zodiak</div><div class="value">Libra</div></div>
-
-    <div class="row"><div class="label">Makanan</div><div class="value">Somebody Son's ass</div></div>
-    <div class="row"><div class="label">Minuman</div><div class="value">Americano</div></div>
-    <div class="row"><div class="label">Kesibukan</div><div class="value">tidur & gooning</div></div>
-
-    <div class="row"><div class="label">Tanggal</div><div class="value">gatau lupa</div></div>
-    <div class="row"><div class="label">Hobi</div><div class="value">ngehalu nyanyi ribut AI</div></div>
-
-    <div class="row"><div class="label">Domisili</div><div class="value">Heisenberg</div></div>
-    <div class="row"><div class="label">Rumah</div><div class="value">67 Six Seven</div></div>
-
-    <div class="row"><div class="label">Rekening</div><div class="value">69 666 67</div></div>
-    <div class="row"><div class="label">Pin</div><div class="value">ilfroy</div></div>
-
-  </div>
-
-  <!-- SECRET TEXT -->
-  <div class="content" id="secretText" style="display:none;"></div>
-
-  <div class="back">
-    <button onclick="goBack()">← return</button>
+  <div class="back" onclick="window.location.href='https://simplefroylan.space'">
+    ← BACK
   </div>
 
 </div>
 
 <script>
-function goBack(){
-  window.location.href = "https://simplefroylan.space";
-}
+// ===== PROTECTION =====
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
 
-const message = `I Just realized I'm not, I'm not even everyone's favorite friend.
+// ===== TEXT =====
+const biodataText = `Nama            : Froylán bukan mpruy
+Zodiak          : Libra
+
+Makanan Fav     : Somebody Son's ass
+Minuman Fav     : Americano
+Kesibukan       : tidur and goonung
+
+Tanggal Lahir   : gatau lupa
+
+Hobi            : Masak, nyanyi, ngehalu, denger lagu, ribut sama A.I.
+
+Domisili        : Heisenberg
+Nomor Rumah     : 67 Six Seven
+Boneka Favorit  : Teddy
+
+Nama Ortu       : g kenal
+
+No. Rek         : 69 666 67
+
+Pw Email        : 123456789
+
+Pin             : ilfroy
+
+Mie             : ga suka mie`;
+
+const messageText = `I Just realized I'm not, I'm not even everyone's favorite friend.
 People may tell me, I mean, a lot to them that I'm special.
 
 But deep down I know there's always someone they'll choose over me.
@@ -233,7 +190,8 @@ It just means people have their own people.
 And that's something I can't control.
 
 I still have a good heart.
-I still care deeply.
+I still care.
+Deeply.
 
 And even if I'm not their favorite,
 I'll still be kind.
@@ -241,52 +199,43 @@ I'll still be kind.
 I don't need to be everyone's first choice
 to know that I'm worth choosing.`;
 
-let showingSecret = false;
+// ===== TYPE EFFECT =====
 let typingInterval = null;
 
-function toggleSecret(){
-  const bio = document.getElementById("biodata");
-  const secret = document.getElementById("secretText");
+function typeText(text){
+  clearInterval(typingInterval);
 
-  if(typingInterval){
-    clearInterval(typingInterval);
-    typingInterval = null;
-  }
+  const el = document.getElementById("content");
+  el.textContent = "";
 
-  if(!showingSecret){
-    bio.style.display = "none";
-    secret.style.display = "block";
-    secret.textContent = "";
+  let i = 0;
 
-    let i = 0;
+  typingInterval = setInterval(()=>{
+    el.textContent += text[i] || "";
+    i++;
 
-    typingInterval = setInterval(()=>{
-      secret.textContent += message[i];
-      i++;
-
-      if(i >= message.length){
-        clearInterval(typingInterval);
-      }
-    }, 18);
-
-    showingSecret = true;
-
-  } else {
-    secret.style.display = "none";
-    bio.style.display = "block";
-    showingSecret = false;
-  }
+    if(i >= text.length){
+      clearInterval(typingInterval);
+    }
+  }, 15);
 }
 
-// block right click
-document.addEventListener("contextmenu", e => e.preventDefault());
+// ===== TOGGLE =====
+let showingBio = true;
 
-// block drag
-document.addEventListener("dragstart", e => {
-  if(e.target.tagName === "IMG"){
-    e.preventDefault();
+document.getElementById("toggleBtn").onclick = () => {
+  showingBio = !showingBio;
+
+  if(showingBio){
+    typeText(biodataText);
+  }else{
+    typeText(messageText);
   }
-});
+};
+
+// ===== INIT =====
+typeText(biodataText);
+
 </script>
 
 </body>
