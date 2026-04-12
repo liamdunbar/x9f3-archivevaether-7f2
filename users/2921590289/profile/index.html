@@ -1,78 +1,200 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Roblox GutierrezFroy's Profile</title>
 
 <meta name="description" content="GutierrezFroy is one of the millions creating and exploring the endless possibilities of Roblox. Join GutierrezFroy on Roblox and explore together! don't say something you not willing to give it.">
-<meta property="og:title" content="Roblox GutierrezFroy's Profile">
-<meta property="og:description" content="GutierrezFroy is one of the millions creating and exploring the endless possibilities of Roblox. Join GutierrezFroy on Roblox and explore together!">
-<meta property="og:image" content="profile.webp">
 
-<link rel="stylesheet" href="style.css">
+<meta property="og:title" content="Roblox GutierrezFroy's Profile">
+<meta property="og:description" content="Join GutierrezFroy on Roblox and explore together!">
+<meta property="og:image" content="profile.webp">
+<meta property="og:type" content="website">
+
+<style>
+body{
+  margin:0;
+  background:#000;
+  font-family:monospace;
+  color:#ff4d4d;
+}
+
+/* ===== CRT EFFECT ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,0,0,0.05) 0px,
+    rgba(255,0,0,0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events:none;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:16px;
+}
+
+/* ===== HEADER IMAGE ===== */
+.header{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border:1px solid #ff0000;
+
+  box-shadow:
+    0 0 10px #ff0000,
+    0 0 40px rgba(255,0,0,0.3);
+}
+
+/* ===== PROFILE ROW ===== */
+.profile-row{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-top:-40px;
+}
+
+/* ===== PROFILE PIC ===== */
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  border:2px solid #ff0000;
+  object-fit:cover;
+  background:#000;
+}
+
+/* ===== NAME ===== */
+.name{
+  font-size:22px;
+  text-shadow:0 0 8px #ff0000;
+}
+
+.username{
+  opacity:.6;
+  font-size:13px;
+}
+
+/* ===== BUTTONS ===== */
+.actions{
+  margin-left:auto;
+  display:flex;
+  gap:10px;
+}
+
+.btn{
+  border:1px solid #ff0000;
+  padding:8px 14px;
+  cursor:pointer;
+  text-decoration:none;
+  color:#ff4d4d;
+
+  box-shadow:0 0 10px rgba(255,0,0,0.3);
+  transition:.2s;
+}
+
+.btn:hover{
+  background:#ff0000;
+  color:#000;
+}
+
+/* ===== STATS ===== */
+.stats{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.stat{
+  border:1px solid rgba(255,0,0,0.3);
+  padding:6px 10px;
+  font-size:12px;
+}
+
+/* ===== BIO ===== */
+.bio{
+  margin-top:12px;
+  font-size:13px;
+  opacity:.8;
+}
+
+/* ===== TABS ===== */
+.tabs{
+  display:flex;
+  gap:40px;
+  margin-top:20px;
+  border-bottom:1px solid rgba(255,0,0,0.3);
+  padding-bottom:6px;
+}
+
+.tab{
+  cursor:pointer;
+  opacity:.6;
+}
+
+.tab.active{
+  opacity:1;
+  border-bottom:1px solid #ff0000;
+}
+</style>
 </head>
 
 <body>
 
-<div class="crt">
-  <div class="terminal">
+<div class="container">
 
-    <!-- MAIN PROFILE -->
-    <div class="terminal-main">
+  <!-- HEADER -->
+  <img src="header.webp" class="header">
 
-      <!-- HEADER IMAGE -->
-      <div class="profile-header">
-        <img src="header.webp" alt="Header">
-      </div>
+  <!-- PROFILE -->
+  <div class="profile-row">
 
-      <!-- PROFILE CONTENT -->
-      <div class="profile-content">
+    <img src="profile.webp" class="avatar">
 
-        <div class="profile-left">
-          <img src="profile.webp" class="avatar">
+    <div>
+      <div class="name">Froylan</div>
+      <div class="username">@GutierrezFroy</div>
+    </div>
 
-          <div class="profile-info">
-            <div class="name">Froylan</div>
-            <div class="username">@GutierrezFroy</div>
+    <div class="actions">
+      <a class="btn" href="https://discord.gg/FfgJvX27GZ" target="_blank">
+        Join His Server
+      </a>
 
-            <div class="stats">
-              <span>42 Friends</span>
-              <span>1 Follower</span>
-              <span>0 Following</span>
-            </div>
-
-            <div class="bio">
-              don't say something you not willing to give it.
-            </div>
-          </div>
-        </div>
-
-        <!-- ACTION BUTTONS -->
-        <div class="profile-actions">
-          <a href="https://discord.gg/FfgJvX27GZ" target="_blank" class="btn">
-            Join His Server
-          </a>
-
-          <a href="https://www.roblox.com/users/2921590289/profile" target="_blank" class="btn">
-            Add Friend
-          </a>
-
-          <div class="btn small">...</div>
-        </div>
-
-      </div>
-
-      <!-- TABS -->
-      <div class="tabs">
-        <span class="active">About</span>
-        <span>Creations</span>
-      </div>
-
+      <a class="btn" href="https://www.roblox.com/users/2921590289/profile" target="_blank">
+        Add Friend
+      </a>
     </div>
 
   </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">42 Friends</div>
+    <div class="stat">1 Follower</div>
+    <div class="stat">0 Following</div>
+  </div>
+
+  <!-- BIO -->
+  <div class="bio">
+    don't say something you not willing to give it.
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active">About</div>
+    <div class="tab">Creations</div>
+  </div>
+
 </div>
 
 </body>
