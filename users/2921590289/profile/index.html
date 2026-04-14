@@ -6,8 +6,7 @@
 
 <title>Roblox GutierrezFroy's Profile</title>
 
-<meta name="description" content="GutierrezFroy is one of the millions creating and exploring the endless possibilities of Roblox. Join GutierrezFroy on Roblox and explore together!">
-<meta property="og:title" content="Roblox GutierrezFroy's Profile">
+<meta name="description" content="GutierrezFroy is one of the millions creating and exploring the endless possibilities of Roblox.">
 <meta property="og:image" content="profile.webp">
 
 <style>
@@ -33,26 +32,26 @@ body::after{
 }
 
 .wrap{
-  max-width:1000px;
+  max-width:900px;
   margin:auto;
 }
 
 /* ===== HEADER ===== */
 .header{
-  height:140px;
+  height:160px;
   background:url("header.webp") center/cover no-repeat;
-  border-bottom:1px solid rgba(255,0,0,0.4);
-  box-shadow:0 0 20px rgba(255,0,0,0.3);
 }
 
-/* ===== PROFILE ===== */
+/* ===== PROFILE (ROBLOX STYLE) ===== */
 .profile{
-  display:flex;
-  align-items:center;
-  gap:16px;
   padding:0 20px;
   margin-top:-50px;
-  flex-wrap:wrap;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
 .avatar{
@@ -61,14 +60,7 @@ body::after{
   border-radius:50%;
   border:2px solid #ff0000;
   object-fit:cover;
-  box-shadow:0 0 12px rgba(255,0,0,0.6);
-}
-
-/* text block */
-.info{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
+  box-shadow:0 0 12px #ff0000;
 }
 
 .name{
@@ -81,21 +73,42 @@ body::after{
   opacity:.7;
 }
 
-/* ===== BUTTONS FIXED ===== */
-.actions{
-  margin-left:auto;
+/* ===== STATS ===== */
+.stats{
   display:flex;
   gap:10px;
+  margin-top:12px;
   flex-wrap:wrap;
-  justify-content:flex-end;
+}
+
+.stat{
+  border:1px solid rgba(255,0,0,0.4);
+  padding:6px 12px;
+  font-size:12px;
+}
+
+/* ===== BIO ===== */
+.bio{
+  margin-top:12px;
+  font-size:13px;
+  opacity:.85;
+}
+
+/* ===== BUTTONS (FULL WIDTH LIKE ROBLOX) ===== */
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
 }
 
 .btn{
+  flex:1;
+  text-align:center;
   border:1px solid #ff0000;
-  padding:8px 12px;
+  padding:12px;
   text-decoration:none;
   color:#ff4d4d;
-  font-size:12px;
+  font-size:13px;
 }
 
 .btn:hover{
@@ -104,36 +117,16 @@ body::after{
   box-shadow:0 0 10px #ff0000;
 }
 
-/* ===== STATS ===== */
-.stats{
-  display:flex;
-  gap:10px;
-  padding:12px 20px;
-  flex-wrap:wrap;
-}
-
-.stat{
-  border:1px solid rgba(255,0,0,0.3);
-  padding:5px 10px;
-  font-size:12px;
-}
-
-/* ===== BIO ===== */
-.bio{
-  padding:0 20px;
-  font-size:13px;
-  opacity:.85;
-}
-
 /* ===== TABS ===== */
 .tabs{
   display:flex;
-  gap:30px;
-  padding:16px 20px;
+  justify-content:space-around;
+  margin-top:20px;
   border-bottom:1px solid rgba(255,0,0,0.3);
 }
 
 .tab{
+  padding:10px;
   opacity:.6;
 }
 
@@ -142,7 +135,7 @@ body::after{
   border-bottom:2px solid #ff0000;
 }
 
-/* ===== FAVORITES (1:1 FIX) ===== */
+/* ===== FAVORITES ===== */
 .favorites{
   padding:20px;
 }
@@ -153,6 +146,7 @@ body::after{
   text-shadow:0 0 6px #ff0000;
 }
 
+/* 1:1 GRID */
 .fav-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -167,21 +161,18 @@ body::after{
 
 .fav-card:hover{
   box-shadow:0 0 10px #ff0000;
-  transform:scale(1.03);
 }
 
-/* 🔥 PERFECT 1:1 */
 .fav-card img{
   width:100%;
   aspect-ratio:1/1;
   object-fit:cover;
-  border:1px solid rgba(255,0,0,0.4);
 }
 
 .fav-name{
+  text-align:center;
   margin-top:6px;
   font-size:12px;
-  text-align:center;
 }
 
 /* ===== DESKTOP ===== */
@@ -208,11 +199,23 @@ body::after{
   <!-- PROFILE -->
   <div class="profile">
 
-    <img src="profile.webp" class="avatar">
+    <div class="top">
+      <img src="profile.webp" class="avatar">
 
-    <div class="info">
-      <div class="name">Froylan</div>
-      <div class="username">@GutierrezFroy</div>
+      <div>
+        <div class="name">Froylan</div>
+        <div class="username">@GutierrezFroy</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">43 Friends</div>
+      <div class="stat">1 Follower</div>
+      <div class="stat">0 Following</div>
+    </div>
+
+    <div class="bio">
+      don't say something you not willing to give it.
     </div>
 
     <div class="actions">
@@ -225,24 +228,12 @@ body::after{
       </a>
     </div>
 
-  </div>
+    <!-- TABS -->
+    <div class="tabs">
+      <div class="tab active">About</div>
+      <div class="tab">Creations</div>
+    </div>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat">43 Friends</div>
-    <div class="stat">1 Follower</div>
-    <div class="stat">0 Following</div>
-  </div>
-
-  <!-- BIO -->
-  <div class="bio">
-    don't say something you not willing to give it.
-  </div>
-
-  <!-- TABS -->
-  <div class="tabs">
-    <div class="tab active">About</div>
-    <div class="tab">Creations</div>
   </div>
 
   <!-- FAVORITES -->
