@@ -6,10 +6,9 @@
 
 <title>Roblox GutierrezFroy's Profile</title>
 
-<meta name="description" content="GutierrezFroy is one of the millions creating and exploring the endless possibilities of Roblox. Join GutierrezFroy on Roblox and explore together!">
+<meta name="description" content="Join GutierrezFroy on Roblox and explore together!">
 <meta property="og:title" content="Roblox GutierrezFroy's Profile">
-<meta property="og:description" content="Join GutierrezFroy on Roblox and explore together!">
-<meta property="og:image" content="profile.webp">
+<meta property="og:image" content="/profile.webp">
 
 <style>
 body{
@@ -19,7 +18,7 @@ body{
   color:#ff4d4d;
 }
 
-/* subtle scanlines */
+/* scanlines */
 body::after{
   content:"";
   position:fixed;
@@ -32,20 +31,19 @@ body::after{
   pointer-events:none;
 }
 
-/* container */
 .wrap{
   max-width:1000px;
   margin:auto;
 }
 
-/* HEADER (FIXED) */
+/* HEADER */
 .header{
   height:160px;
-  background:url("header.webp") center/cover no-repeat;
+  background:url("/header.webp") center/cover no-repeat;
   border-bottom:1px solid rgba(255,0,0,0.4);
 }
 
-/* PROFILE SECTION */
+/* PROFILE */
 .profile{
   display:flex;
   align-items:flex-end;
@@ -54,17 +52,14 @@ body::after{
   margin-top:-50px;
 }
 
-/* avatar */
 .avatar{
   width:100px;
   height:100px;
   border-radius:50%;
   border:2px solid #ff0000;
-  background:#000;
   object-fit:cover;
 }
 
-/* name */
 .name{
   font-size:24px;
   text-shadow:0 0 6px #ff0000;
@@ -75,7 +70,7 @@ body::after{
   opacity:.7;
 }
 
-/* buttons */
+/* BUTTONS */
 .actions{
   margin-left:auto;
   display:flex;
@@ -88,7 +83,6 @@ body::after{
   text-decoration:none;
   color:#ff4d4d;
   font-size:13px;
-  transition:.2s;
 }
 
 .btn:hover{
@@ -96,7 +90,7 @@ body::after{
   color:#000;
 }
 
-/* stats */
+/* STATS */
 .stats{
   display:flex;
   gap:10px;
@@ -109,14 +103,14 @@ body::after{
   font-size:12px;
 }
 
-/* bio */
+/* BIO */
 .bio{
   padding:0 20px;
   font-size:13px;
   opacity:.8;
 }
 
-/* tabs */
+/* TABS */
 .tabs{
   display:flex;
   gap:30px;
@@ -125,9 +119,7 @@ body::after{
 }
 
 .tab{
-  cursor:pointer;
   opacity:.6;
-  font-size:14px;
 }
 
 .tab.active{
@@ -135,7 +127,38 @@ body::after{
   border-bottom:2px solid #ff0000;
 }
 
-/* spacing */
+/* FAVORITES */
+.favorites{
+  padding:20px;
+}
+
+.fav-title{
+  font-size:16px;
+  margin-bottom:12px;
+}
+
+.fav-row{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+}
+
+.fav-card{
+  min-width:120px;
+}
+
+.fav-card img{
+  width:120px;
+  height:80px;
+  object-fit:cover;
+  border:1px solid rgba(255,0,0,0.4);
+}
+
+.fav-name{
+  margin-top:6px;
+  font-size:13px;
+}
+
 .space{
   height:40px;
 }
@@ -151,8 +174,7 @@ body::after{
 
   <!-- PROFILE -->
   <div class="profile">
-
-    <img src="profile.webp" class="avatar">
+    <img src="/profile.webp" class="avatar">
 
     <div>
       <div class="name">Froylan</div>
@@ -168,7 +190,6 @@ body::after{
         Add Friend
       </a>
     </div>
-
   </div>
 
   <!-- STATS -->
@@ -187,6 +208,45 @@ body::after{
   <div class="tabs">
     <div class="tab active">About</div>
     <div class="tab">Creations</div>
+  </div>
+
+  <!-- FAVORITES -->
+  <div class="favorites">
+    <div class="fav-title">Favorites ></div>
+
+    <div class="fav-row">
+
+      <div class="fav-card">
+        <img src="/assets/favorites/fav-h.webp">
+        <div class="fav-name">H</div>
+      </div>
+
+      <div class="fav-card">
+        <img src="/assets/favorites/fav-i.webp">
+        <div class="fav-name">I</div>
+      </div>
+
+      <div class="fav-card">
+        <img src="/assets/favorites/fav-k.webp">
+        <div class="fav-name">K</div>
+      </div>
+
+      <div class="fav-card">
+        <img src="/assets/favorites/fav-a.webp">
+        <div class="fav-name">A</div>
+      </div>
+
+      <div class="fav-card">
+        <img src="/assets/favorites/fav-r.webp">
+        <div class="fav-name">R</div>
+      </div>
+
+      <div class="fav-card">
+        <img src="/assets/favorites/fav-u.webp">
+        <div class="fav-name">U</div>
+      </div>
+
+    </div>
   </div>
 
   <div class="space"></div>
