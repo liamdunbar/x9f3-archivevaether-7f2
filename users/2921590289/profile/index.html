@@ -6,9 +6,9 @@
 
 <title>Roblox GutierrezFroy's Profile</title>
 
-<meta name="description" content="Join GutierrezFroy on Roblox and explore together!">
+<meta name="description" content="GutierrezFroy is one of the millions creating and exploring the endless possibilities of Roblox. Join GutierrezFroy on Roblox and explore together!">
 <meta property="og:title" content="Roblox GutierrezFroy's Profile">
-<meta property="og:image" content="/profile.webp">
+<meta property="og:image" content="profile.webp">
 
 <style>
 body{
@@ -18,7 +18,7 @@ body{
   color:#ff4d4d;
 }
 
-/* scanlines */
+/* subtle scanlines */
 body::after{
   content:"";
   position:fixed;
@@ -39,7 +39,7 @@ body::after{
 /* HEADER */
 .header{
   height:160px;
-  background:url("/header.webp") center/cover no-repeat;
+  background:url("header.webp") center/cover no-repeat;
   border-bottom:1px solid rgba(255,0,0,0.4);
 }
 
@@ -83,6 +83,7 @@ body::after{
   text-decoration:none;
   color:#ff4d4d;
   font-size:13px;
+  white-space:nowrap;
 }
 
 .btn:hover{
@@ -95,6 +96,7 @@ body::after{
   display:flex;
   gap:10px;
   padding:12px 20px;
+  flex-wrap:wrap;
 }
 
 .stat{
@@ -141,6 +143,7 @@ body::after{
   display:flex;
   gap:14px;
   overflow-x:auto;
+  padding-bottom:6px;
 }
 
 .fav-card{
@@ -159,6 +162,45 @@ body::after{
   font-size:13px;
 }
 
+/* ===== MOBILE (PORTRAIT) ===== */
+@media (max-width: 700px){
+
+  .profile{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    margin-top:-40px;
+  }
+
+  .actions{
+    margin:10px 0 0;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .avatar{
+    width:90px;
+    height:90px;
+  }
+
+  .name{
+    font-size:20px;
+  }
+
+  .tabs{
+    justify-content:center;
+  }
+
+  .fav-card{
+    min-width:100px;
+  }
+
+  .fav-card img{
+    width:100px;
+    height:70px;
+  }
+}
+
 .space{
   height:40px;
 }
@@ -174,7 +216,7 @@ body::after{
 
   <!-- PROFILE -->
   <div class="profile">
-    <img src="/profile.webp" class="avatar">
+    <img src="profile.webp" class="avatar">
 
     <div>
       <div class="name">Froylan</div>
@@ -217,32 +259,32 @@ body::after{
     <div class="fav-row">
 
       <div class="fav-card">
-        <img src="/assets/favorites/fav-h.webp">
+        <img src="fav-h.webp">
         <div class="fav-name">H</div>
       </div>
 
       <div class="fav-card">
-        <img src="/assets/favorites/fav-i.webp">
+        <img src="fav-i.webp">
         <div class="fav-name">I</div>
       </div>
 
       <div class="fav-card">
-        <img src="/assets/favorites/fav-k.webp">
+        <img src="fav-k.webp">
         <div class="fav-name">K</div>
       </div>
 
       <div class="fav-card">
-        <img src="/assets/favorites/fav-a.webp">
+        <img src="fav-a.webp">
         <div class="fav-name">A</div>
       </div>
 
       <div class="fav-card">
-        <img src="/assets/favorites/fav-r.webp">
+        <img src="fav-r.webp">
         <div class="fav-name">R</div>
       </div>
 
       <div class="fav-card">
-        <img src="/assets/favorites/fav-u.webp">
+        <img src="fav-u.webp">
         <div class="fav-name">U</div>
       </div>
 
