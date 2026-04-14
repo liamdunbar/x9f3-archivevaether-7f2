@@ -11,6 +11,8 @@
 <meta property="og:image" content="profile.webp">
 
 <style>
+
+/* ===== BASE ===== */
 body{
   margin:0;
   background:#000;
@@ -18,7 +20,7 @@ body{
   color:#ff4d4d;
 }
 
-/* subtle scanlines */
+/* scanlines */
 body::after{
   content:"";
   position:fixed;
@@ -36,14 +38,15 @@ body::after{
   margin:auto;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 .header{
-  height:160px;
+  height:150px;
   background:url("header.webp") center/cover no-repeat;
   border-bottom:1px solid rgba(255,0,0,0.4);
+  box-shadow:0 0 20px rgba(255,0,0,0.3);
 }
 
-/* PROFILE */
+/* ===== PROFILE ===== */
 .profile{
   display:flex;
   align-items:flex-end;
@@ -58,19 +61,20 @@ body::after{
   border-radius:50%;
   border:2px solid #ff0000;
   object-fit:cover;
+  box-shadow:0 0 12px rgba(255,0,0,0.6);
 }
 
 .name{
   font-size:24px;
-  text-shadow:0 0 6px #ff0000;
+  text-shadow:0 0 8px #ff0000;
 }
 
 .username{
-  font-size:14px;
+  font-size:13px;
   opacity:.7;
 }
 
-/* BUTTONS */
+/* ===== BUTTONS ===== */
 .actions{
   margin-left:auto;
   display:flex;
@@ -82,16 +86,17 @@ body::after{
   padding:8px 14px;
   text-decoration:none;
   color:#ff4d4d;
-  font-size:13px;
-  white-space:nowrap;
+  font-size:12px;
+  position:relative;
 }
 
 .btn:hover{
   background:#ff0000;
   color:#000;
+  box-shadow:0 0 10px #ff0000;
 }
 
-/* STATS */
+/* ===== STATS ===== */
 .stats{
   display:flex;
   gap:10px;
@@ -105,14 +110,14 @@ body::after{
   font-size:12px;
 }
 
-/* BIO */
+/* ===== BIO ===== */
 .bio{
   padding:0 20px;
   font-size:13px;
-  opacity:.8;
+  opacity:.85;
 }
 
-/* TABS */
+/* ===== TABS ===== */
 .tabs{
   display:flex;
   gap:30px;
@@ -129,29 +134,38 @@ body::after{
   border-bottom:2px solid #ff0000;
 }
 
-/* FAVORITES */
+/* ===== FAVORITES (UPGRADED) ===== */
 .favorites{
   padding:20px;
 }
 
 .fav-title{
   font-size:16px;
-  margin-bottom:12px;
+  margin-bottom:14px;
+  text-shadow:0 0 6px #ff0000;
 }
 
-.fav-row{
-  display:flex;
+/* grid instead of flat scroll */
+.fav-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
   gap:14px;
-  overflow-x:auto;
-  padding-bottom:6px;
 }
 
+/* card style */
 .fav-card{
-  min-width:120px;
+  border:1px solid rgba(255,0,0,0.3);
+  padding:6px;
+  transition:.2s;
+}
+
+.fav-card:hover{
+  box-shadow:0 0 10px #ff0000;
+  transform:scale(1.03);
 }
 
 .fav-card img{
-  width:120px;
+  width:100%;
   height:80px;
   object-fit:cover;
   border:1px solid rgba(255,0,0,0.4);
@@ -159,51 +173,42 @@ body::after{
 
 .fav-name{
   margin-top:6px;
-  font-size:13px;
+  font-size:12px;
+  text-align:center;
 }
 
-/* ===== MOBILE (PORTRAIT) ===== */
-@media (max-width: 700px){
+/* ===== MOBILE (FIXED STRUCTURE) ===== */
+@media (max-width:700px){
 
   .profile{
-    flex-direction:column;
     align-items:center;
-    text-align:center;
     margin-top:-40px;
   }
 
-  .actions{
-    margin:10px 0 0;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-
   .avatar{
-    width:90px;
-    height:90px;
+    width:85px;
+    height:85px;
   }
 
   .name{
     font-size:20px;
   }
 
-  .tabs{
-    justify-content:center;
+  .actions{
+    margin-top:8px;
+    flex-wrap:wrap;
   }
 
-  .fav-card{
-    min-width:100px;
-  }
-
-  .fav-card img{
-    width:100px;
-    height:70px;
+  /* still grid, not stacked */
+  .fav-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
 .space{
   height:40px;
 }
+
 </style>
 </head>
 
@@ -216,6 +221,7 @@ body::after{
 
   <!-- PROFILE -->
   <div class="profile">
+
     <img src="profile.webp" class="avatar">
 
     <div>
@@ -232,6 +238,7 @@ body::after{
         Add Friend
       </a>
     </div>
+
   </div>
 
   <!-- STATS -->
@@ -254,9 +261,10 @@ body::after{
 
   <!-- FAVORITES -->
   <div class="favorites">
+
     <div class="fav-title">Favorites ></div>
 
-    <div class="fav-row">
+    <div class="fav-grid">
 
       <div class="fav-card">
         <img src="fav-h.webp">
@@ -289,6 +297,7 @@ body::after{
       </div>
 
     </div>
+
   </div>
 
   <div class="space"></div>
