@@ -175,17 +175,52 @@ body::after{
   font-size:12px;
 }
 
-/* ===== DESKTOP ===== */
-@media (min-width:700px){
-  .fav-grid{
-    grid-template-columns:repeat(3,1fr);
+/* ===== LANDSCAPE / DESKTOP UPGRADE ===== */
+@media (min-width:900px){
+
+  /* PROFILE becomes horizontal */
+  .profile{
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    align-items:center;
+    gap:20px;
   }
-}
 
-.space{
-  height:40px;
-}
+  .top{
+    grid-column:1 / 2;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
 
+  /* move buttons to right side */
+  .actions{
+    grid-column:3 / 4;
+    flex-direction:row;
+    justify-content:flex-end;
+    margin:0;
+  }
+
+  /* center block */
+  .stats,
+  .bio{
+    grid-column:2 / 3;
+  }
+
+  /* tabs full width under */
+  .tabs{
+    grid-column:1 / -1;
+    justify-content:flex-start;
+    gap:40px;
+  }
+
+  /* FAVORITES = wider grid */
+  .fav-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+}
+  
 </style>
 </head>
 
