@@ -32,22 +32,23 @@ body::after{
 }
 
 .wrap{
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
 }
 
 /* ===== HEADER ===== */
 .header{
-  height:160px;
+  height:180px;
   background:url("header.webp") center/cover no-repeat;
 }
 
-/* ===== PROFILE (ROBLOX STYLE) ===== */
+/* ===== PROFILE ===== */
 .profile{
   padding:0 20px;
-  margin-top:-50px;
+  margin-top:-60px;
 }
 
+/* TOP LINE */
 .top{
   display:flex;
   align-items:center;
@@ -55,8 +56,8 @@ body::after{
 }
 
 .avatar{
-  width:90px;
-  height:90px;
+  width:95px;
+  height:95px;
   border-radius:50%;
   border:2px solid #ff0000;
   object-fit:cover;
@@ -92,9 +93,10 @@ body::after{
   margin-top:12px;
   font-size:13px;
   opacity:.85;
+  max-width:500px;
 }
 
-/* ===== BUTTONS (FULL WIDTH LIKE ROBLOX) ===== */
+/* ===== BUTTONS ===== */
 .actions{
   display:flex;
   gap:10px;
@@ -146,7 +148,6 @@ body::after{
   text-shadow:0 0 6px #ff0000;
 }
 
-/* 1:1 GRID */
 .fav-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -175,52 +176,66 @@ body::after{
   font-size:12px;
 }
 
-/* ===== LANDSCAPE / DESKTOP UPGRADE ===== */
+/* ===== DESKTOP FIX (REAL STRUCTURE) ===== */
 @media (min-width:900px){
 
-  /* PROFILE becomes horizontal */
   .profile{
     display:grid;
     grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "avatar info actions"
+      "avatar stats actions"
+      "avatar bio actions"
+      "tabs tabs tabs";
+    gap:14px 30px;
     align-items:center;
-    gap:20px;
   }
 
   .top{
-    grid-column:1 / 2;
+    grid-area: avatar / avatar / avatar / avatar;
     display:flex;
     align-items:center;
     gap:14px;
   }
 
-  /* move buttons to right side */
-  .actions{
-    grid-column:3 / 4;
-    flex-direction:row;
-    justify-content:flex-end;
-    margin:0;
+  .top{
+    grid-area: avatar;
   }
 
-  /* center block */
-  .stats,
+  .stats{
+    grid-area: stats;
+    justify-content:flex-start;
+  }
+
   .bio{
-    grid-column:2 / 3;
+    grid-area: bio;
   }
 
-  /* tabs full width under */
+  .actions{
+    grid-area: actions;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn{
+    width:180px;
+  }
+
   .tabs{
-    grid-column:1 / -1;
+    grid-area: tabs;
     justify-content:flex-start;
     gap:40px;
   }
 
-  /* FAVORITES = wider grid */
   .fav-grid{
     grid-template-columns:repeat(4,1fr);
   }
-
 }
-  
+
+.space{
+  height:40px;
+}
+
 </style>
 </head>
 
