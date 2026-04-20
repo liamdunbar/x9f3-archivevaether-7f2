@@ -1,14 +1,8 @@
 const FRAGMENTS = [
   {
-    name: "b◇◇◇◇◇",
-    username: "@s■■■■■■",
-    image: "/fragments/assets/bio.webp",
-    link: "https://simplefroylan.space/fragments/data/remnant-004"
-  },
-  {
-    name: "R◇◇◇◇◇",
-    username: "@m■■■■■■",
-    image: "/fragments/assets/rendang.webp",
+    name: "S◇◇◇◇",
+    username: "@s■■■■■",
+    image: "/fragments/assets/simon.webp",
     link: "https://simplefroylan.space/fragments/data/remnant-003"
   },
   {
