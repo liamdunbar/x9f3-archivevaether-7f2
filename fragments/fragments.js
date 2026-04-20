@@ -9,13 +9,13 @@ const FRAGMENTS = [
     name: "M◇◇◇◇",
     username: "@n■■■■■",
     image: "/fragments/assets/nacho.webp",
-    link: "https://simplefroylan.space/fragments/data/remnant-004"
+    link: "https://simplefroylan.space/fragments/data/remnant-005"
   },
   {
     name: "F◇◇◇◇",
     username: "@F■■■■■",
     image: "/fragments/assets/Fvst.webp",
-    link: "https://simplefroylan.space/fragments/data/remnant-005"
+    link: "https://simplefroylan.space/fragments/data/remnant-004"
   },
   {
     name: "S◇◇◇◇◇",
