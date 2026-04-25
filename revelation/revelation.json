@@ -2,6 +2,14 @@
   "revelations": [
     { 
       "id": "rev-003",
+      "date": "unknown error date",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "Hikaru? He’s someone I care about more than I expected. He’s not perfect, and we didn’t match the right way… but he stayed with me. And maybe part of me is still holding onto what it could’ve been, not just what it was..",
+      "video": "revelation/media/thebeautyofhikaru.mp4"
+    },
+    {
+      "id": "rev-003",
       "date": "2026-March-23",
       "displayName": "Froylan",
       "username": "@froy",
