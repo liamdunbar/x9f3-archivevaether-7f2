@@ -2,6 +2,14 @@
   "revelations": [
     { 
       "id": "rev-003",
+      "date": "unknown date",
+      "displayName": "Froylan",
+      "username": "@froy",
+      "caption": "I swear to God I almost drowned, You asked me how I've been, But how could I begin, To tell you I should've chased you, I should be who you're engaged to?, Lost my fight with fate.",
+      "video": "revelation/media/1d4707e208df9e831823760919e01e7e.mp4"
+    },
+    {
+      "id": "rev-003",
       "date": "unknown error date",
       "displayName": "Froylan",
       "username": "@froy",
