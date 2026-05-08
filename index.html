@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>simplefroylan.space</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#000;
+  color:#d8d8d8;
+  font-family: "Georgia", serif;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+/* background grain */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity:.08;
+  pointer-events:none;
+}
+
+/* vignette */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle, transparent 40%, rgba(0,0,0,.85) 100%);
+  pointer-events:none;
+}
+
+.container{
+  width:min(780px,90vw);
+  text-align:center;
+  position:relative;
+  z-index:2;
+  animation:fadeIn 2s ease;
+}
+
+.small{
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-size:11px;
+  opacity:.45;
+  margin-bottom:18px;
+}
+
+.title{
+  font-size:clamp(36px,7vw,72px);
+  font-weight:400;
+  color:#fff;
+  line-height:1.1;
+  margin-bottom:28px;
+  text-shadow:0 0 25px rgba(255,255,255,.06);
+}
+
+.line{
+  width:120px;
+  height:1px;
+  background:rgba(255,255,255,.18);
+  margin:0 auto 35px;
+}
+
+.message{
+  font-size:clamp(14px,2vw,18px);
+  line-height:1.95;
+  opacity:.72;
+  max-width:720px;
+  margin:auto;
+}
+
+.message p{
+  margin-bottom:22px;
+}
+
+.final{
+  margin-top:42px;
+  font-size:14px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  opacity:.35;
+}
+
+.cursor{
+  display:inline-block;
+  width:8px;
+  animation:blink 1s infinite;
+}
+
+audio{
+  display:none;
+}
+
+.fade-bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:180px;
+  background:linear-gradient(to top, #000 0%, transparent 100%);
+  pointer-events:none;
+}
+
+@keyframes blink{
+  50%{ opacity:0; }
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@media (max-width:700px){
+
+  body{
+    overflow:auto;
+    align-items:flex-start;
+    padding:70px 0;
+  }
+
+  .container{
+    width:88vw;
+  }
+
+  .message{
+    line-height:1.8;
+    font-size:15px;
+  }
+
+  .title{
+    margin-bottom:22px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="small">simplefroylan.space</div>
+
+  <h1 class="title">
+    some people<br>
+    are only meant<br>
+    to be memories
+  </h1>
+
+  <div class="line"></div>
+
+  <div class="message">
+
+    <p>
+      I built this place because I thought love was something that could stay.
+      Something that could survive distance, silence, fear, timing, confusion,
+      and two people slowly becoming strangers while still pretending nothing changed.
+    </p>
+
+    <p>
+      But not every story ends with understanding.
+      Some end with unread messages, empty tabs, disappearing routines,
+      and the quiet realization that you were holding on alone.
+    </p>
+
+    <p>
+      I waited longer than I should have.
+      I replayed conversations until they lost meaning.
+      I searched for signs that were probably never there.
+      And somewhere along the way,
+      I stopped asking whether they loved me back
+      and started asking whether I was allowed to let go.
+    </p>
+
+    <p>
+      Maybe love is not always about staying.
+      Maybe sometimes it is about accepting that someone changed your life,
+      even if they never stayed long enough to see what they became to you.
+    </p>
+
+    <p>
+      So this is the last page.
+      No dramatic ending.
+      No hatred.
+      No revenge.
+      Just someone finally closing the door after standing there for too long.
+    </p>
+
+  </div>
+
+  <div class="final">
+    goodbye, froylan<span class="cursor">_</span>
+  </div>
+
+</div>
+
+<div class="fade-bottom"></div>
+
+</body>
+</html>
