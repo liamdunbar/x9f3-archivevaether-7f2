@@ -3,24 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SYSTEM TERMINAL — BOUNDARY LOG</title>
+<title>ABSOLUTE SYSTEM — BOUNDARY PROTOCOL</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 html,body{
   width:100%;
   min-height:100dvh;
   background:#000;
-  font-family:monospace;
   color:#f2e86d;
+  font-family:monospace;
+  overflow-x:hidden;
 }
 
 /* CRT */
 .crt{
   position:fixed;
   inset:0;
-  background:#050505;
+  background:#040404;
 }
 
 .crt::before{
@@ -30,8 +35,8 @@ html,body{
   pointer-events:none;
   background:repeating-linear-gradient(
     to bottom,
-    rgba(255,255,255,0.05),
-    rgba(255,255,255,0.05) 1px,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.04) 1px,
     transparent 2px,
     transparent 4px
   );
@@ -40,58 +45,108 @@ html,body{
 /* TERMINAL */
 .terminal{
   position:relative;
-  max-width:900px;
+  max-width:950px;
   margin:40px auto;
-  padding:28px;
+  padding:30px;
   border:1px solid #f2e86d;
-  background:rgba(0,0,0,0.92);
+  background:rgba(0,0,0,0.93);
+  box-shadow:0 0 35px rgba(242,232,109,0.08);
 }
 
+/* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   border-bottom:1px solid #f2e86d;
-  padding-bottom:8px;
-  margin-bottom:16px;
-  font-weight:bold;
+  padding-bottom:10px;
+  margin-bottom:18px;
 }
 
-/* BACK BUTTON */
 .back{
-  font-size:12px;
   color:#6aa6ff;
   text-decoration:underline;
-  cursor:pointer;
+  font-size:12px;
 }
 
-/* TITLE */
 .title{
-  font-weight:bold;
   font-size:18px;
-  margin-bottom:16px;
+  margin-bottom:20px;
+  font-weight:bold;
+  letter-spacing:1px;
 }
 
-/* TEXT */
 .body{
-  line-height:1.8;
+  line-height:1.9;
   font-size:14px;
 }
 
-.warn{ color:#ff4a4a; }
-.soft{ color:#aaa; }
-
-.final{
-  margin-top:18px;
-  color:#ffffff;
+.section{
+  margin-top:24px;
+  margin-bottom:8px;
+  color:#fff;
+  font-weight:bold;
 }
 
-/* MOBILE */
+.warn{
+  color:#ff5d5d;
+}
+
+.safe{
+  color:#8dffb2;
+}
+
+.soft{
+  color:#9a9a9a;
+}
+
+.system{
+  color:#6aa6ff;
+}
+
+.final{
+  margin-top:28px;
+  color:#ffffff;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:20px;
+}
+
+/* glitch */
+.glitch{
+  animation:glitch 0.15s infinite;
+}
+
+@keyframes glitch{
+  0%{transform:translate(0);}
+  25%{transform:translate(-1px,1px);}
+  50%{transform:translate(1px,-1px);}
+  75%{transform:translate(-1px,-1px);}
+  100%{transform:translate(1px,1px);}
+}
+
+/* mobile */
 @media(max-width:600px){
+
   .terminal{
-    margin:20px;
-    padding:20px;
+    margin:14px;
+    padding:18px;
   }
+
+  .title{
+    font-size:15px;
+  }
+
+  .body{
+    font-size:12px;
+    line-height:1.8;
+  }
+
+  .header{
+    gap:8px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
 }
 </style>
 </head>
@@ -103,12 +158,12 @@ html,body{
 <div class="terminal">
 
 <div class="header">
-  <span>SYSTEM TERMINAL — BOUNDARY LOG</span>
+  <span>ABSOLUTE SYSTEM — BOUNDARY PROTOCOL</span>
   <a class="back" href="https://simplefroylan.space">← back</a>
 </div>
 
-<div class="title">
-ENTRY — I ASKED THE WRONG PEOPLE
+<div class="title glitch">
+ENTRY — STABILIZATION BEFORE CONNECTION
 </div>
 
 <div class="body" id="typed"></div>
@@ -116,51 +171,100 @@ ENTRY — I ASKED THE WRONG PEOPLE
 </div>
 
 <script>
+
 const content = `
-I don’t think I ask for too much.<br>
-I just ask the wrong people.<br><br>
 
-<span class="warn">• Don’t tell me I deserve love if you can’t show it consistently.</span><br>
-<span class="warn">• Don’t give me attention just to disappear when it gets real.</span><br>
-<span class="warn">• Don’t say things you don’t mean just to fill silence.</span><br>
-<span class="warn">• Don’t act interested if you’re only bored.</span><br>
-<span class="warn">• Don’t make me feel special today and optional tomorrow.</span><br><br>
+<span class="system">[SYSTEM]</span> Emotional overload detected.<br>
+<span class="system">[SYSTEM]</span> Attachment response currently unstable.<br>
+<span class="system">[SYSTEM]</span> Temporary protection protocol activated.<br><br>
 
-• If you’re confused about your feelings, figure it out before involving me.<br>
-• If you’re “not ready,” then don’t start something you can’t maintain.<br>
-• If you only want something casual, say it clearly — don’t disguise it as connection.<br><br>
+<div class="section">BOUNDARIES FOR OTHER PEOPLE</div>
 
-• I won’t chase people who are unsure about me.<br>
-• I won’t beg for consistency, respect, or clarity.<br>
-• I won’t keep explaining myself to people who don’t try to understand.<br><br>
+<span class="warn">• Don’t give me relationship-level affection while calling it “just friendship.”</span><br>
 
-<span class="soft">• I can be patient, but I won’t wait forever for someone to decide my worth.</span><br>
-<span class="soft">• I can care deeply, but I won’t pour into someone who gives nothing back.</span><br><br>
+<span class="warn">• Don’t treat me like an emotional partner if you only want temporary comfort.</span><br>
+
+<span class="warn">• Don’t say things you can’t consistently maintain.</span><br>
+
+<span class="warn">• Don’t feed attachment if you already know you can’t stay.</span><br>
+
+<span class="warn">• Don’t make me emotionally safe one day and emotionally disposable the next.</span><br><br>
+
+• If you’re confused about your feelings, figure them out before pulling me deeper.<br>
+
+• If you only want casual attention, say it honestly.<br>
+
+• If you cannot communicate clearly, don’t create emotional dependency accidentally.<br><br>
+
+<div class="section">BOUNDARIES FOR MYSELF</div>
+
+<span class="safe">• I will stop treating kindness like destiny.</span><br>
+
+<span class="safe">• I will stop making one person my emotional home too quickly.</span><br>
+
+<span class="safe">• I will stop building futures with people I barely know.</span><br>
+
+<span class="safe">• I will stop confusing affection with permanent safety.</span><br>
+
+<span class="safe">• I will slow down before attachment becomes emotional survival.</span><br><br>
+
+• I will not chase reassurance every time someone becomes quiet.<br>
+
+• I will not force clarity from emotionally confused people.<br>
+
+• I will not sacrifice my mental stability just to keep connection alive.<br>
+
+• I will remember that people are humans, not cures for loneliness.<br><br>
+
+<div class="section">CURRENT SYSTEM REALIZATION</div>
+
+<span class="soft">• My heart is not evil. It is just starving for safety.</span><br>
+
+<span class="soft">• My attachment is not proof of destiny.</span><br>
+
+<span class="soft">• My feelings are real, but they are not always instructions.</span><br>
+
+<span class="soft">• Wanting love is human. Depending on it for survival is dangerous.</span><br><br>
 
 <div class="final">
-I’m not afraid of love.<br>
-I’m just done with half-effort, mixed signals, and empty words.<br><br>
 
-If you come into my life, come honestly.<br>
-If not, don’t come close at all.
+I do not need to become cold.<br>
+I need to become steady.<br><br>
+
+Not every person who comforts me is meant to become my future.<br><br>
+
+For now, I choose stabilization over intensity.<br>
+Peace over emotional chaos.<br>
+Reality over fantasy.<br><br>
+
+<span class="system">[SYSTEM]</span> Boundary protocol active.<br>
+<span class="system">[SYSTEM]</span> User protection prioritized.<br>
+
 </div>
+
 `;
 
 const target = document.getElementById("typed");
 
 let i = 0;
-const speed = 18;
+const speed = 12;
 
 function type(){
+
   if(i < content.length){
-    target.innerHTML = content.slice(0, i);
+
+    target.innerHTML = content.slice(0,i);
     i++;
-    setTimeout(type, speed);
+
+    setTimeout(type,speed);
+
   }
+
 }
 
 type();
+
 </script>
-  
+
 </body>
 </html>
